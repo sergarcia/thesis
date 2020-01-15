@@ -1,0 +1,620 @@
+\chapter{Formulation of conceptual and mathematical framework to design modular cells}\label{ch:field}
+% Metabolic engineering paper
+
+\disclose{garcia2019}
+Supplementary Files S1 and S2 are provied in Apendix 1 and 2 respectively, while Supplementary Files S3,S4, and S5 are provided as attachments.
+
+
+\section*{Abstract}\label{abstract}
+
+Diversity of cellular metabolism can be harnessed to produce a large space of molecules.
+However, development of optimal strains with high product titers, rates, and yields required for industrial production is laborious and expensive.
+To accelerate the strain engineering process, we have recently introduced a modular cell design concept that enables rapid generation of optimal production strains by systematically assembling a modular cell with an exchangeable production module(s) to produce target molecules efficiently.
+In this study, we formulated the modular cell design concept as a general multi-objective optimization problem with flexible design objectives derived from mass action.
+We developed algorithms and an associated software package, named ModCell2 to implement the design.
+We demonstrated that ModCell2 can systematically identify genetic modifications to design modular cells that can couple with a variety of production modules and exhibit a minimal tradeoff among modularity, performance, and robustness.
+Analysis of the modular cell designs revealed both intuitive and complex metabolic architectures enabling modular production of these molecules.
+We envision ModCell2 provides a powerful tool to guide modular cell engineering and sheds light on modular design principles of biological systems.
+
+%\section{Keywords}\label{keywords}
+%
+%Modular cell engineering; modular cell; production modules; modular design; modularity; multi-objective optimization; multi-objective evolutionary algorithms.
+%
+
+\section{Introduction}
+
+Engineering microbial cells to produce bulk and specialty chemicals from renewable and sustainable feedstocks is becoming a feasible alternative to traditional chemical methods that rely on petroleum feedstocks \citep{nielsen2016}.
+However, only a handful of chemicals, out of the many possible molecules offered by nature, are industrially produced by microbial conversion, mainly because the current strain engineering process is laborious and expensive for profitable biochemical production \citep{trinh2016}.
+Thus, innovative technologies to enable rapid and economical strain engineering are needed to harness a large space of industrially-relevant molecules \citep{connelly2015}.
+
+The modular organization of biological systems has been a source of inspiration for synthetic biology and metabolic engineering \citep{purnick2009, sauro2008}.
+Modular pathway engineering breaks down target pathways into tractable pathway modules that can be finely tuned for optimal production of desirable chemicals \citep{biggs2014, yadav2012}.
+Harnessing combinatorial pathways (e.g., fatty acid biosynthesis, reverse beta oxidation, polyketide or isoprenoid biosynthesis) is one excellent example of modular pathway engineering.
+These pathways contain metabolic similarity (or combinatorial characteristics) such as a group of common specific enzymes capable of catalyzing linear reaction steps \citep{rodriguez2014} and/or elongation cycles \citep{cheong2016, tseng2012b, xu2013} and hence are capable of producing a large library of unique molecules \citep{ng2016}.
+Since these molecules are derived from a common precursor metabolite(s), the optimal production strains often share common genotypes and phenotypes, and hence, the costly strain optimization process is only performed once for these molecules.
+Remarkably, this advantageous strain optimization strategy can be applied even for production of molecules derived from different precursors, using the concept of modular cell (ModCell) design \citep{trinh2015, trinh2016, wilbanks2017}.
+
+With the arrival of steady-state, constraint-based stoichiometric models of cellular metabolism, various computational algorithms have been developed to guide strain engineering \citep{chowdhury2015, long2015, yang2011}.
+These methods have featured the design of strains capable of growth-coupled product synthesis (\emph{GCP}), enabling adaptive laboratory evolution of these designed strains to enhance product titers, rates, and yields \citep{fong2005b, yadav2012, trinh2009, wilbanks2017}.
+Two approaches on growth-coupled production have been formulated - one based on the coexistence of maximum growth and product synthesis rates during the growth phase \citep{burgard2003} and the other based on the obligate requirement of optimal product synthesis in any growth phase \citep{trinh2008}.
+The distinction between these two types of growth coupling are also referred to weak coupling (\emph{wGCP}) and strong coupling (\emph{sGCP}) \citep{klamt2015, yang2011}.
+
+Development of most strain design algorithms has been focused on overproduction of only one target molecule.
+The first algorithm proposed for modular cell design compatible for overproduction of multiple target molecules is MODCELL \citep{trinh2015}, which guided several experimental studies \citep{layton2016, layton2014, layton2016b, wierzbicki2016, wilbanks2017}.
+It works by generating \emph{sGCP} strain designs for each target product based on elementary mode analysis \citep{trinh2009b}, and then comparing the design strategies of different products to identify common genetic modifications among them.
+A similar approach was adapted in a subsequent work \citep{jouhten2016}.
+For MODCELL to find optimal solutions for multiple target products, it requires: 1) enumerating all possible designs above a predefined minimum product yield and with minimal reaction deletion sets for each production network, which might lead to a large number of solutions for each network and hence make the problem computationally intractable, and 2) the resulting designs for all products must be compared to identify common interventions, which is a computationally-hard, set-covering problem.
+Thus, the current enumerative approach of MODCELL might become intractable very quickly, especially for large-scale metabolic networks and potentially generate non-optimal designs, i.e., requiring more knock-outs than necessary or including fewer products than possible.
+
+In this study, we generalized the concept of modular cell design and addressed the computational limitation of implementing it.
+We developed a novel computational platform (ModCell2), based on multi-objective optimization and analysis of mass action of cellular metabolism, to guide the design of modular cells for large-scale metabolic networks.
+We demonstrated that ModCell2 can systematically identify genetic modifications to design modular cells that can couple with a variety of production modules and exhibit a minimal tradeoff among modularity, performance, and robustness.
+By analyzing these designs, we further revealed both intuitive and complex metabolic architectures enabling modularity in modular cell and production modules required for efficient biosynthesis of target molecules.
+
+
+\section{Methods}
+
+\subsection{Design principles of modular cell
+engineering}
+
+In the conventional strain engineering approach, a parent strain is genetically modified to yield an optimal production strain to make only a target product.
+To produce each new molecule, the design-build-test cycles of strain engineering must be repeated, which is laborious and expensive (Figure~\ref{fig:ms1-fig1}).
+To minimize the cycles, modular cell engineering is formulated by genetically transforming a parent strain into a modular (chassis) cell that must be assembled with exchangeable modules to create optimal production strains \citep{trinh2015}.
+A modular cell is designed to contain core metabolic pathways shared across designed optimal production strains.
+Exchangeable modules are production pathways designed to synthesize desirable chemicals.
+A combination of a modular cell and a production module(s) is required to balance redox, energy, and precursor metabolites for sustaining cellular metabolism during growth and/or stationary phases and exhibiting only desirable phenotypes.
+Practically, modular cell engineering can be applied to monocultures and polycultures, where a production module(s) can be embedded in a modular cell and activated by intracellular and/or extracellular cues such as light and/or signaling molecules.
+
+\subsection{Multi-objective strain design framework for modular cell engineering}
+
+For modular cell engineering, we seek to design a chassis cell compatible with as many production modules as possible to achieve only desirable production phenotypes while requiring minimal genetic modifications.
+Since all production modules must leverage cellular resources of the modular cell (e.g.
+precursor metabolites, cofactors, and energy), they form competing objectives.
+Therefore, the framework of modular cell engineering can be formulated as a multi-objective optimization problem, named ModCell2, as described below.
+
+\begin{alignat}{3}
+    & \underset{ \; y_j, z_{jk}}{\textrm{maximize}} \quad (f_1, f_2, \ldots, f_{|\mathcal{K}|})^T \quad \text{subject to}  \label{eq3:of1} \\
+	&  \quad f_k \in \, \text{arg }\underset{}{\text{max}} \Bigg\{\sum_{j \in \mathcal{J}_k} c_{jk}  v_{jk} \quad \text{subject to} \label{eq3:of2}\\
+	& \quad \qquad \sum_{j\in \mathcal{J}_k}S_{ijk}v_{jk} = 0 && \text{for all } i \in \mathcal{I}_k  \label{eq3:mb}\\
+	& \quad \qquad  l_{jk} \le v_{jk} \le u_{jk}  && \text{for all } j \in \mathcal{J}_k \label{eq3:rb}\\
+	& \quad \qquad  l_{jk} d_{jk} \le v_{jk} \le u_{jk} d_{jk} && \text{for all } j \in \mathcal{C} \label{eq3:db}\\
+	& \quad \qquad \mathrm{where} \; d_{jk} = y_j \lor z_{jk} \; \Bigg\} && \text{for all } k \in \mathcal{K} \nonumber \\
+	& \quad z_{jk}\le (1-y_j) && \text{for all } j \in \mathcal{C}, \, k \in \mathcal{K} \label{eq3:mr1}\\
+	& \quad \sum_{j \in \mathcal{C}}z_{jk} \le \beta_k && \text{for all } k \in \mathcal{K} \label{eq3:mr2} \\
+	& \quad \sum_{j \in \mathcal{C}} (1-y_j) \le \alpha \label{eq3:a}
+\end{alignat}
+
+\noindent where $i$, $j$, and $k$ are indices of metabolite $i$, reaction $j$, and production network $k$, respectively; $f_k$ is a design objective for network $k$; $c_{jk}$ represents the cellular objective for reaction $j$ in network $k$ associated with a design objective defined in (\ref{eq3:wgcp} -\ref{eq3:ngp}); $v_{jk}$ (mmol/g DCW/h) is metabolic flux of reaction $j$ bounded by $l_{jk}$ and $u_{jk}$ in network $k$, respectively; $y_j$ and $z_{jk}$ are binary design variables for deletion reaction $j$ and module reaction $j$ in network $k$, respectively; $\alpha$ and $\beta_k$ are design parameters for deletion and module reactions, respectively; $S_{ijk}$ is a stoichiometric coefficient of metabolite in reaction $j$ of network \emph{k}; and \emph{C} \eqref{eq3:db} is the candidate reaction set (Supplementary File S1).
+The goal of the optimization problem is to simultaneously maximize all design objectives \emph{f\textsubscript{k}}.
+
+\subsubsection{Steady-state mass balance constraint of cellular metabolism}
+Quasi steady-state flux balance of cellular metabolism \eqref{eq3:mb} is used as metabolic constraints for \eqref{eq3:of1}.\citep{price2003}. A model corresponding to each modular
+production strain (i.e. production network $k$) will be derived from a
+parent strain (i.e. parent network) by adding necessary reactions (e.g.,
+a production module) to produce a target molecule. A feasible flux
+distribution for each production network is described by mass balance
+\eqref{eq3:mb} and reaction flux bounds (\ref{eq3:rb}-\ref{eq3:db}). For a given
+production network, the phenotypic space can be illustrated by the gray
+area that is projected onto the two-dimensional space spanned by product
+synthesis and growth rates (Figure~\ref{fig:ms1-fig2}).
+
+\subsubsection{Design variables} In our formulation for modular cell
+engineering, we introduced two design variables: binary reaction
+deletions (\emph{y\textsubscript{j}}) inherent to the modular cell and
+module-specific reaction insertions (\emph{z\textsubscript{jk}}) \eqref{eq3:db}.
+These variables can be experimentally manipulated to constrain the
+desirable phenotypes of production strains as shown in Figure~\ref{fig:ms1-fig2}.
+Specifically, \emph{y\textsubscript{j}} = 0 if reaction \emph{j} is
+deleted from the modular cell; otherwise, \emph{y\textsubscript{j}} = 1.
+Deleting metabolic reactions removes undesired functional states of the
+network and leaves those with high design objectives. Likewise,
+\emph{z\textsubscript{jk}} = 1 if reaction \emph{j} is present in the
+production network \emph{k}; otherwise, \emph{z\textsubscript{jk}} = 0.
+These module reactions are endogenous reactions removed from the parent
+network \eqref{eq3:mr1} , but are added back to a specific production module to
+enhance the compatibility of a modular cell. The maximum number of
+reaction deletions ($\alpha$) and module-specific reaction insertions
+($\beta_k$) are user-defined parameters.
+
+\subsubsection{Design objectives} To generalize ModCell2 design, we allow
+three different types of design objectives (\emph{f\textsubscript{k}},
+\eqref{eq3:of1} that determine production phenotypes for each production
+network. Depending on the application, a phenotype can be designed to be
+weak coupling (\emph{wGCP}), strong coupling (\emph{sGCP}), and/or
+non-growth production (\emph{NGP}) (Figure~\ref{fig:ms1-fig2}). The constrained
+phenotypic spaces based on these design objectives are shown in color;
+any point within these spaces is a feasible physiological state of the
+cell that can be represented by a metabolic flux distribution.
+
+The \emph{wGCP} design seeks to achieve a high product rate at maximum growth rate (Figure~\ref{fig:ms1-fig2}A).
+The \emph{wGCP} design objective, $f_{k}^{\text{wGCP}} \in \{0, 1\}$, is calculated as follows:
+\begin{equation}
+    f_{k}^{\text{wGCP}} = \frac{v_{\text{Pk}}^{\mu}}{v_{\text{Pmaxk}}^{\mu}} \label{eq3:wgcp}
+\end{equation}
+\noindent where \(v_{\text{Pk}}^{\mu}\) is the minimum synthesis rate of the target product P at the maximum growth rate for production network \emph{k} and \(v_{\text{Pmaxk}}^{\mu}\) is the maximum synthesis rate of P (Supplementary File S1).
+This \emph{wGCP} design formulation is equivalent to RobustKnock \citep{tepper2010} or OptKnock with a tilted objective function \citep{burgard2003, feist2010, yang2011}.
+In \eqref{eq3:wgcp}, \(f_{k}^{\text{wGCP}}\) is scaled from 0 to 1 for proper comparison among products.
+The \emph{wGCP} design is appropriate for applications where growth rate is not limited by the nutrients, and the product is formed during the growth phase.
+
+The \emph{sGCP} design seeks to achieve a high product rate not only at optimal growth rate but also during non-growth phase (Figure~\ref{fig:ms1-fig2}B).
+The \emph{sGCP} design objective,$f_{k}^{\text{sGCP}} \in \{0, 1\}$, is calculated as follows:
+
+\begin{equation}
+    f_{k}^{\text{sGCP}} = \frac{v_{\text{Pk}}^{\mu}}{v_{P_{\max}k}^{\mu}} \frac{v_{\text{Pk}}^{\overline{\mu}}}{v_{P_{\max}k}^{\overline{\mu}}} \label{eq3:sgcp}
+\end{equation}
+\noindent where \(v_{\text{Pk}}^{\overline{\mu}}\ \)and \(v_{P_{\max}k}^{\overline{\mu}}\ \)are the minimum and maximum product formation rates for production network \emph{k} in the stationary phase, respectively (Supplementary File S1).
+The \emph{sGCP} design objective is comparable to the one implemented in MODCELL \citep{trinh2015}.
+Different from \emph{wGCP}, \emph{sGCP} requires high product synthesis rate for any growth phase.
+However, the additional constraint of optimal product synthesis during the stationary phase requires more genetic manipulations or specific experimental conditions (e.g., anaerobic growth condition, supply of intermediate metabolites).
+Both \emph{wGCP} and \emph{sGCP} designs enable fast growth selection to attain the optimum product rates by adaptive laboratory evolution \citep{fong2005, trinh2009bc}.
+
+The \emph{NGP} design aims to maximize the minimum product rate during the non-growth phase by eliminating carbon fluxes directed to biomass synthesis (Figure~\ref{fig:ms1-fig2}C).
+The \emph{NGP} design objective, $f_{k}^{\text{NGP}}\in \{0, 1\}$, is calculated as follows:
+
+\begin{equation}
+    f_{k}^{\text{NGP}} = \frac{v_{\text{Pk}}^{\overline{\mu}}}{v_{P_{\max}k}^{\overline{\mu}}} \label{eq3:ngp}
+\end{equation}
+
+While the \emph{NGP} design is not suitable for growth selection, it can be derived from a \emph{wGCP} (or \emph{sGCP}) design by imposing additional genetic modifications.
+Practically, \emph{NGP} design strains can be activated during cell culturing using a regulatory genetic circuit to toggle switch between production phases.
+
+\subsubsection{Design solutions}
+Optimal solutions for (\ref{eq3:of1}-\ref{eq3:a} are a Pareto set
+($\PS$) that correspond to design variables, including
+reaction deletions (\emph{y\textsubscript{j}}) and module reaction
+insertions (\emph{z\textsubscript{jk}}). Each solution constitutes a
+design of a modular cell:
+
+\begin{equation}
+\PS = \{ x \in \Omega: \nexists t \in \Omega, \, F(t) \prec F(x) \}
+\end{equation}
+\noindent Here, \(\mathbf{F}\left( \mathbf{t} \right)\mathbf{\prec}\mathbf{F}\left( \mathbf{x} \right)\) means \textbf{F}(\textbf{t}) \emph{dominates} \textbf{F}(\textbf{x}) if and only if \(f_{i}\left( \mathbf{t} \right) \geq f_{i}\left( \mathbf{x} \right)\) for all \(i\), and \(\mathbf{F}\left( \mathbf{t} \right)\) differs from \(\mathbf{F}\left( \mathbf{x} \right)\) in at least one entry.
+The feasible space of design variables, \(\Omega\), is defined by the problem constraints (\ref{eq3:of2}-\ref{eq3:a}), also see Supplementary File S1).
+Phenotypes of modular cells will be the image of the Pareto set in the objective space, known as the Pareto front (\emph{\textbf{PF}}):
+\begin{equation}
+    \PF = \{ F(x):x \in \PS \}
+\end{equation}
+
+For the multi-objective strain design framework, the input parameters include $\alpha$ \eqref{eq3:a}, $\beta_k$ \eqref{eq3:mr3}
+, and the production networks as input metabolic models.
+Each model contains a production module to produce one target chemical.
+The output is a Pareto set (genetic modifications) and its respective Pareto front (desirable production phenotypes).
+For a special case with no trade-off among the design objectives, an optimal solution, named a utopia point, exists where each objective achieves its maximum value.
+The multi-objective strain design formulation presented is general and can be applied to design modular cells for any organism.
+
+\subsection{Algorithm and implementation}
+
+\subsubsection{ModCell2 algorithm}
+To solve the multi-objective
+optimization problem for modular cell engineering, we used
+multi-objective evolutionary algorithms (MOEAs)
+\citep{coello2002}. MOEAs were selected because they can
+efficiently handle linear and non-linear problems and do not require
+preferential specification of design objectives
+\citep{marler2004}. MOEAs start by randomly generating a
+population of individuals (a vector of design variables), each of which
+is mapped to a design objective vector (i.e., a fitness vector). In
+ModCell2 (Supplementary File S1), the objective values of an individual
+are calculated by solving the linear programming problems for each
+production network. Next, individuals are shuffled to generate an
+offspring, from which the most fit individuals are kept. This process
+was repeated until the termination criteria was reached, for instance,
+either the solutions cannot be further improved or the simulation time
+limit is reached.
+
+\subsubsection{ModCell2 implementation}
+To streamline the modular cell
+design, we developed the ModCell2 software package based on three core
+classes (Figure S1 in Supplementary File S2). The Prodnet class parses
+and pre-processes production network models, and computes production
+phenotypes. The MCdesign class serves as an interface between the MOEA
+optimization method and metabolic models. Finally, the ResAnalysis class
+loads the Pareto set computed by MCdesign and identifies the most
+promising modular cell designs.
+
+The code was written in MATLAB 2017b (The Mathworks Inc.) using the function gamultiobj() from the MATLAB Optimization Toolbox that implements the NSGA-II algorithm \citep{deb2002} to solve the multi-objective optimization problem.
+The solution and analysis methods were parallelized using the MATLAB Parallel Computing Toolbox.
+The linear programs to calculate metabolic fluxes were solved using the GNU Linear Programming Kit (GLPK).
+The COBRA toolbox \citep{heirendt2017, schellenberger2011} and F2C2 0.95b \citep{larhlimi2012} were also used for COBRA model preprocessing and manipulation.
+
+\subsubsection{Metabolic models} In our study, we used three parent
+models including i) a small metabolic network to illustrate the modular
+cell design concept \citep{trinh2015}, ii) a core metabolic
+network of \emph{Escherichia coli} to compare the performance of
+ModCell2 with respect to the conventional single-product strain design
+strategy and the first-generation modular cell design platform MODCELL
+\citep{trinh2015}, and iii) a genome-scale metabolic network
+of \emph{E. coli} (i.e., iML1515 \citep{feist2010}) for
+biosynthesis of a library of endogenous and heterologous
+metabolites\emph{,} including 4 organic acids, 6 alcohols, and 10 esters
+(Figures S2 in Supplementary File S2) \textbackslash{}cite\{RN197, 126,
+81, 198, 83, 127, 136, 80, 110, 1045\}.
+
+\subsubsection{Simulation protocols} Anaerobic conditions were imposed
+by setting oxygen exchange fluxes to be 0, and the glucose uptake rate
+was constrained to be at most 10 mmol/gCDW/h, as experimentally observed
+for \emph{E. coli}. When using the genome-scale model iML1515 to
+simulate \emph{wGCP} designs, the commonly observed fermentative
+products (acetate, CO2, ethanol, formate, lactate, succinate) were
+allowed for secretion as described elsewhere
+\citep{von2017}. For simulation of \emph{sGCP} and
+\emph{NGP} designs, the glucose uptake rate was fixed (i.e., -10
+mmol/gCDW/h); otherwise, the flux is not active during the no-growth
+phases, resulting in the product synthesis rate of 0 regardless of
+genetic manipulations. To compare ModCell2 with Optknock, we applied the
+OptKnock algorithm with a titlted objective function
+\citep{maranas2016} to generate \emph{wGCP} designs for each
+production network, using the open-source algebraic modeling language
+Pyomo \citep{hart2012}. The MILP problems were solved using
+CPLEX 12.8.0 with a time limit of 10,000 seconds set for each product.
+ModCell2 is provided as an open-source software package and is freely
+available for academic research. The software package and documentation
+can be downloaded via either \url{https://web.utk.edu/\textasciitilde ctrinh} or Github
+\url{https://github.com/TrinhLab}.
+
+\subsection{Analysis methods for design
+solutions}
+
+\subsubsection{Compatibility}
+The compatibility,$C$, %\in \mathcal{Z}_+$,
+of a design is defined as the number of
+products that are coupled with a modular cell and has objective values
+above a specified cutoff value $\theta$. As a default, we set
+$\theta=0.6$ for the \emph{wGCP} and \emph{NGP} design objectives and
+$\theta=0.36$ ($0.6^2$) for the \emph{sGCP}
+design objective. For example, a \emph{wGCP} design for 3 products that
+has the design objective values of 0.4, 0.9, and 0.6 has a compatibility
+of 2, given a cutoff value of $\theta \ge 0.6$.
+
+\subsubsection{Compatibility difference and loss} Robustness is the
+ability of a system to maintain its function against perturbations, and
+hence is very important of designing biological and engineered systems
+\citep{kitano2004}. To evaluate the robustness of modular cell
+designs, we defined two metrics, the compatibility difference
+(\emph{CD}) and compatibility loss ($CL \in \{0,1\}$) as follows:
+
+\begin{equation}
+CD\  = \ C_{\text{initial}} - C_{\text{final}}
+\end{equation}
+\begin{equation}
+CL\  = \ \frac{C_{\text{initial}} - C_{\text{final}}}{C_{\text{initial}}}
+\end{equation}
+\noindent where \emph{C\textsubscript{initial}} and \emph{C\textsubscript{final}} are the compatibilities of a modular cell design before and after a single reaction deletion, respectively.
+The value \emph{CD} \textgreater{} 0 (or \emph{CL} \textgreater{} 0) means the modular gains fitness while \emph{CD} \textless{} 0 (or \emph{CL} \textless{} 0) means that it loses its fitness.
+In the analysis, we did not consider essential and blocked reactions for our single-deletion analysis; for instance, there are only 1139 potential reaction deletions in the iML1515 model.
+
+\subsubsection{Metabolic switch design} A metabolic switch design is a
+modular cell that can possess multiple production phenotypes (i.e.,
+\emph{wGCP}, \emph{sGCP}, and \emph{NPG}), activated by an environmental
+stimulus (e.g. metabolites, lights). The metabolic switch design is
+enforced to have a set of reaction (gene) deletions in one production
+phenotype to be a subset of the other.
+%, for instance,
+%\{\textbf{y}\textsubscript{wGCP}\}~⊆ \{\textbf{y}\textsubscript{NPG}\},
+%\{\textbf{y}\textsubscript{wWCP}\} ⊆ \{\textbf{y}\textsubscript{sGCP}\}.
+The metabolic switch design is beneficial for multiphase fermentation
+configurations that enable flexible genetic modification and
+implementation. Specifically, the metabolic switch design can exhibit
+the \emph{wGCP} phenotype during the growth phase and the \emph{NPG} (or
+\emph{sGCP}) phenotype during the stationary phase. The metabolic
+switches can be implemented using the genetic switchboard
+\citep{callura2012}.
+
+\section{Results and discussion}
+
+\subsection{Illustrating ModCell2 for modular cell design of a simplified network}
+
+An example parent network, adapted from \citep{trinh2015}, was used to illustrate ModCell2 (Figure~\ref{fig:ms1-fig3}A).
+Inputs for the multi-objective optimization problem include i) three production networks (Figure~\ref{fig:ms1-fig3}B), comprising of one endogenous production module (module 1) and two heterologous production modules (modules 2 and 3) and ii) design parameters (Figure~\ref{fig:ms1-fig3}C), containing design objective type, maximum number of deletion reactions (\(\alpha\)), and maximum number of module reactions (\(\beta_{k}\)).
+The output of ModCell2 generated the Pareto set and the corresponding Pareto front for modular cell designs (Figure~\ref{fig:ms1-fig3}D).
+The 2-D plots of product yields versus growth rates presented the feasible phenotypic spaces of the wildtype (gray area) and the designed strain (blue area).
+
+Using various \(\alpha\)~and \(\beta_{k}\) values, ModCell2 simulation generated three \emph{wGCP}-\(\alpha\)\emph{-}\(\beta_{k}\)-\(d\), four \emph{sGCP}-\(\alpha\)\emph{-}\(\beta_{k}\)-\(d\) designs, and three \emph{NGP}-\(\alpha\)\emph{-}\(\beta_{k}\)-\(d\) designs, where \(d\) is the design solution index (Figure~\ref{fig:ms1-fig3}D).
+For instance, by setting \(\alpha\)~= 3 and \(\beta_{k}\) = 0, we found three \emph{sGCP} designs including \emph{sGCP-3-0-1}, \emph{sGCP-3-0-2}, and \emph{sGCP-3-0-3}.
+The first design \emph{sGCP-3-0-1} has a compatibility of 2 with the design objective values of 0.42 and 0.97 for the products P2 and P3, respectively.
+In contrast, the \emph{sGCP-3-0-2} and \emph{sGCP-3-0-3} designs have compatibilities of only 1 with the design objectives of 0.63 for P2 and 0.45 for P1, respectively.
+
+Based on all designs, we can clearly see the trade-offs for optimization of different products for \(\beta_{k}\) = 0.
+However, setting \(\beta_{k} \geq 1\) helps increase the compatibility of a modular cell with different production modules.
+In addition, we found that the Pareto front collapses into a utopia point as seen in the \emph{wGCP-1-1-1}, \emph{sGCP-3-1-1}, and \emph{NGP-3-1-1} designs.
+For instance, the modular cell, \emph{sGCP-3-1-1}, is compatible with all three products.
+The three corresponding optimal production strains can couple growth and product formation during the growth phase.
+During the stationary phase, these strains produce the products at maximum theoretical yields.
+In theory, a universal modular cell always exists, provided that enough reaction deletions and module reactions are used.
+It might be more tractable to construct such a modular cell from a synthetic minimal cell using the bottom-up approach.
+However, construction of a universal modular cell from a host organism (e.g., \emph{E.
+coli}, \emph{S. cerevisiae}) using the top-down approach will require a significantly large number of genetic modifications, that might be challenging.
+
+
+\subsection{Comparing ModCell2 designs with first-generation MODCELL and single product designs}
+
+\subsubsection{ModCell2 can generate more and better designs than the
+first-generation modular cell design platform}
+To evaluate the algorithms and performance of ModCell2, we directly compared it with
+MODCELL \citep{trinh2015} in two case studies, using the same
+core model of \emph{E. coli} for production of five alcohols (ethanol,
+propanol, isopropanol, butanol, and isobutanol) and 5 derived butyrate
+esters (ethyl butyrate, propyl butyrate, isopropyl butyrate, butyl
+butyrate, and isobutyl butyrate) from glucose (Figure~\ref{fig:ms1-fig4}A).
+
+In the first case study, we fixed the reaction module, i.e.
+\(\beta_{k} = 2\) for ethanol dehydrogenase (FEM5) and ethanol export reaction (TRA1), in ModCell2 to emulate the same input as MODCELL (Supplementary File S3).
+The results showed that ModCell2 generated all the designs with the same \emph{sGCP} objective values like MODCELL (Figure~\ref{fig:ms1-fig4}B, 4C, 4D) together with other alternative solutions (Supplementary File S3).
+Interestingly, ModCell2 only required 5 and 6 reaction deletions as opposed to 7 and 7 for the \emph{sGCP-5-0-5} and \emph{sGCP-5-0-6} designs, respectively.
+By setting the maximum reaction deletions to \(\alpha \geq 6\), ModCell2 could find better design solutions with fewer deletion reaction requirement and higher objective values (Supplementary File S3).
+
+In the second case study, we used the same model configuration but did not enforce the module reactions.
+By setting \(\alpha = 5\) and \(\beta_{k} = 1\), we found the \emph{sGCP-5-1-8} design that is compatible with all products and achieves the same objective values for products found in \emph{sGCP-5-0-5}, \emph{sGCP-5-0-6}, and \emph{sGCP-5-0-2} (Figure~\ref{fig:ms1-fig4}E).
+The desirable phenotypic spaces can be further constrained for many products if \(\alpha\) is increased from 5 to 6 (Figure~\ref{fig:ms1-fig4}F).
+Remarkably, by setting \(\alpha = 8\) and \(\beta_{k} = 2\), we found a utopia point design, \emph{sGCP-8-2-9}, without any trade-off among design objectives (Figure~\ref{fig:ms1-fig4}G).
+This utopia point design could not be achieved with \(\alpha <\) 8 regardless\(\ \)of any \(\beta_{k}\) value.
+
+Overall, the results demonstrate that ModCell2 can efficiently compute the Pareto front of modular cell designs.
+It can find better designs with fewer reaction deletion and module reaction requirements, improve design objective values, and enhance compatibility.
+
+\subsubsection{ModCell2 can identify designs with more compatibility than
+the conventional single-product designs}
+To evaluate if the
+conventional, single-product design strategy is suitable for modular
+cell engineering, we first used OptKnock to generate \emph{wGCP} designs
+for the same 10 target molecules independently with various allowable
+reaction deletions (\(\alpha = 2,\ 3,\ \ldots,\ 7\)). Likewise, we
+employed ModCell2 to produce \emph{wGCP} designs using the same
+\(\alpha\) and various \(\beta\). To directly compare OptKnock and
+ModCell2 solutions, we calculated the \emph{wGCP} design objective
+values for all products based on each OptKnock solution (Supplementary
+File S3). As expected, our result showed that ModCell2 and OptKnock
+designs have the same highest objective values for each product (Figure
+5A). However, several OptKnock solutions were always dominated by
+ModCell2 solutions in all parameter configurations (Figure~\ref{fig:ms1-fig5}B). With
+\(\alpha \geq 4\), ModCell2 could identify
+\emph{wGCP-}\(\alpha\)\emph{-1} designs with the maximum compatibility
+of 10, while the best OptKnock designs only achieved the highest
+compatibility of 5 (Figure~\ref{fig:ms1-fig5}C, 5D).
+
+Overall, ModCell2 can generate modular cells compatible with the maximum number of modules and achieve high objective values.
+Single-product designs might not be compatible with a large number of products, and the solutions might be far from Pareto optimality.
+
+\subsection{Exploring emergent features of modular cell design using an \textit{E. coli} genome-scale network}
+
+\subsubsection{Modcell2 can design modular cells using a large-scale
+metabolic network.}
+To demonstrate that ModCell2 can be applied for a
+genome scale metabolic network, we tested it to generate \emph{wGCP}
+designs for 20 target molecules with \(\alpha = 4\) and various
+\(\beta_{k}\) (Supplementary File S4). The \(\alpha\) value was chosen
+because with 4 deletions, OptKnock could identify single product designs
+with objectives above 60\% of the theoretical maximum (Supplementary
+File S5). With \(\beta_{k} = 0\), ModCell2 could identify modular cell
+designs with compatibility of 17, for example, the \emph{wGCP-4-0-50}
+design featuring deletion of ACALD (acetaldehyde dehydrogenase,
+\emph{adhE}), ACKr/PTAr (acetate kinase, \emph{ack;}
+phosphotransacetylase, \emph{pta}), GLYAT (glycine C-acetyltransferase,
+\emph{kbl}), and LDH\_D (lactate dehydrogenase, \emph{ldhA}) (Figure~\ref{fig:ms1-fig6}A,
+6D, Supplementary File S4). By analyzing all
+\emph{wGCP-4-}\(\beta_{k}\)\emph{-}\(d\) designs (257 total for
+\(\beta_{k}\) = 0, 1, 2, and 3), we found that the ethanol and D-lactate
+production modules are most compatible with all modular cell designs
+(Figure~\ref{fig:ms1-fig6}A, 6C, Supplementary File S4). Among reaction deletions,
+\emph{LdhA} (86\% of designs), \emph{Pta} (38\%), and \emph{AdhE} (25\%)
+are the most frequent deletion reactions (Figure~\ref{fig:ms1-fig6}B). This finding is
+consistent with a comprehensive survey of metabolic engineering
+publications \citep{winkler2015} showing that these deleted
+reactions appeared in most of \emph{E. coli} engineered strains for
+production of fuels and chemicals. The result supports the potential use
+of modular cell engineering to systematically build modular platform
+strains.
+
+\subsubsection{ModCell2 designs can capture combinatorial characteristics
+of production modules.} To evaluate whether ModCell2 could capture the
+combinatorial properties among production modules, we analyzed the
+Pareto front of \emph{wGCP-4-0-d} that have a total of 58 designs.
+Hierarchical clustering of this Pareto front revealed certain products
+with similar objective values across solutions, such as ethyl esters and
+butyrate esters (Figure~\ref{fig:ms1-fig6}A). These products together were compatible
+with different modular cells and exhibited metabolic similarity in their
+production modules. Thus, ModCell2 could generate designs that capture
+the combinatorial properties useful for modular cell engineering.
+
+\subsubsection{ModCell2 can identify highly compatible modular cells}
+Analysis of compatibility shows that certain modular cells can couple
+with production modules that may not exhibit the combinatorial
+properties (Figure~\ref{fig:ms1-fig6}D). However, there exists a tradeoff between the
+number of feasible designs and degree of compatibility. Some modular
+cell designs are compatible with up to 17 out of 20 products, for
+instance, the most compatible design, \emph{wGCP-4-0-48}, featuring
+deletions of ACALD (\emph{adhE}), ACKr/PTAr (\emph{ack}, \emph{pta}),
+GND (phosphogluconate dehydrogenase, \emph{gnd}) and LDH\_D
+(\emph{ldhA}) (Supplementary File S4). An alternative design
+\emph{wGCP-4-0-48-alternative} also exists where deletion of G6PDH2r
+(gluose-6-phosphate dehydrogenase, \emph{zwf}) is replaced by that of
+GND, the first step in the oxidative pentose phosphate pathway. The gene
+deletions in the design \emph{wGCP-4-0-48-alternative} are a subset of
+the modular \emph{E. coli} strain TCS095, whose modular properties have
+recently been validated experimentally \citep{wilbanks2017}.
+
+To determine if modular cell design is a viable alternative to single-product design, we also analyzed a potential tradeoff between design performance and modularity by comparing the maximum value of each objective across all solutions in the Pareto front and the single-product design optima.
+If production modules exhibit competing phenotypes, a modular cell will not achieve the same performance in all modules as a single-product design strain.
+Analysis of the most compatible design \emph{wGCP-4-0-48-alternative} showed that it could achieve objectives within 4\% of the single-product optima in 14 products and within 10\% in 3 products (Figure~\ref{fig:ms1-fig6}E).
+This result indicates that it is feasible to identify highly compatible modular cell designs without a significant tradeoff between performance and modularity.
+
+\subsubsection{Analysis of potential tradeoff between robustness and
+modularity can identify conserved metabolic features}
+To evaluate the
+robustness of modular cells, we analyzed the compatibility change
+(\emph{CD}) of \emph{wGCP-4-0} designs with compatibilities of 4 or
+greater (Figure S3 in Supplementary File 2). Remarkably, the result
+shows that only 7.5\% of potential reaction deletions were detrimental
+to the robustness of modular cells while the large remaining portion did
+not affect \emph{CD} values. Out of the 85 reactions whose deletion
+affected compatibility, only a few appeared consistently across the
+designs. For instance, deletion of TPI (triose-phosphate isomerase,
+\emph{tpi}) led to an average compatibility loss of 95\%, inactivating
+most modular cell designs. Based on flux variability analysis, TPI must
+operate in the forward direction by converting glycerone phosphate
+(dhap) to glyceraldehyde-3-phosphate (g3p) to drive sufficient flux
+through glycolysis and hence preventing synthesis of undesired
+byproducts (D-lactate or 1,2-propanediol) from dhap. Likewise, deletion
+of carbon dioxide and water transport and exchange reactions caused
+compatibility loss across all designs. Pyruvate carboxylase (PPC) is an
+important reaction to channel carbon flux through the Krebs cycle
+\citep{coomes1985}, and hence, deletion of PPC reduces
+compatibility in most modular cell designs with an average \emph{CL} of
+43\%.
+
+While some reaction deletions are critical for modular cell robustness, others are associated with specific products.
+For example, deletion of PDH (pyruvate dehydrogenase complex, \emph{lpd/aceEF}) removes compatibility in all butanol-derived designs, indicating PFL (pyruvate formate lyase, \emph{pfl}) is not an appropriate route.
+To make heterologous butanol-derived molecules under anaerobic conditions, FDH (NADH-dependent formate dehydrogenase, \emph{fdh}) is required in butanol-derived modules where enzymatic reaction pairs of PFL and FDH could substitute PDH known to be anaerobically inhibited.
+
+Overall, analysis of tradeoff between modularity and robustness can identify not only the conserved metabolic features of modular cells but also potential bottlenecks in specific production modules.
+
+\subsubsection{Enabling metabolic switch among different design
+objectives using ModCell2}
+
+The ability to dynamically control growth and production phases can potentially enhance product titers, rates, and yields.
+For instance, two-phase fermentation can be employed where growth phase is optimized for biomass synthesis and stationary phase for chemical production \citep{klamt2018}.
+Using ModCell2, we investigated the feasibility to design optimal strains to toggle switch desirable production phenotypes\emph{.}
+To design a \emph{wGCP}$\rightarrow$\emph{NPG} metabolic switch, we first used our reference \emph{wGCP} design as a parent strain (Figure~\ref{fig:ms1-fig7}A) and then employed ModCell2 to identify the most compatible \emph{wGCP}$\rightarrow$\emph{NPG} designs.
+With 5 additional deletions, we could find \emph{wGCP}$\rightarrow$NPG designs that encompass both \emph{wGCP} and \emph{NPG} phenotypes, for instance, the \emph{sup-NGP-5-0-23} design featuring deletion of PGI (glucose-6-phosphate isomerase, \emph{pgi}), MDH (malate dehydrogenase, \emph{mdh}), ASPT (L-aspartase, \emph{aspT}), Tkt2 (transketolase, \emph{tktB}), and ATPS4rpp (ATP synthase, \emph{atp}) (Figure~\ref{fig:ms1-fig7}B).
+The deletion reactions in the \emph{wGCP}$\rightarrow$NPG designs appear in both catabolic (PGI, ATPS4tpp) and anabolic (ASP, TKT2) processes, responsible for growth disruption and direction of carbon flow to the biosynthesis of target products.
+
+Likewise, we used ModCell2 to design a \emph{wGCP}$\rightarrow$\emph{sGCP} metabolic switch\emph{.} We identified the most compatible \emph{wGCP}$\rightarrow$\emph{sGCP} designs with 6 additional deletions, for instance, the \emph{sup-sGCP-6-0-39} design featuring the deletion of MGSA (Methylglyoxal synthase, \emph{mgsA}), ALCD2x (alcohol dehydrogenase, \emph{adhE}), PFL, MDH, FADRx (FAD reductase, \emph{fadI}), and GLUDy (NADP\textsuperscript{+}dependent glutamate dehydrogenase, \emph{gdhA}) (Figure~\ref{fig:ms1-fig7}C).
+Different from the \emph{wGCP}$\rightarrow$\emph{NGP} metabolic switch, all deletions in the \emph{wGCP}$\rightarrow$\emph{sGCP} designs are involved the elimination of biosynthesis pathways of undesirable byproducts.
+
+While it is feasible to metabolically switch among different production phenotypes, it not only requires more reaction deletions but also reduces the product compatibility.
+For instance, the \emph{wGCP}$\rightarrow$sGCP and \emph{wGCP}$\rightarrow$NGP designs are only compatible with 5 products while the \emph{wGCP} parent design have a compatibility of 17 out of 20 products with 4 deletions.
+The main reason is that both \emph{wGCP}$\rightarrow$\emph{sGCP} and \emph{wGCP}$\rightarrow$\emph{NGP} designs must eliminate all possible redundant pathways that result in biosynthesis of undesirable byproducts.
+
+\section{Conclusion}
+
+In this study, we developed a multi-objective strain design platform for modular cell engineering.
+With a new developed algorithm and computational platform, ModCell2 enables flexible design of modular cells that can couple with production modules to exhibit desirable production phenotypes.
+In comparison to the first-generation strain design platform, ModCell2 can handle large-scale metabolic networks and identify better solutions that require fewer genetic modifications and exhibit more product compatibility.
+Different from the conventional single-product strain design, ModCell2 can find solutions that are Pareto optimal with negligible tradeoffs among modularity, performance, and robustness.
+We envision ModCell2 is a useful tool to implement modular cell engineering and fundamentally study modular designs in natural and synthetic biological systems.
+
+%\textbf{ACKNOWLEDGEMENTS}
+%
+%This research was financially supported in part by the NSF CAREER Award (NSF\#1553250) and the DOE subcontract Grant (DE-AC05-000R22725) by the Center of Bioenergy Innovation (CBI), the U.S.
+%Department of Energy Bioenergy Research Center funded by the Office of Biological and Environmental Research in the DOE Office of Science.
+%The funders had no role in the study design, data collection and analysis, decision to publish, or preparation of the manuscript.
+%
+
+
+\section*{Figures}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{ms1-1}
+    \caption[Comparison between the conventional single-product strain design and modular cell engineering]{
+Comparison between the conventional single-product
+strain design and modular cell engineering. In the conventional
+approach, each target product requires to go through the iterative
+optimization cycle. The modular cell engineering approach exploits
+common phenotypes associated with high product titers, rates, and
+yields; and hence, the strain optimization cycle only needs to be
+performed once for multiple products, which helps reduce the cost and
+time of strain development.
+    }
+    \label{fig:ms1-fig1}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{ms1-2}
+    \caption[Graphical representation of phenotypic spaces for different strain design objectives]{
+Graphical representation of phenotypic spaces for
+different strain design objectives including \textbf{(A)} weak growth
+coupling (\emph{wGCP}), \textbf{(B)} strong growth coupling
+(\emph{sGCP}), and \textbf{(C)} no-growth production (\emph{NPG}).
+\(v_{\text{Pk}}^{\mu}\) is the minimum product formation rate at the
+maximum growth rate for production network \emph{k}, and
+\(v_{P_{\max}k}^{\mu}\ \)is the maximum product secretion rate
+attainable. \(v_{\text{Pk}}^{\overline{\mu}}\) and
+\(v_{P_{\max}k}^{\overline{\mu}}\ \)are the minimum and maximum product
+formation rates for production network \(k\) during the stationary
+phase, respectively.
+    }
+    \label{fig:ms1-fig2}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{ms1-3}
+    \caption[ModCell2 workflow and analysis]{
+Illustration of ModCell2 workflow and analysis
+including (\textbf{A}) parent model, (\textbf{B}) production modules,
+(\textbf{C}) design parameters, and (\textbf{D}) simulation output for
+Pareto set and Pareto front based on design input.
+    }
+    \label{fig:ms1-fig3}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{ms1-4}
+    \caption[2-D metabolic phenotypic spaces of different \emph{sGCP} designs using the core metabolic model]{
+The 2-D metabolic phenotypic spaces of different
+\emph{sGCP} designs using the core metabolic model. (\textbf{A})
+Metabolic map, \textbf{(B)} \emph{sGCP-5-0-5} design, \textbf{(C)}
+\emph{sGCP-5-0-6} design, \textbf{(D)} \emph{sGCP-5-0-2} design,
+\textbf{(E)} \emph{sGCP-5-1-8} design, \textbf{(F)} \emph{sGCP-6-1-10}
+design, and \textbf{(G)} \emph{sGCP-8-2-9} design. For each panel, the
+gray and blue areas correspond to the phenotypic spaces of the wildtype
+and the optimal production strain, respectively.
+    }
+    \label{fig:ms1-fig4}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{ms1-5}
+    \caption[Comparison of strain design by OptKnock and Modcell2]{
+Comparison of strain design by OptKnock and Modcell2.
+(\textbf{A}) A correlation between the maximum objective values for each
+product generated by OptKnock and the equivalent values attained by
+ModCell2. Each point is colored based on the number of reaction
+deletions, with warmer colors corresponding to more reaction deletions.
+(\textbf{B}) A comparison between the Optknock objective vectors with at
+most 7 reaction deletions and the representative ModCell2 objective
+vector, \emph{wGCP-7-1} which dominates them. Each color circle
+represents a pair of dominating \emph{wGCP} design and dominated
+OptKnock solution (Supplementary File S3). (\textbf{C}) Maximum
+compatibility of OptKnock designs (blue), \emph{wGCP} designs
+    ($\beta_k=0$, orange), wGCP designs ($\beta_k = 1$,
+yellow). (\textbf{D}) Compatibility distribution of Optknock ($\alpha = 7$,
+orange) and \emph{wGCP-7-1} (blue).
+    }
+    \label{fig:ms1-fig5}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{ms1-6}
+    \caption[Analysis of \emph{wGCP} designs with genome-scale model]{
+ Analysis of \emph{wGCP} designs with genome-scale model. \textbf{(A)} Pareto front of \emph{wGCP-4-0-d}. The
+columns correspond to different designs labeled by their design index,
+\emph{d}, where the rows correspond to different products. \textbf{(B)}
+Frequency of the top deletion reactions. \textbf{(C)} Product
+    compatibility distribution across designs. \textbf{(D)} Design
+compatibility. \textbf{(E)} Tradeoff between modularity and performance.
+The bars correspond to the maximum objective values attainable for each
+product whereas the blue line represent the objective values of the
+\emph{wGCP-4-0-48alternative} design.
+    }
+    \label{fig:ms1-fig6}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=.8\textheight]{ms1-7}
+    \caption[Production phenotypes of proposed designs]{
+Production phenotypes of (\textbf{A}) the wild type
+(gray) and the representative, highly-compatible design
+\emph{wGCP-4-0-48-alternative} (blue), (\textbf{B}) the
+\emph{wGCP}$\rightarrow$\emph{NPG} design, \emph{sup-NGP-5-0-23}, and (\textbf{C})
+the \emph{wGCP}$\rightarrow$\emph{sGCP} design, \emph{sup-sGCP-6-0-39}.
+    }
+    \label{fig:ms1-fig7}
+\end{figure}
+

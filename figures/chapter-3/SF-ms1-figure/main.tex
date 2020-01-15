@@ -1,0 +1,94 @@
+\documentclass[border=5mm]{standalone}
+
+\usepackage{xcolor}
+\usepackage{tikz}
+
+\begin{document}
+
+\tikzstyle{p}=[circle,draw=blue!50,fill=blue!20,thick, radius=2pt, scale=0.7]
+
+\begin{tikzpicture}[thick, node distance=2cm
+    every node/.append style={circle, draw=blue!80, inner sep=2pt, minimum size=2pt, fill, radius=1pt} ]
+
+    \def\labeldist{-0.3}
+    \def\x{0}
+    \def\a{a}
+    \def\b{b}
+    \def\c{c}
+    \def\d{d}
+
+    \node[font=\bf](label) at (-1,0.5) {\large A};
+    \node at (\x, \labeldist) {Parent};
+    \node[p] (\a) at (\x, -1) {};
+    \node[p] (\b) at (\x, -2) {};
+    \node[p] (\c) at (\x, -3) {};
+    \node[p] (\d) at (\x, -4) {};
+
+    %\draw[->, shorten >=2pt, shorten <=2pt, thick] (\a) edge (\b);
+    \draw[->, shorten >=2pt, shorten <=2pt, thick, red]
+    (\b) edge node[left, black]{R1} (\c) (\c) edge node[left, black]{R2} (\d);
+
+
+    \def\x{2}
+    \def\a{e}
+    \def\b{f}
+    \def\c{g}
+    \def\d{h}
+
+    \node at (\x, \labeldist) {Production};
+    \node[p] (\a) at (\x, -1) {};
+    \node[p] (\b) at (\x, -2) {};
+    \node[p] (\c) at (\x, -3) {};
+    \node[p] (\d) at (\x, -4) {};
+    \node[p] (prod) at (\x+0.5, -2.5) {};
+    \draw[->, shorten >=2pt, shorten <=2pt, thick, black!15!green] (\a) edge node[left, black]{R3} (\b) (\b) edge (prod);
+    \draw[->, shorten >=2pt, shorten <=2pt, thick]
+    (\b) edge node[left]{R1} (\c) (\c) edge node[left]{R2}(\d);
+
+    \def\x{5}
+    %
+    \node[font=\bf](label) at (\x-1,0.5) {\large B};
+
+    \def\a{i}
+    \def\b{j}
+    \def\c{k}
+    \def\d{l}
+
+    \node at (\x, \labeldist) {Parent};
+    \node[p] (\a) at (\x, -1) {};
+    \node[p] (\b) at (\x, -2) {};
+    \node[p] (\c) at (\x, -3) {};
+    \node[p] (\d) at (\x, -4) {};
+
+    \draw[->, shorten >=2pt, shorten <=2pt, thick, dashed]
+    (\a) edge node[left] {R1} (\b) (\b) edge node[left] {R2} (\c) (\c) edge node[left] {R3} (\d);
+
+    \def\x{7}
+    \def\a{m}
+    \def\b{n}
+    \def\c{o}
+    \def\d{p}
+
+    \node at (\x, \labeldist) {Production};
+    \node[p] (\a) at (\x, -1) {};
+    \node[p] (\b) at (\x, -2) {};
+    \node[p] (\c) at (\x, -3) {};
+    \node[p] (\d) at (\x, -4) {};
+
+    \draw[->, shorten >=2pt, shorten <=2pt, thick, dashed]
+    (\b) edge node[left]{R2} (\c) (\c)   edge node[left]{R3} (\d);
+    \draw[->, shorten >=2pt, shorten <=2pt, thick]
+    (\a) edge node[left] {R1} (\b) ;
+
+    \node[p] (prod) at (\x+0.5, -2.5) {};
+    \draw[->, shorten >=2pt, shorten <=2pt, thick, black!15!green] (\b) edge (prod);
+
+\end{tikzpicture}
+
+
+%\addcontentsline{toc}{section}{References}
+%\bibliography{reflibrary}
+%\bibliographystyle{ieeetr}
+
+\end{document}
+
