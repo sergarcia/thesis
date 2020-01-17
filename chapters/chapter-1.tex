@@ -5,224 +5,71 @@
 % - When refering to each chapter note if their correspondence to publications. (or have a sentence "the chapters of these thesis correspond to publications in peer-review journals\cite{}")
 % - When refering to the chapters, note co-author publications not discussed here.
 % -
+% (Revisit intro to thesis proposal)
+% - It is nice how statistical mechanics bridges the gap between phenomenological models and microscopic principles (at least in thermodynamics). Are the interactions of biological molecules too heterogenous to be explained in these terms?
+% - Cite all my papers (both first author and coauthor)
 
-%Diversity of cellular metabolism can be harnessed to produce a large
-%space of molecules. However, development of optimal strains with high
-%product titers, rates, and yields required for industrial production is
-%laborious and expensive. To accelerate the strain engineering process,
-%we have recently introduced a modular cell design concept that enables
-%rapid generation of optimal production strains by systematically
-%assembling a modular cell with an exchangeable production module(s) to
-%produce target molecules efficiently.
-%\quotecolor{ % paper 3
-Complex engineered systems such as computers, vehicles, or factories can be assembled from exchangeable units of self-contained functionality known as modules.
-Modular design enables efficient production, maintenance, and customization across modern engineering technologies.
-The inception of modular design has had a revolutionary impact on many industries.
-For instance, the first modular computer, named IBM System/360 and built in the 1960s, allowed to use the same software for different application-dependent hardware, shaping information technology as we know it today. Undoubtedly, modular design will continue to drive innovation in both established and emergent fields of engineering.
+% Paragraph structure:
+% 1. Developments in biology and biotechnology and the challenge ahead
+% 2. Hypothesis and comparison to existing modular design views
+% 3. Developments/goals of the thesis
 
-Among trending engineering disciplines, biotechnology is encompassing far-reaching applications driven by the recent development of enabling technologies in interdisciplinary areas of genome engineering,\citep{barrangou2016} systems and synthetic biology,\citep{kahl2013} metabolic engineering,\citep{nielsen2016,lee2019} and bioprocessing.\citep{cramer2011, olson2012} Amid many applications to address issues related to health, energy, security, and the environment, the chemical industry will benefit from metabolic reprogramming of microbes as cell factories to catalyze the synthesis of therapeutics, chemicals, and fuels, from renewable and sustainable feedstocks (e.g., lignocellulosic biomass, sugar cane) or waste products (e.g., waste gas from steel manufacturing, plastic waste).
-Even though there exists a naturally large space of molecules that can be synthesized by engineered microorganisms, fewer than a dozen are industrially produced.\citep{nielsen2016} A major roadblock is attributed to the very laborious and costly strain engineering process partly arising from the lack of standardization and repetition of genetic manipulation tasks.\citep{king2017, winkler2015} Recently, modular cell engineering has been proposed as an innovative approach to accelerate the strain engineering process, harnessing a large space of molecules derived from rich and diverse cellular metabolism and pushing whole-cell biocatalysis into an industrially competitive technology.\citep{trinh2015, trinh2016}
-%} % paper 3
 
-\textbf{The goal of this thesis is to advance modular design principles in synthetic biology and metabolic engineering with emphasis on biocatalysis applications.}
-%\quotecolor{ % paper 3
-To date, modular design in metabolic engineering has been mostly applied at the pathway level, where enzyme module expression is adjusted to increase target metabolite production.\citep{biggs2014, jeschek2017, lu2018, yadav2012} More recently, a system-level modular cell design (ModCell) has been proposed.\citep{trinh2015}
-Unlike conventional modular pathway optimization methods that target one product, ModCell enables rapid construction of multiple production strains each synthesizing a different product.
-Each optimal production strain is obtained by assembling a reusable modular (chassis) cell with an exchangeable production module(s) in a plug-and-play fashion, resembling the advantages of modular design in traditional engineering disciplines.
-Specifically, a modular cell contains core metabolic phenotypes shared among production modules (Figure~\ref{fig:modcell_concept}.A).
-The chassis interfaces with the modules through enzymatic and genetic synthesis machinery and precursor metabolites (Figure~\ref{fig:modcell_concept}.B).
-Modules contain auxiliary regulatory and metabolic pathways (Figure~\ref{fig:modcell_concept}.C) that enable a desired phenotype for optimal biosynthesis of a target molecule, such as growth-coupled-to-product formation (\textit{GCP} design) or stationary-phase product synthesis (\textit{NGP} design) (Figure~\ref{fig:modcell_concept}.D).
-%} % paper 3
 
-\paragraph{Executive summary:}
-The proposed thesis is divided into three goals:
-i) The development of general modular cell design principles and associated mathematical models (Chapters~\ref{chap:review}-\ref{chap:modcell2});
-ii) the development of scalable algorithms to solve the mathematical models (Chapters~\ref{chap:moea}-\ref{chap:milp});
-and iii) the application of the resulting modular cell design tool to understand driving principles of natural biological modularity and to design modular biocatalyst strains based on industrially-relevant hosts and production modules (Chapters~\ref{chap:modcell2}, \ref{chap:milp}, \ref{chap:gem}, \ref{chap:many-objectives}).
+% TODO: This view needs to be refined. Why bring up the Demon? What is the gap? The gap is between first principles and emergent behavoir
+% Note: In terms of biochemistry we might have sufficient knowledge, but regarding biophysicis there might be novel phenomena (e.g., catch bonds) that we still have not thought of and has great implications to system behavior.
+% The point is rather than we lack information and computational power, rather than first principles. Hence we need models that bridge the gap between first principles and emergent phenomena, without requiring the omniscence Laplace's demon.
+% Laplaces demon might not fit well here after all
+
+% 1. Developments in biology and biotechnology and the challenge ahead
+Vitalism was the notion that life arises from an essential principle that cannot be explained in terms of physical and chemical phenomena.
+Eduard Buchner's discovery of what would later be called enzymes during the late 19th century provided the final blow to vitalism and opened the door to
+great developments in our mechanistic understanding of living systems throught the 20th century.
+%After the final blow to this theory provided by Eduard Buchner's discovery of what would later be called enzymes during the late 19th century, the mechanistic understanding of living systems greatly developed over the 20th century.
+However, it was not until the last few decades that bioengineers began to manipulate cellular DNA for diverse applications ranging from renewable chemical production to medical treatment. Despite recent success stories, such applied fields remain highly constrained by a lack of models with sufficent predictive and explanatory power to bridge the gap between first principles and emerging phenomena.
+%Our current understanding of fundamental biological phenomena is sufficient to make a biological version of Laplace's Demon theoretically plausible, .i.e., if we were to know all biochemical and biophysical events of an organism and their parameters we could predict all biological behavior given sufficient computational power. However, other areas of science need not to relay on such Demon for their application, but rather phenomenological and statistical models with high predictive power.
+%(models with sufficient explanatory power to conduct chemical transformations and treat diseases)
+Finding such models for biological systems might be an unprecedented challenge, and remains a remarkable opportunity for scientific discovery.
+% Bridge the gap between first principles and emergent behavoir
+In addition to this scientific challenge, our increasing capabilities to engineer biological system need to be complemented by principles and design methods that will ensure efficient development of predictable systems.
+Among potential applications, biocatalysis technologies can broaden the accessibility of goods, including food and medication, and reduce global warming, two issues that will likely become the major drivers of civil conflict during the 21st century. % Last sentence is not very clear
+
+
+%  TODO: this paragraph needs to transition to the focus on biocatalysis !!
+% 2. Hypothesis and comparison to existing modular design views
+The most important concept is modern engineering is modular design. Computers, vehicles, factories, and many other complex devices are often assembled from exchangeable units of self-contained functionality known as modules.
+By analogy with electrical engineering, synthetic biologist have aimed to build biological parts that enable modular assembly and re-usability in different contexts.
+However, most modularization efforts in this field have been applied conceptually and are often applied in isolation to specific cellular components (e.g., a metabolic pathway) rather than seeing the cell as a chassis and components and modules. Hence they are difficult to generalize and do not take advantage of the potential to build platform strains.
+The primary aim of this thesis is to advance modular design principles in synthetic biology and metabolic engineering with emphasis on biocatalysis applications.
+Unlike previous modularization approaches, this work considers modular design at the system level and provides quantitative tools for its application.
+Chapter~\ref{ch:review} reviews the engineering and bioengineering literature to develop this view in depth.
+
+
+
+%Conceptually, modular design is often discussed in synthetic biology, in particular since analogies with electronical engineering are common.
+%This modularization approach is unlike exiting methods in synthetic biology that focus on the ... the primary differnece is that we focus on modularization at the system level,  that is we consider how to design modules, interfaces, and a chassis in an integrated fashion.
+
+%We propose a framework based on systems-level mechanistic biological modelsand optimization principles
+
+%%-> Introduce challenge to current modularization in biology
+%%-> Refer to Chapter 2 for in-depth investigation of these topics
+%%-> Proposed approach and how it differs from existing methods
+
+%\textbf{The goal of this thesis is to advance modular design principles in synthetic biology and metabolic engineering with emphasis on biocatalysis applications.}
+%%\quotecolor{ % paper 3
+%To date, modular design in metabolic engineering has been mostly applied at the pathway level, where enzyme module expression is adjusted to increase target metabolite production.\citep{biggs2014, jeschek2017, lu2018, yadav2012} More recently, a system-level modular cell design (ModCell) has been proposed.\citep{trinh2015}
+%Unlike conventional modular pathway optimization methods that target one product, ModCell enables rapid construction of multiple production strains each synthesizing a different product.
+%Each optimal production strain is obtained by assembling a reusable modular (chassis) cell with an exchangeable production module(s) in a plug-and-play fashion, resembling the advantages of modular design in traditional engineering disciplines.
+%Specifically, a modular cell contains core metabolic phenotypes shared among production modules (Figure~\ref{fig:modcell_concept}.A).
+%The chassis interfaces with the modules through enzymatic and genetic synthesis machinery and precursor metabolites (Figure~\ref{fig:modcell_concept}.B).
+%Modules contain auxiliary regulatory and metabolic pathways (Figure~\ref{fig:modcell_concept}.C) that enable a desired phenotype for optimal biosynthesis of a target molecule, such as growth-coupled-to-product formation (\textit{GCP} design) or stationary-phase product synthesis (\textit{NGP} design) (Figure~\ref{fig:modcell_concept}.D).
+%%} % paper 3
+
+% TODO: Just review, but this should be mostly the same
+% 3. Developments/goals of the thesis
+This thesis aims to attain three goals:
+i) The development of general modular cell design principles and associated mathematical models (Chapters~\ref{ch:review}, \ref{ch:modcell2});
+ii) the development of scalable algorithms to solve the mathematical models (Chapters~\ref{ch:moea}, \ref{ch:milp}, \ref{ch:hpc});
+and iii) the application of the resulting modular cell design tool to understand driving principles of natural biological modularity and to design modular biocatalyst strains based on industrially-relevant hosts and production modules (Chapters~\ref{ch:modcell2}, \ref{ch:milp}, \ref{ch:ctherm}, \ref{ch:hpc}).
 In conclusion, the outcome of this research is to bring modularity principles proven in conventional engineering to metabolic engineering, leading to increased robustness and efficiency thereby accelerating the strain design process that remains the major roadblock for widespread industrial application of microbial catalysis.
 
-
-
-%This is a very short guide to an unofficial thesis/dissertation template for the University of Tennessee. It has been updated to meet the specifications as of 2017 but can be easily altered as the guidelines are changed. This template requires a basic knowledge of \LaTeX\ and should cover the basic requirements in terms of required packages and functionality.
-%
-%\section{Disclaimer}
-%\textcolor{red}{\bf
-%This template is distributed with ABSOLUTELY NO WARRANTY. It serves as a guideline and constitutes a basic structure for a thesis/dissertation. The user assumes full responsibility for formatting and typesetting their document and for verifying that all the thesis requirements set by the University of Tennessee are met. Please refer to the most recent UT thesis guide \href{http://gradschool.utk.edu/thesesdissertations/formatting/}{http://gradschool.utk.edu/thesesdissertations/formatting/} or contact the thesis consultant (\href{http://gradschool.utk.edu/thesesdissertations/}{http://gradschool.utk.edu/thesesdissertations/}). Please report any bugs to the thesis consultant.}
-%
-%\section{Getting started}
-%\begin{figure}[h]
-%  \centering
-%  \includegraphics[width=6.5in]{fig01-folder-structure}\\
-%  \caption{UT thesis template folder structure.}\label{fig:intro-folder-structure}
-%\end{figure}
-%The general structure of this template is based on the tree shown in Figure \ref{fig:intro-folder-structure}. The titles of the folders are self descriptive and should guide you to proper file placement. Note that this is only a suggested model that could be modified to fit your own organizational structure.
-%
-%There are two important files in this template: ``my-dissertation.tex'' and ``utthesis.cls''. The ``utthesis.cls'' is the class file that contains the settings, definitions, packages, and macros for this template to work properly and is located in the root directory. This file constitutes the document class for the template. It is based on the report class and provides some customized functionality. It will also generate a title page for you. In certain cases, one of the packages included in this template may conflict with a package that you are adding. You will have to resolve this conflict by either removing the package that is not being used or by modifying some settings with either packages. The packages that are preloaded in this class file are: amsmath, amsthm, amssymb, setspace, geometry, hyperref, and color.
-%
-%The ``my-dissertation.tex'' file is the main file for your thesis/dissertation. This is where you bring all of the pieces together. Each individual section of your dissertation should be its own .tex file saved in the proper place. For example, a chapter for your dissertation should be saved in the ``chapters" folder. Whereas your acknowledgments file should be saved in the ``front-matter" folder. The ``my-dissertation.tex" file is the file you compile to make your dissertation. It'll call all of the included files and compile the document properly. You may want to change the name of the file to something like ``my-name-dissertation.tex''. Next, invoke the proper options for the ``utthesis'' document class. This class will take all the options for the report class in addition to two options: thesis/dissertation and monochrome. If you are writing a thesis, you must use "thesis" otherwise, use "dissertation" or omit that option because dissertation is the default setting. The monochrome option converts all your document to monochrome - except figures. This is very useful when printing your document. Because this dissertation has colored hyperlinks, these will look washed out when printed on a monochrome printer. Therefore, it is handy to have a monochrome copy of your thesis for print.
-%
-%Now you are ready to fill in the proper values corresponding to your title, name, degree, etc. This can be done in the following section:
-%\begin{verbatim}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% TO DO: FILL IN YOUR INFORMATION BELOW - READ THIS SECTION CAREFULLY
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\title{My Thesis or Dissertation Title}	 % title of thesis/dissertation
-%\author{Smokey Volunteer}                % author's name
-%\copyrightYear{2017}            		 		      % copyright year of your
-%                                           thesis/dissertation
-%\graduationMonth{May}           	     	  % month of graduation for your
-%                                           thesis/dissertation
-%\degree{Doctor of Philosophy}   % degree: Doctor of Philosophy, Master of
-%                                  Science, Master of Engineering...
-%\university{The University  of Tennessee, Knoxville}	% school name
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\end{verbatim}
-%
-%\section{References}
-%The bibliography style used in this template is "apalike". It is an author-year style based on the APA specification. Here are a few examples. T. Hungerford wrote a book on Algebra, \citep{Hungerford1974}. In 1999, D. F. Anderson and P. S. Livingston wrote the defining paper on zero-divisor graphs of commutative rings in \citep{AndersonLivingston1999}. You can also point out specific theorems in papers, such as the fact that the zero-divisor graph always has diameter less than or equal to $3$, \citep[Theorem 2.3]{AndersonLivingston1999}. You can also list several references at once. For example, for more on zero-divisor graphs see \citep{AAS2011,AFLL2001}. However, you can change this style to any format you'd like. The code in the ``my-dissertation.tex" file is
-%\begin{verbatim}
-%\utbiblio{#1}{apalike}{references-dissertation}
-%\end{verbatim}
-%The first entry (``\#1") must remain there. It deletes the title ``Bibliography" from being printed again at the top of the bibliography page. The title ``Bibliography" should only appear on the title page. The second entry can be changed to any natbib style you'd like. For example, plainnat, humannat, etc. The third entry is the name of your bibliography .tex file. Remember to run BibTeX in order to compile the bibliography correctly. For more information, visit \href{http://merkel.texture.rocks/Latex/natbib.php}{http://merkel.texture.rocks/Latex/natbib.php}.
-%
-%\section{Theorem environments}
-%This template contains predefined theorem, lemma, proposition, corollary, and definition environments. For example,
-%\begin{definition}
-%	This is your definition.
-%\end{definition}
-%\begin{proposition}
-%	This is an example of a proposition.
-%\end{proposition}
-%\begin{theorem}[First theorem]\label{thm:theorem-a}
-%    This is an example theorem.
-%\end{theorem}
-%\begin{proof}[Proof for theorem]
-%    This is the proof for this theorem.
-%\end{proof}
-%\begin{lemma}[First lemma]
-%    This is the first lemma.
-%\end{lemma}
-%\begin{proof}
-%	This is the proof for this lemma that requires Theorem \ref{thm:theorem-a}.
-%\end{proof}
-%\begin{corollary}
-%    This is the first corollary.
-%\end{corollary}
-%
-%\section{Figures and Tables}
-%\subsection{General Rules}
-%To comply with the 2017 dissertation formatting, figure captions should be placed below the figure and table captions should be placed above the table. Also, if a table or figure takes up more than half the page, then there should be no text on that page (except for the caption of course). Lastly, you must allow tables and figures to float. DO NOT HARD CODE POSITIONS. In addition, no table or figure should go into the margins. If a table or figure does creep into the margins you can either resize it so that it properly fits within the margins, or put it on its own page and make that specific page landscape. See Figure \ref{fig:wide-pic} for an example. Note the page number location in the example. The code for this is given by:
-%
-%\begin{verbatim}
-%\begin{landscape}
-%\thispagestyle{mylandscape}
-%	\begin{figure}[h]
-%		\centering
-%		\includegraphics[width=9in]{32303-TheHill-byJoshQueener.jpg}
-%		\caption{This view of The Hill is too wide for a portrait page.}
-%		\label{fig:wide-pic}
-%	\end{figure}
-%\end{landscape}
-%\end{verbatim}
-%
-%Be careful about where you place this landscape page, as well as all figures and tables. These objects are not considered part of the text, and thus their placement should not be assigned to a precise location. The general rule to follow is that no text page should have significant white space, with the exception being the last page of a chapter. So if you mention a figure in some paragraph but the figure will not fit on the remainder of the page, continue the text (even if it's a new section) to fill the current page with text and then place the figure on the next page. To see an example of this, consider this page you are reading now. We've mentioned Figure \ref{fig:wide-pic} in the previous paragraph. However, it requires a new page and since there is plenty of space on this page, we've filled it with text and delayed the \verb|\begin{landscape}| section of code until the appropriate position.
-%
-%\subsection{Single figures}
-%For more information, check out the following page: \\ \href{http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions}{http://en.wikibooks.org/wiki/LaTeX/Floats,\_Figures\_and\_Captions}
-%\begin{verbatim}
-%    \begin{figure}[t for top, b for bottom, h for here]
-%        % Requires \usepackage{graphicx}
-%        \centering % center the figure
-%        \includegraphics[width=5in or 127mm etc...]{figure-name}\\
-%        \caption{figure caption}\label{figure label}
-%    \end{figure}
-%\end{verbatim}
-%
-%\begin{figure}[h]
-%  \centering
-%  \includegraphics[width=3in]{fig02a-circle}\\
-%  \caption{Sample caption.}\label{label}
-%\end{figure}
-%
-%\subsection{Multipart figures}
-%For multipart figures, you need to use the package "subfig". here's an example:
-%\begin{verbatim}
-%\begin{figure}[h]
-%   \centering
-%   \subfloat[Circle]{\label{fig:figure-a}\includegraphics[width=1.1in]
-%     {fig02a-circle}}
-%   \subfloat[Rectangle]{\label{fig:figure-b}\includegraphics[width=1.1in]
-%     {fig02b-rectangle}}
-%   \subfloat[Cube]{\label{fig:figure-c}\includegraphics[width=1.1in]
-%     {fig02c-cube}}
-%   \caption{Geometric shapes.}
-%   \label{fig:multipart-figure}
-%\end{figure}
-%\end{verbatim}
-%\begin{figure}[h]
-%        \centering
-%        \subfloat[Circle]{\label{fig:figure-a}\includegraphics[width=1.1in]{fig02a-circle}}
-%        \subfloat[Rectangle]{\label{fig:figure-b}\includegraphics[width=1.1in]{fig02b-rectangle}}
-%        \subfloat[Cube]{\label{fig:figure-c}\includegraphics[width=1.1in]{fig02c-cube}}
-%        \caption{Geometric shapes.}
-%        \label{fig:multipart-figure}
-%\end{figure}
-%To add some space between the figures above, one can use the usual spacing commands such as ``\verb|\qquad|''. For example,
-%\begin{verbatim}
-%\begin{figure}[h]
-%   \centering
-%   \subfloat[Circle]{\label{fig:fig-a-space}\includegraphics[width=1in]
-%     {fig02a-circle}} \qquad
-%   \subfloat[Rectangle]{\label{fig:fig-b-space}\includegraphics[width=1in]
-%     {fig02b-rectangle}}\qquad
-%   \subfloat[Cube]{\label{fig:fig-c-space}\includegraphics[width=1in]
-%     {fig02c-cube}}\qquad
-%   \caption{Geometric shapes with space between images.}
-%   \label{fig:multipart-figure-space}
-%\end{figure}
-%\end{verbatim}
-%
-%\begin{figure}[h]
-%        \centering
-%        \subfloat[Circle]{\label{fig:fig-a-space}\includegraphics[width=1in]{fig02a-circle}} \qquad
-%        \subfloat[Rectangle]{\label{fig:fig-b-space}\includegraphics[width=1in]{fig02b-rectangle}}\qquad
-%        \subfloat[Cube]{\label{fig:fig-c-space}\includegraphics[width=1in]{fig02c-cube}}\qquad
-%        \caption{Geometric shapes with space between images.}
-%        \label{fig:multipart-figure-space}
-%\end{figure}
-%
-%\begin{landscape}
-%\thispagestyle{mylandscape}
-%	\begin{figure}[h]
-%		\centering
-%		\includegraphics[width=9in]{32303-TheHill-byJoshQueener.jpg}
-%		\caption{This view of The Hill is too wide for a portrait page.}
-%		\label{fig:wide-pic}
-%	\end{figure}
-%\end{landscape}
-%
-%\subsection{Tables}
-%Again, table captions should be placed above the table. See Table \ref{tab:table-a} for an example and to learn about Smokey's history\footnote{According to Wikipedia: \href{https://en.wikipedia.org/wiki/Smokey_(mascot)}{https://en.wikipedia.org/wiki/Smokey\_(mascot)}}. For more information about tables, see \href{https://en.wikibooks.org/wiki/LaTeX/Tables}{https://en.wikibooks.org/wiki/LaTeX/Tables}.
-%
-%\begin{table}[hb]
-%\caption{Smokey's History}
-%\label{tab:table-a}
-%\begin{center}
-%\begin{tabular}[b]{|c|c|c|c|}
-%	\hline
-%	Dog & Years & Record & Pct. \\ \hline
-%	Blue Smokey & 1953-1954 & 10-10-1 & .500 \\ \hline
-%	Smokey II & 1955-1963 & 58-39-5 & .597 \\ \hline
-%	Smokey III & 1964-1977 & 105-39-5 & .729 \\ \hline
-%	Smokey IV & 1978-1979 & 12-10-1 & .545 \\ \hline
-%	Smokey V & 1980-1983 & 28-18-1 & .608 \\ \hline
-%	Smokey VI & 1984-1991 & 67-23-6 & .744 \\ \hline
-%	Smokey VII & 1992-1994 & 27-9 & .750 \\ \hline
-%	Smokey VIII & 1995-2003 & 91-22 & .805 \\ \hline
-%	Smokey IX & 2004-2012 & 62-53 & .539 \\ \hline
-%	Smokey X & 2013-present & 21-17 & .552 \\ \hline
-%\end{tabular}
-%\end{center}
-%\end{table}
-%
-%

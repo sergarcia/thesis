@@ -13,8 +13,8 @@
 % 2. monochrome
 % 3. all options provided by the report class
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[dissertation,letterpaper,12pt]{utthesis} %dissertation
-%\documentclass[dissertation,letterpaper,12pt,draft]{utthesis} %dissertation
+%\documentclass[dissertation,letterpaper,12pt]{utthesis} %dissertation
+\documentclass[dissertation,letterpaper,12pt,draft]{utthesis} %dissertation
 % some alternatives are:
 %\documentclass[thesis,monochrome,letterpaper,12pt]{utthesis} %thesis, monochrome text
 \renewcommand{\baselinestretch}{1.5} 	 % line Spacing
@@ -42,6 +42,7 @@
 {figures/chapter-5/}%
 {figures/chapter-6/}%
 {figures/chapter-7/}%
+{figures/chapter-8/}%
  }% specify the path where figures are located
 \usepackage{fancyhdr}                   % fancy headers and footers
 \usepackage{url}                        % nicely format url breaks
@@ -56,7 +57,6 @@
 
 %% SG
 %%% Additional packages
-\usepackage{bibentry} % Quote citations in text (FIXME: This does not work with natbib so will remove and manually insert citations)
 \usepackage[table]{xcolor} % Row colors
 %%%% Needed for appendix B
 \usepackage{mathtools}
@@ -69,7 +69,14 @@
 \newcommand\PF{\mathcal{PF}}
 \newcommand\PS{\mathcal{PS}}
 \newcommand\PFs{\mathcal{PF}^*}
-\newcommand{\disclose}[1] {This chapter is based on the publication \bibentry{#1}. As first author I lead its development, implementation, and writting of this study.}
+
+%\usepackage{bibentry} % Quote citations in text (FIXME: This does not work with natbib so will remove and manually insert citations)
+%\newcommand{\disclose}[2] {This chapter is based on the publication \textit{#1}.\citep{#2} As first author I lead the development, implementation, and writing of this study.}
+% cite these papers at the beginning
+\newcommand{\disclose}[1] {This chapter is based on the publication \textit{#1}. As first author I lead the development, implementation, and writing of this study.}
+
+%%% Unicode
+\DeclareUnicodeCharacter{0301}{\'{e}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This section formats landscape pages properly with the correct page number.
@@ -144,7 +151,7 @@
 % bibliography style - recommend using apalike-doi as it hyperlinks DOIs
 % Be sure to run BibTeX in order to generate the bibliography correctly.
 
-\utbiblio{#1}{apalike}{references-dissertation}
+\utbiblio{#1}{apalike}{bibliography}
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % APPENDIX - OPTIONAL - COMMENT OUT IF NOT NEEDED

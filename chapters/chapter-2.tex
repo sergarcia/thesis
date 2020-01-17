@@ -1,8 +1,8 @@
-\chapter{Modular design: Concepts, methods, and applications in engineering, biology, and biotechnology}\label{ch:classroom}
+\chapter{Modular design: Concepts, methods, and applications in engineering, biology, and biotechnology}\label{ch:review}
 % (Review paper)
 
 
-\disclose{garcia2019b}
+\disclose{Modular design: Implementing proven engineering principles in biotechnology. Garcia, S., and Trinh, C. T. Biotechnology Advances, 2019}%{garcia2019b}
 
 %\textbf{Modular design: Implementing proven engineering principles in
 %biotechnology}
@@ -41,12 +41,13 @@ We conclude with an outlook towards theoretical and practical opportunities for 
 Complex engineered systems such as computers, vehicles, or factories can be assembled from exchangeable units of self-contained functionality known as modules.
 Modular design enables efficient production, maintenance, and customization across modern engineering technologies.
 The inception of modular design has had a revolutionary impact on many industries.
-For instance, the first modular computer, named IBM System/360 and built in the 1960s, allowed to use the same software for different application-dependent hardware, shaping information technology as we know it today.\{O'Regan, 2018 \#135;Ajikumar, 2010 \#85\} Undoubtedly, modular design will continue to drive innovation in both established and emergent fields of engineering.
+For instance, the first modular computer, named IBM System/360 and built in the 1960s, allowed to use the same software for different application-dependent hardware, shaping information technology as we know it today.\citep{o2018}
+Undoubtedly, modular design will continue to drive innovation in both established and emergent fields of engineering.
 
 Among trending engineering disciplines, biotechnology is encompassing far-reaching applications driven by the recent development of enabling technologies in interdisciplinary areas of genome engineering \citep{barrangou2016}, systems and synthetic biology \citep{kahl2013}.
-metabolic engineering \citep{nielsen2016b}, and bioprocessing \citep{cramer2011, olson2012}.
+metabolic engineering \citep{nielsen2016}, and bioprocessing \citep{cramer2011, olson2012}.
 Amid many applications to address issues related to health, energy, and the environment, the chemical industry will benefit from metabolic reprogramming of microbes as cell factories to catalyze the synthesis of therapeutics, chemicals, and fuels, from renewable and sustainable feedstocks (e.g., lignocellulosic biomass, sugar cane) or waste products (e.g., waste gas from steel manufacturing, plastic waste).
-Even though there exists a naturally large space of molecules that can be synthesized by metabolically engineered microorganisms \citep{lee2019}, fewer than a dozen molecules are industrially produced \citep{nielsen2016b}.
+Even though there exists a naturally large space of molecules that can be synthesized by metabolically engineered microorganisms \citep{lee2019}, fewer than a dozen molecules are industrially produced \citep{nielsen2016}.
 A major roadblock is attributed to the very laborious and costly strain engineering process partly arising from the lack of standardization and repetition of genetic manipulation tasks \citep{king2017, winkler2015}.
 Recently, modular cell engineering has been proposed as an innovative approach to accelerate strain engineering process, harnessing a large space of molecules derived from rich and diverse cellular metabolism and thus pushing whole-cell biocatalysis towards an industrially competitive technology \citep{trinh2016}.
 
@@ -113,7 +114,7 @@ Modularity is a ubiquitous organizing principle across all scales of biology.
 Within a scale, modules often interact in a hierarchical manner (Figure~\ref{fig:ba-fig2}).
 At the molecular level, DNA transcription activation and rate can be controlled by a variety of modular promoter elements \citep{dynan1989}.
 Additionally, certain proteins are highly modular, such as enzymes (e.g., polyketide synthase and non-ribosomal peptide synthetase \citep{hutchinson2003}) with modular substrate identification elements that enable biosynthesis of a large space of secondary metabolites \citep{khosla2001}.
-At the cellular level, modularity is present in all biomolecule interaction networks \citep{mitra2013}, including DNAs \citep{wagner2001}, RNAs \citep{stuart2003}, proteins \citep{spirin2003}, and metabolites \citep{ravasz2002}.
+At the cellular level, modularity is present in all biomolecule interaction networks \citep{mitra2013}, including RNAs \citep{stuart2003}, proteins \citep{spirin2003}, and metabolites \citep{ravasz2002}.
 In all cases, modules are associated with specific cellular functions or pathways, which often interact in a hierarchical manner \citep{ravasz2002}.
 At the multi-cellular level, organs and tissues are also structured modularly.
 For example, in the human brain, neuron interaction networks contain modules associated with specific cognitive functions \citep{sporns2016}.
@@ -161,12 +162,12 @@ Thus, modular cell engineering can harness the existing features of biological m
 \section{Modular cell engineering}
 
 Diverse and complex cellular metabolism encompasses a large space of molecules, providing a potential path towards broader industrialization of biology \citep{connelly2015}.
-To realize this potential, rapid development of novel microbial biocatalysts to efficiently synthesize these molecules is critical but faces multiple challenges due to laborious and costly requirement of extensive strain optimization cycles \citep{nielsen2016b, trinh2016}.
+To realize this potential, rapid development of novel microbial biocatalysts to efficiently synthesize these molecules is critical but faces multiple challenges due to laborious and costly requirement of extensive strain optimization cycles \citep{nielsen2016, trinh2016}.
 Effective exploitation of modular design as seen in natural and engineered systems for biocatalyst development can offer innovative strategies to tackle these challenges.
 
 To date, modular cell engineering has been mostly applied at the pathway level, where enzyme module expression is adjusted to increase target metabolite production.
 This topic has been extensively reviewed \citep{biggs2014, jeschek2017, lu2018, yadav2012} and will not be elaborated in detail here.
-At the cellular level, platform strains engineered to eliminate common byproducts and increase availability of important precursors for overproduction of target molecules have been reported with some success by implementing the conventional ``push-and-pull'' metabolic engineering strategy \citep{nielsen2016b}.
+At the cellular level, platform strains engineered to eliminate common byproducts and increase availability of important precursors for overproduction of target molecules have been reported with some success by implementing the conventional ``push-and-pull'' metabolic engineering strategy \citep{nielsen2016}.
 More recently, a system-level modular cell design method has been developed to systematically and simultaneously design both the chassis cell and production modules for the synthesis of various target chemicals \citep{garcia2019, trinh2015}.
 Unlike conventional strain optimization methods that target one product, modular cell design seeks to enable rapid and predictable creation of multiple production strains to achieve superior performance with minimal strain optimization cycle where each synthesizes a different product.
 Each optimal production strain is obtained by assembling a reusable modular (chassis) cell with an exchangeable production module(s) in a plug-and-play fashion, resembling the advantages of modular design in traditional engineering disciplines.
@@ -184,10 +185,13 @@ The primer for the modular cell design principles started with the observation \
 coli} cells\emph{,} based on constraint-based modeling \citep{palsson2015} and conventional strain design methods \citep{trinh2009}, exhibited the same core metabolism (Figure~\ref{fig:ba-fig4}~A-B).
 To systematically explore this property, the first modular cell design method, called MODCELL, was proposed and used to design an \emph{E.
 coli} modular cell for alcohol and ester production \citep{trinh2015} (Figure~\ref{fig:ba-fig4}~E).
-A new formulation of the modular cell design problem, ModCell2 \citep{garcia2019}, was proposed based on the framework of multi-objective optimization to capture the tradeoffs that may exist among highly diverse biochemical pathways.
-ModCell2 enables analysis of genome-scale metabolic networks with many production modules and design of optimal modules without extensive prior knowledge of target pathways.
-ModCell2 was used to demonstrate that a modular cell can be designed to exhibit (i) desirable production phenotypes for many molecules under various culturing conditions beyond the growth-coupled to product synthesis phase \citep{klamt2015}, such as the stationary-phase phase \citep{klamt2018}, and (ii) minimal trade-off between compatibility, performance, and robustness (Figure~\ref{fig:ba-fig4}~H).
-These results highlight that the systems-level modularization of cellular metabolism can accelerate strain engineering without sacrificing performance requirements.
+In Chapter~\ref{ch:ms1} a new formulation of the modular cell design problem, ModCell2, based on multi-objective optimization will be developed to design strains with minimal trade-off between compatibility, performance, and robustness (Figure~\ref{fig:ba-fig4}~H).
+
+%A new formulation of the modular cell design problem, ModCell2 \citep{garcia2019}, was proposed based on the framework of multi-objective optimization to capture the tradeoffs that may exist among highly diverse biochemical pathways.
+%ModCell2 enables analysis of genome-scale metabolic networks with many production modules and design of optimal modules without extensive prior knowledge of target pathways.
+%ModCell2 was used to demonstrate that a modular cell can be designed to exhibit (i) desirable production phenotypes for many molecules under various culturing conditions beyond the growth-coupled to product synthesis phase \citep{klamt2015}, such as the stationary-phase phase \citep{klamt2018}, and (ii) minimal trade-off between compatibility, performance, and robustness (Figure~\ref{fig:ba-fig4}~H).
+%These results highlight that the systems-level modularization of cellular metabolism can accelerate strain engineering without sacrificing performance requirements.
+
 While ModCell2 is to our knowledge the only tool that involves simultaneous design of chassis, modules, and interfaces, other recently developed computational tools can be applied to design these elements individually.
 For example, MinGenome \citep{wang2018} is used to design genomes of minimal cells that can serve as chassis whereas ValveFind \citep{pandit2017} enables design of orthogonal pathways to build production modules.
 Topics on model-guided strain design techniques for ``integral'' strains, .i.e, strains optimized for production of only a single product, can be found in recent excellent reviews.
@@ -206,7 +210,7 @@ Nowadays, development of production modules can start by using computational too
 Next, the genetic parts can be synthesized, assembled, and characterized for accuracy in a rapid manner to build production modules to make desirable molecules in a target host \citep{annaluru2014, bitinaite2007, blake2010, chen2013, colloms2014, gibson2009, kok2014, li2005, li2007, shao2009, trubitsyna2014, tsuge2003, zhang2012b}.
 Some recent achievements, highlighting innovations in retrofitting cellular metabolism for novel biocatalysis from sustainable feedstocks, include: (i) redirection of central metabolism to make environmentally friendly, non-natural bioplastics \citep{rehm2010}, (ii) redesign of fermentative pathways to produce a large space of designer bioesters used as flavors, fragrances, biofuels, and solvents \citep{layton2014, rodriguez2014} (Figure~\ref{fig:ba-fig4}~D), (iii) repurposing of the beta-oxidation pathway for combinatorial biosynthesis of alcohols, dicarboxylic acids, hydroxyl acids, and lactones as industrial platform chemicals \citep{cheong2016} (Figure~\ref{fig:ba-fig4}~F), and (iv) refactoring of polyketide and isoprenoid pathways to explore a large space of secondary metabolites as drugs \citep{ajikumar2010, galanie2015, martin2003}.
 
-While the design, construction, and characterization of production modules can be streamlined, compatibility between the modules and a target host has always posed a significant challenge mainly due to the intricate flux imbalance resulting in low product titers, rates, and yields \citep{nielsen2016b}.
+While the design, construction, and characterization of production modules can be streamlined, compatibility between the modules and a target host has always posed a significant challenge mainly due to the intricate flux imbalance resulting in low product titers, rates, and yields \citep{nielsen2016}.
 In the case of heterologous enzyme expression, undesirable regulatory interactions at the transcriptional and metabolic levels might hinder the pathway operation in a new host.
 This problem can be addressed by refactoring pathways into isolated orthogonal modules that are independent of the source organism regulation and do not interfere with heterologous host regulation \citep{galanie2015, RN171, tan2017, temme2012}.
 In most design scenarios, even after regulatory issues are addressed, metabolic flux imbalance is likely to occur due to the differences in expression and catalytic efficiencies of pathway enzymes.
@@ -217,13 +221,13 @@ Screening approaches can be effort-intensive and impractical for certain scenari
 Additionally, these approaches may not be able to solve poor pathway-host interactions where precursor metabolite(s) of the pathway of interest becomes the bottleneck.
 Alternatively, simultaneous host and pathway optimization can be accomplished by adaptive laboratory evolution, provided that a simple selectable phenotype such as growth is tightly coupled with the desirable product synthesis phenotype.
 For example, Wilbanks \emph{et al.} \citep{wilbanks2017} recently demonstrated a linear correlation between growth rate and product synthesis rate for computationally designed growth-coupled strains \citep{trinh2015} (Figure~\ref{fig:ba-fig4}~G).
-Pathway optimization through growth-coupled design has been applied successfully \citep{fong2005}, and a recent computational study suggest its applicability to many different products and organisms \citep{von2017}.
+Pathway optimization through growth-coupled design has been applied successfully \citep{fong2005}, and a recent computational study suggest its applicability to many different products and organisms. \citep{von2017}
 Modular cell design is compatible with the two described module optimization tools; particularly, the design of a chassis growth-coupled to its production modules can enable rapid optimization of diverse pathways.
 
 \subsection{Recent advances in the experimental implementation of modular cell design}
 
 Experimental implementation of modular cell design is still at infancy of validation.
-Construction of modular cells can be implemented by two methods: (i) top-down approach that aims to remove undesired phenotypes from a naturally existing organism under defined environmental conditions \citep{trinh2008b, trinh2006} and (ii) bottom-up approach that seeks to create a new organism derived from a synthetic minimal cell.
+Construction of modular cells can be implemented by two methods: (i) top-down approach that aims to remove undesired phenotypes from a naturally existing organism under defined environmental conditions \citep{trinh2008, trinh2006} and (ii) bottom-up approach that seeks to create a new organism derived from a synthetic minimal cell.
 \citep{hutchison2016} These two methods draw the same analogy as those in the engineering modular design, classified as ``product modularization'' and ``design with modules'' \citep{bonvoisin2016}.
 In the ``product modularization'' approach like the ``top-down'' approach, the chassis, modules, and interfaces are simultaneously designed either by defining functional carriers and interfaces as part of the design (\emph{ex ante} design) or by clustering existing functions into modules (\emph{ex post} design).
 Alternatively, in the ``design with modules'' approach like the ``bottom-up'' approach, a product is designed out of a collection of predefined compatible parts; for example, the design of a personal computer that is assembled from the existing modules, including a motherboard, a graphic card, a monitor, etc., with standard interfaces.
@@ -319,8 +323,8 @@ for growth-coupled to product synthesis predicted by MODCELL
 \citep{trinh2015} and pathway optimization by adaptive
 laboratory evolution \citep{wilbanks2017}. (\textbf{H})
 Multi-objective optimization-based modular cell design method, named
-ModCell2, was developed and demonstrated to reveal negligible trade-offs
-between modular and integral designs \citep{garcia2019}.
+ModCell2, will be developed in Chapter~\ref{ch:ms1} and used to reveal negligible trade-offs
+between modular and integral designs.
 (\textbf{I}) Next-generation of modular cell design framework is
 proposed to account for enzyme biosynthesis cost using metabolism and
 expression (ME) or kinetic models with enzyme constraints. (\textbf{J})

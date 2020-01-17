@@ -7,8 +7,6 @@ Questions:
 	- rewrite
 
 ## Chapter 2:
-	- fix missing references
-	- In section 2.3.4 edit out ModCell2 and refer to chapter 3. Last figure of this chapter should also reflect this
 
 ## Chapter 3:
 	- fix missing references
@@ -27,7 +25,7 @@ Write, include arrow figure
 General tips:
 - For labels append the chapter number to avoid clashes: (eq:lorem) -> (eq3:lorem).
 
-Ideas to enhance formatting (ask on vim so):
-- Have a macro that removes \textbf on figure captions
+Ideas to enhance formatting (ask on vim SO):
+-  Make sure in all figure captions letters for subpanles are bold
 - Have a macro that puts citations before punctuation signs
 

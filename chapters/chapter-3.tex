@@ -1,8 +1,8 @@
-\chapter{Formulation of conceptual and mathematical framework to design modular cells}\label{ch:field}
+\chapter{Formulation of conceptual and mathematical framework to design modular cells}\label{ch:modcell2}
 % Metabolic engineering paper
 
-\disclose{garcia2019}
-Supplementary Files S1 and S2 are provied in Apendix 1 and 2 respectively, while Supplementary Files S3,S4, and S5 are provided as attachments.
+\disclose{Multiobjective strain design: A framework for modular cell engineering. Garcia, S., and Trinh, C. T. Metabolic Engineering, 2019}%{garcia2019}
+Supplementary Files S1 and S2 are provied in Apendix 1 and 2 respectively, while Supplementary Files S3, S4, and S5 are provided as attachments.
 
 
 \section*{Abstract}\label{abstract}
@@ -30,12 +30,12 @@ Thus, innovative technologies to enable rapid and economical strain engineering 
 The modular organization of biological systems has been a source of inspiration for synthetic biology and metabolic engineering \citep{purnick2009, sauro2008}.
 Modular pathway engineering breaks down target pathways into tractable pathway modules that can be finely tuned for optimal production of desirable chemicals \citep{biggs2014, yadav2012}.
 Harnessing combinatorial pathways (e.g., fatty acid biosynthesis, reverse beta oxidation, polyketide or isoprenoid biosynthesis) is one excellent example of modular pathway engineering.
-These pathways contain metabolic similarity (or combinatorial characteristics) such as a group of common specific enzymes capable of catalyzing linear reaction steps \citep{rodriguez2014} and/or elongation cycles \citep{cheong2016, tseng2012b, xu2013} and hence are capable of producing a large library of unique molecules \citep{ng2016}.
+These pathways contain metabolic similarity (or combinatorial characteristics) such as a group of common specific enzymes capable of catalyzing linear reaction steps \citep{rodriguez2014} and/or elongation cycles \citep{cheong2016, tseng2012, xu2013} and hence are capable of producing a large library of unique molecules \citep{ng2016}.
 Since these molecules are derived from a common precursor metabolite(s), the optimal production strains often share common genotypes and phenotypes, and hence, the costly strain optimization process is only performed once for these molecules.
 Remarkably, this advantageous strain optimization strategy can be applied even for production of molecules derived from different precursors, using the concept of modular cell (ModCell) design \citep{trinh2015, trinh2016, wilbanks2017}.
 
 With the arrival of steady-state, constraint-based stoichiometric models of cellular metabolism, various computational algorithms have been developed to guide strain engineering \citep{chowdhury2015, long2015, yang2011}.
-These methods have featured the design of strains capable of growth-coupled product synthesis (\emph{GCP}), enabling adaptive laboratory evolution of these designed strains to enhance product titers, rates, and yields \citep{fong2005b, yadav2012, trinh2009, wilbanks2017}.
+These methods have featured the design of strains capable of growth-coupled product synthesis (\emph{GCP}), enabling adaptive laboratory evolution of these designed strains to enhance product titers, rates, and yields \citep{fong2005, yadav2012, trinh2009, wilbanks2017}.
 Two approaches on growth-coupled production have been formulated - one based on the coexistence of maximum growth and product synthesis rates during the growth phase \citep{burgard2003} and the other based on the obligate requirement of optimal product synthesis in any growth phase \citep{trinh2008}.
 The distinction between these two types of growth coupling are also referred to weak coupling (\emph{wGCP}) and strong coupling (\emph{sGCP}) \citep{klamt2015, yang2011}.
 
@@ -146,7 +146,7 @@ The \emph{sGCP} design objective,$f_{k}^{\text{sGCP}} \in \{0, 1\}$, is calculat
 The \emph{sGCP} design objective is comparable to the one implemented in MODCELL \citep{trinh2015}.
 Different from \emph{wGCP}, \emph{sGCP} requires high product synthesis rate for any growth phase.
 However, the additional constraint of optimal product synthesis during the stationary phase requires more genetic manipulations or specific experimental conditions (e.g., anaerobic growth condition, supply of intermediate metabolites).
-Both \emph{wGCP} and \emph{sGCP} designs enable fast growth selection to attain the optimum product rates by adaptive laboratory evolution \citep{fong2005, trinh2009bc}.
+Both \emph{wGCP} and \emph{sGCP} designs enable fast growth selection to attain the optimum product rates by adaptive laboratory evolution \citep{fong2005, trinh2009b}.
 
 The \emph{NGP} design aims to maximize the minimum product rate during the non-growth phase by eliminating carbon fluxes directed to biomass synthesis (Figure~\ref{fig:ms1-fig2}C).
 The \emph{NGP} design objective, $f_{k}^{\text{NGP}}\in \{0, 1\}$, is calculated as follows:
@@ -607,7 +607,7 @@ product whereas the blue line represent the objective values of the
 
 \begin{figure}[h]
   \centering
-  \includegraphics[height=.8\textheight]{ms1-7}
+  \includegraphics[height=.84\textheight]{ms1-7}
     \caption[Production phenotypes of proposed designs]{
 Production phenotypes of (\textbf{A}) the wild type
 (gray) and the representative, highly-compatible design

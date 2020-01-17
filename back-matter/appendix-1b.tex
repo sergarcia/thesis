@@ -79,7 +79,7 @@
 \end{description}
 
 \subsubsection{Solver} \label{sec:mainMOP}
-We used the \textit{gamultiobj()} solver, an implementation of NSGA-II \cite{Deb2002}, from the MATLAB Optimization Toolbox to solve our combinatorial multiobjective optimization, formulated as an unconstrained multiobjective problem of
+We used the \textit{gamultiobj()} solver, an implementation of NSGA-II \citep{deb2002}, from the MATLAB Optimization Toolbox to solve our combinatorial multiobjective optimization, formulated as an unconstrained multiobjective problem of
 the form:
 \begin{equation}
 \max (p_1,p_2,\dots ,p_{|\mathcal{K}|})^T
@@ -197,7 +197,7 @@ Initially, ExcludedSol will contain at least a target solution for which we are 
 
 \subsection{Specifying the Set of Deletion Reaction Candidates for Manipulation} \label{sec:cand}
 
-The set of deletion reaction candidates, \textit{C}, is a subset of all reactions in the parent network, excluding reactions infeasible to eliminate in practice and irrelevant to desirable phenotypes, as described below. Some criteria  used in \cite{Feist2010} were adapted and implemented in our study.
+The set of deletion reaction candidates, \textit{C}, is a subset of all reactions in the parent network, excluding reactions infeasible to eliminate in practice and irrelevant to desirable phenotypes, as described below. Some criteria  used in \citep{feist2010} were adapted and implemented in our study.
 
 	\paragraphit{ Macromolecule-associated reactions.} These reactions involve macromolecules whose biologically relevant roles are not well represented in the model (e.g., glycogen) or do not impact the optimal design of target product biosynthesis pathways. We identified macromolecule-associated reactions by screening metabolite IDs and formulas, for instance, those with total carbon number above 10 except currency metabolites (e.g., ATP, acetyl-CoA, etc.)
 
