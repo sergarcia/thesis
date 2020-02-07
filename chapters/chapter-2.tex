@@ -41,7 +41,7 @@ We conclude with an outlook towards theoretical and practical opportunities for 
 Complex engineered systems such as computers, vehicles, or factories can be assembled from exchangeable units of self-contained functionality known as modules.
 Modular design enables efficient production, maintenance, and customization across modern engineering technologies.
 The inception of modular design has had a revolutionary impact on many industries.
-For instance, the first modular computer, named IBM System/360 and built in the 1960s, allowed to use the same software for different application-dependent hardware, shaping information technology as we know it today.\citep{o2018}
+For instance, the first modular computer, named IBM System/360 and built in the 1960s, allowed to use the same software for different application-dependent hardware, shaping information technology as we know it today \citep{o2018}.
 Undoubtedly, modular design will continue to drive innovation in both established and emergent fields of engineering.
 
 Among trending engineering disciplines, biotechnology is encompassing far-reaching applications driven by the recent development of enabling technologies in interdisciplinary areas of genome engineering \citep{barrangou2016}, systems and synthetic biology \citep{kahl2013}.
@@ -67,6 +67,23 @@ A fully modular or sectional architecture has all the components to be modules, 
 Chassis-based architectures are also common in modular design, including bus and slot.
 The bus modular architecture uses the same interface for all modules, e.g., universal serial bus (USB) and peripheral component interconnect (PCI) ports found in computers, while the slot modular architecture has specific interfaces for corresponding modules, e.g., tires in an automobile.
 The chassis-based architectures enable the use of alternative chasses that can be combined with the same modules to efficiently generate a variety of products or vice versa \citep{jose2005}.
+
+%\afterpage{%
+%\begin{figure}[H]
+\begin{figure}[!p]
+  \centering
+  \includegraphics[width=\textwidth]{ba-fig1}
+    \caption[Modular design in engineering]{Modular design in engineering. (\textbf{A}) Common
+types of modular architectures. (\textbf{B}) Current applications of
+innovative modular design. (\textbf{C}) General mathematical framework
+of modular design. The input is illustrated with a gas turbine jet
+engine, that intakes air through the front section for heating and
+compression followed by air expansion to generate thrust. The
+interaction between system components can be formalized in a DSM model
+    and analyzed to identify the most effective modules and interfaces.}
+    \label{fig:ba-fig1}
+\end{figure}
+%}
 
 
 \subsection{Driving forces and potential tradeoffs of modular design}
@@ -121,6 +138,19 @@ For example, in the human brain, neuron interaction networks contain modules ass
 These modules are hierarchically organized into submodules to integrate and contextualize specialized functions of the brain \citep{meunier2010}; for instance, visual perception that requires the functional integration of multiple neuron clusters in the cortical columns \citep{park2013}.
 At the ecological scale, organism communities can be represented by networks, where nodes are species or subpopulations and links are interactions such as consumption, pollination, or competition \citep{grilli2016}.
 The capability of ecological networks to avoid global failure due to small perturbations has been attributed to their modular structure both theoretically \citep{grilli2016} and experimentally \citep{gilarranz2017}.
+%
+%\afterpage{%
+%\begin{figure}[H]
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=\textwidth]{ba-fig2}
+    \caption[Hierarchical modularity across all scales of biology]{Hierarchical modularity across all scales of biology.
+Images marked with * and ** are adapted from Khosla and Harbury
+\citep{khosla2001} and Gilarranz \emph{et al.}
+    \citep{gilarranz2017}, respectively.}
+    \label{fig:ba-fig2}
+\end{figure}
+%}
 
 \subsection{Modularity explains functions of components and interactions of biological systems}
 
@@ -178,6 +208,22 @@ These design principles are formulated to integrate state-of-the-art techniques 
 
 In the following sections, we highlight the recent advancements in modular cell engineering that capture: (1) design principles and computational tools to enable construction of a modular cell and associated production modules, (2) discovery and optimization of metabolic pathways as production modules both theoretically and experimentally, and (3) experimental implementation of modular cell design principles.
 
+%\afterpage{%
+%\begin{figure}[H]
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\textwidth]{ba-fig3}
+    \caption[Generalized concept of modular cell design]{Generalized concept of modular cell design.
+    (\textbf{A}) Modular (chassis) cell. \textbf{(B)} Interfaces.
+(\textbf{C}) Production modules. \textbf{(D)} Production strains. A
+modular cell is designed to provide the necessary precursors for
+biosynthesis pathway modules that are independently assembled with the
+modular cell to generate production strains exhibiting desirable
+phenotypes.}
+    \label{fig:ba-fig3}
+\end{figure}
+%}
+
 \subsection{Recent developments in mathematical formulation of modular cell design}
 
 
@@ -185,7 +231,7 @@ The primer for the modular cell design principles started with the observation \
 coli} cells\emph{,} based on constraint-based modeling \citep{palsson2015} and conventional strain design methods \citep{trinh2009}, exhibited the same core metabolism (Figure~\ref{fig:ba-fig4}~A-B).
 To systematically explore this property, the first modular cell design method, called MODCELL, was proposed and used to design an \emph{E.
 coli} modular cell for alcohol and ester production \citep{trinh2015} (Figure~\ref{fig:ba-fig4}~E).
-In Chapter~\ref{ch:ms1} a new formulation of the modular cell design problem, ModCell2, based on multi-objective optimization will be developed to design strains with minimal trade-off between compatibility, performance, and robustness (Figure~\ref{fig:ba-fig4}~H).
+In Chapter~\ref{ch:modcell2} a new formulation of the modular cell design problem, ModCell2, based on multi-objective optimization will be developed to design strains with minimal trade-off between compatibility, performance, and robustness (Figure~\ref{fig:ba-fig4}~H).
 
 %A new formulation of the modular cell design problem, ModCell2 \citep{garcia2019}, was proposed based on the framework of multi-objective optimization to capture the tradeoffs that may exist among highly diverse biochemical pathways.
 %ModCell2 enables analysis of genome-scale metabolic networks with many production modules and design of optimal modules without extensive prior knowledge of target pathways.
@@ -201,6 +247,55 @@ Future development of modular cell design tools will incorporate enzyme kinetics
 Enzyme cost analysis is also particularly useful for identifying robust strategies for adaptive laboratory evolution that prevent an unintended pathway(s) to be optimized instead of a targeted pathway(s) \citep{dinh2018}.
 The lack of experimental data on enzyme catalytic efficiencies needed for these modeling approaches can be addressed through random parameter sampling \citep{dinh2018}, \emph{omics} integration \citep{ebrahim2016, khodayari2016}, and machine learning \citep{heckmann2018}.
 Recently developed models that predict \emph{in-vivo} enzyme concentrations from the genetic sequence help bridge the gap between metabolic model predictions and experimental implementation \citep{farasat2014, meng2013, salis2009}.
+
+%\afterpage{
+%\begin{figure}[H]
+\begin{figure}[!p]
+  \centering
+  \includegraphics[width=\textwidth]{ba-fig4}
+    \caption[Key advances and opportunities in the design and
+    implementation of modular cells and exchangeable production modules]{Key advances and opportunities in the design and
+implementation of modular cells and exchangeable production modules.
+    (\textbf{A}) The same core metabolic pathways were revealed for butanol
+and isobutanol growth-coupled production based on elementary mode
+analysis \citep{trinh2012}. (\textbf{B}) An \emph{E. coli}
+cell with minimal metabolic functionality designed to require product
+(ethanol) synthesis for cell growth was experimentally validated
+\citep{trinh2008}. (\textbf{C}) A dynamic sensor-regulator
+system was designed and implemented to balance metabolic fluxes for
+enhanced biosynthesis of fatty acid-derived molecules
+\citep{zhang2012}. (\textbf{D}) A modular ester fermentative
+pathway platform derived from alcohol and acyl-CoA pathway submodules
+was designed and experimentally demonstrated in a chassis strain
+\citep{layton2014}. (\textbf{E}) First modular cell design
+method, named MODCELL, was proposed and used to design 3 modular cells
+for the production of a group of alcohols and derived esters
+\citep{trinh2015}. (\textbf{F}). Carbon and energy efficient
+cyclic pathway was developed to synthesize 10 product classes from a
+variety of primer and extender precursors \citep{cheong2016}.
+(\textbf{G}) Prototypes of modular cell engineering were demonstrated
+for growth-coupled to product synthesis predicted by MODCELL
+\citep{trinh2015} and pathway optimization by adaptive
+laboratory evolution \citep{wilbanks2017}. (\textbf{H})
+Multi-objective optimization-based modular cell design method, named
+ModCell2, will be developed in Chapter~\ref{ch:modcell2} and used to reveal negligible trade-offs
+between modular and integral designs.
+(\textbf{I}) Next-generation of modular cell design framework is
+proposed to account for enzyme biosynthesis cost using metabolism and
+expression (ME) or kinetic models with enzyme constraints. (\textbf{J})
+Experimental demonstration of rapid and systematic generation of modular
+production strains with many different types of production modules to
+achieve superior performances over the wildtype and single-product
+(integral) strains in terms of titer, rate, and yield (TRY).
+(\textbf{K}) Design of a universal modular cell compatible with a large
+and diverse space of production modules. (\textbf{L}) Future
+demonstration of modular cell design is proposed for
+industrially-relevant, non-model organisms with difficult-to-transfer
+phenotypes, such as efficient assimilation of CO\textsubscript{2},
+    CH\textsubscript{4}, or cellulose.}
+    \label{fig:ba-fig4}
+\end{figure}
+%}
 
 \subsection{Recent advances in discovery and optimization of metabolic pathways as production modules}
 
@@ -258,87 +353,8 @@ By combining proven engineering methods rooted in the physical and chemical laws
 %Department of Energy (DOE) Bioenergy Research Centers funded by the Office of Biological and Environmental Research in the DOE Office of Science.
 %Due to space limitation, we sincerely apologize to those whose work was not cited.
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth]{ba-fig1}
-    \caption[Modular design in engineering]{Modular design in engineering. (\textbf{A}) Common
-types of modular architectures. (\textbf{B}) Current applications of
-innovative modular design. (\textbf{C}) General mathematical framework
-of modular design. The input is illustrated with a gas turbine jet
-engine, that intakes air through the front section for heating and
-compression followed by air expansion to generate thrust. The
-interaction between system components can be formalized in a DSM model
-    and analyzed to identify the most effective modules and interfaces.}
-    \label{fig:ba-fig1}
-\end{figure}
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth]{ba-fig2}
-    \caption[Hierarchical modularity across all scales of biology]{Hierarchical modularity across all scales of biology.
-Images marked with * and ** are adapted from Khosla and Harbury
-\citep{khosla2001} and Gilarranz \emph{et al.}
-    \citep{gilarranz2017}, respectively.}
-    \label{fig:ba-fig2}
-\end{figure}
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth]{ba-fig3}
-    \caption[Generalized concept of modular cell design]{Generalized concept of modular cell design.
-    (\textbf{A}) Modular (chassis) cell. \textbf{(B)} Interfaces.
-(\textbf{C}) Production modules. \textbf{(D)} Production strains. A
-modular cell is designed to provide the necessary precursors for
-biosynthesis pathway modules that are independently assembled with the
-modular cell to generate production strains exhibiting desirable
-phenotypes.}
-    \label{fig:ba-fig3}
-\end{figure}
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth]{ba-fig4}
-    \caption[Key advances and opportunities in the design and
-    implementation of modular cells and exchangeable production modules]{Key advances and opportunities in the design and
-implementation of modular cells and exchangeable production modules.
-    (\textbf{A}) The same core metabolic pathways were revealed for butanol
-and isobutanol growth-coupled production based on elementary mode
-analysis \citep{trinh2012}. (\textbf{B}) An \emph{E. coli}
-cell with minimal metabolic functionality designed to require product
-(ethanol) synthesis for cell growth was experimentally validated
-\citep{trinh2008}. (\textbf{C}) A dynamic sensor-regulator
-system was designed and implemented to balance metabolic fluxes for
-enhanced biosynthesis of fatty acid-derived molecules
-\citep{zhang2012}. (\textbf{D}) A modular ester fermentative
-pathway platform derived from alcohol and acyl-CoA pathway submodules
-was designed and experimentally demonstrated in a chassis strain
-\citep{layton2014}. (\textbf{E}) First modular cell design
-method, named MODCELL, was proposed and used to design 3 modular cells
-for the production of a group of alcohols and derived esters
-\citep{trinh2015}. (\textbf{F}). Carbon and energy efficient
-cyclic pathway was developed to synthesize 10 product classes from a
-variety of primer and extender precursors \citep{cheong2016}.
-(\textbf{G}) Prototypes of modular cell engineering were demonstrated
-for growth-coupled to product synthesis predicted by MODCELL
-\citep{trinh2015} and pathway optimization by adaptive
-laboratory evolution \citep{wilbanks2017}. (\textbf{H})
-Multi-objective optimization-based modular cell design method, named
-ModCell2, will be developed in Chapter~\ref{ch:ms1} and used to reveal negligible trade-offs
-between modular and integral designs.
-(\textbf{I}) Next-generation of modular cell design framework is
-proposed to account for enzyme biosynthesis cost using metabolism and
-expression (ME) or kinetic models with enzyme constraints. (\textbf{J})
-Experimental demonstration of rapid and systematic generation of modular
-production strains with many different types of production modules to
-achieve superior performances over the wildtype and single-product
-(integral) strains in terms of titer, rate, and yield (TRY).
-(\textbf{K}) Design of a universal modular cell compatible with a large
-and diverse space of production modules. (\textbf{L}) Future
-demonstration of modular cell design is proposed for
-industrially-relevant, non-model organisms with difficult-to-transfer
-phenotypes, such as efficient assimilation of CO\textsubscript{2},
-    CH\textsubscript{4}, or cellulose.}
-    \label{fig:ba-fig4}
-\end{figure}
 
 

@@ -1,8 +1,76 @@
 
-\section{Summary of Stuff}
-some text here
-\subsection{More Things}
-some equations here
+\renewcommand{\hbAppendixPrefix}{C}
 
-\subsection{Other Aspects}
-some equations also here
+\renewcommand{\thefigure}{\hbAppendixPrefix\arabic{figure}}
+\setcounter{figure}{0}
+\renewcommand{\thetable}{\hbAppendixPrefix\arabic{table}}
+\setcounter{table}{0}
+\renewcommand{\theequation}{\hbAppendixPrefix\arabic{equation}}
+\setcounter{equation}{0}
+
+\section{Supplementary Material 1 for Chapter \ref{ch:ctherm}} \label{apx:sm1-ctherm}
+
+%\documentclass[dvipsnames]{article}
+%\usepackage[sm]{paper}
+%%\usepackage{longtable}
+%\usepackage{supertabular}
+%\addbibresource{bibliography.bib}
+
+% Command to easily format gene knockouts
+%\makeatletter
+%\newcommand\ko[1]{{\@for\tmp:=#1\do{\textit{$\Delta$\tmp}}}}
+
+
+
+%\title{ \textbf{Supplementary Material 1:} \\Development of an updated genome-scale metabolic model of \textit{Clostridium thermocellum} and its application for integration of multi-omics datasets}
+%\author[1,2]{Sergio Garcia}
+%\author[2,3]{R. Adam Thompson}
+%\author[2,5]{Richard J. Giannone}
+%\author[2,4]{Satyakam Dash}
+%\author[2,4]{Costas D. Maranas}
+%\author[1,2,3,*]{Cong T. Trinh}
+%\affil[1]{Department of Chemical and Biomolecular Engineering, The University of Tennessee, Knoxville, TN, United States}
+%\affil[2]{Center for Bioenergy Innovation, Oak Ridge National Laboratory Oak Ridge, TN, United States}
+%\affil[3]{Bredesen Center for Interdisciplinary Research and Graduate Education, The University of Tennessee, Knoxville and Oak Ridge National Laboratory, Oak Ridge, TN, USA}
+%\affil[4]{Department of Chemical Engineering, The Pennsylvania State University, University Park, PA, United States}
+%\affil[5]{Chemical Sciences Division, Oak Ridge National Laboratory. Oak Ridge, TN, United States.}
+%\affil[*]{Corresponding author: 1512 Middle Dr, DO432, Deparment of Chemical and Biomolecular Engineering, University of Tennesse, Knoxville, TN 37996, United States. Tel: 865-974-2181. Email: ctrinh@utk.edu.}
+%
+%
+%\begin{document}
+%\maketitle
+%%\tableofcontents
+%%\listoftables
+%\newpage
+
+%\section*{Consistent cases}
+
+%\todo[inline]{A list of reaction abreviations to names can be added at the end but otherwise it is too much for one table, also consider adding the model in "table form" for easy reference}
+
+%\todo[inline]{Add continuation caption}
+% A way to add continuation caption:
+%https://tex.stackexchange.com/questions/11380/how-to-repeat-top-rows-column-headings-on-every-page
+% --- See longtable instead
+% https://tex.stackexchange.com/questions/26462/make-a-table-span-multiple-pages
+
+
+%\begin{table}[!ht]
+%\caption[Consistent reactions between flux simulations and proteomic data]{The 70 consistent reactions in the
+%\textit{$\Delta$hydG-$\Delta$ech} case study and their associated fold changes. The biomass reaction is not included due to size. This table is continued in the following pages.}
+\input{./figures/chapter-6/top_up.tex}
+%\end{table}
+
+% Supertabular
+%\topcaption[Consistent reactions between flux simulations and proteomic data]{The 70 consistent reactions in the
+%\textit{$\Delta$hydG-$\Delta$ech} case study and their associated fold changes. The biomass reaction is not included due to size. This table is continued in the following pages.}
+%\input{./figures/chapter-6/top_up.tex}
+
+
+%\pagebreak
+%\section{Flux simulations to further elucidate possible fate of \textit{nadph}}
+
+\begin{table}[!ht]
+\caption[Simulated fluxes for \textit{$\Delta$hydG-$\Delta$ech}]{pFBA simulated fluxes from \textit{$\Delta$hydG-$\Delta$ech} case study. Only includes reactions involving NADPH or exchange reactions that have different flux between wild-type and mutant. The biomass reaction is not included due to size. Additionally, we also excluded reactions with the same fold change magnitude as the biomass reaction ($|\textrm{FC}|=0.26$), likely because they are fully correlated.}
+\input{./figures/chapter-6/nadph_and_ex.tex}
+\end{table}
+

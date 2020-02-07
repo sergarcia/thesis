@@ -13,8 +13,8 @@
 % 2. monochrome
 % 3. all options provided by the report class
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\documentclass[dissertation,letterpaper,12pt]{utthesis} %dissertation
-\documentclass[dissertation,letterpaper,12pt,draft]{utthesis} %dissertation
+\documentclass[dissertation,letterpaper,12pt]{utthesis} %dissertation
+%\documentclass[dissertation,letterpaper,12pt,draft]{utthesis} %dissertation
 % some alternatives are:
 %\documentclass[thesis,monochrome,letterpaper,12pt]{utthesis} %thesis, monochrome text
 \renewcommand{\baselinestretch}{1.5} 	 % line Spacing
@@ -27,6 +27,7 @@
 \graduationMonth{May}           				% month of graduation for your thesis/dissertation
 \degree{Doctor of Philosophy}	    			% degree: Doctor of Philosophy, Master of Science, Master of Engineering...
 \university{The University  of Tennessee, Knoxville}	% school name
+% Keywords:??
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LOAD SOME USEFUL PACKAGES.
 % No need to change anything here, although if you'd like to add packages you can do that here. Note that packages preloaded with the utthesis class are: amsmath,amsthm,amssymb,setspace,geometry,hyperref,and color
@@ -64,6 +65,22 @@
 \SetKwRepeat{Do}{do}{while}
 \usepackage{cases}
 %\usepackage{tikz} % Generally tikz will be compiled outside and provided as png
+%%% Chapter 5
+\usepackage{enumitem} % Definition list
+\setlist[description]{font=\normalfont\itshape,itemsep=-2pt} % negative itemsep can make elements in sublists overlap
+%%% Figures
+\usepackage{afterpage} % NOTE: This should not be used for figure placement, use [p] instead
+%%% Chapter 6 appendix:
+\usepackage{supertabular} % TODO: Get rid of this
+\usepackage{longtable}
+
+\usepackage{multirow}
+
+
+% Notation
+\usepackage{siunitx} %(Used for chapter 6)
+\DeclareSIUnit\molar{M} % some use \textsc{M} but this looks unconventional
+
 
 %%% Macros
 \newcommand\PF{\mathcal{PF}}
@@ -162,6 +179,7 @@
     \appendix
     \include{back-matter/appendix-1a}
     \include{back-matter/appendix-1b}
+    \include{back-matter/appendix-2}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % A VITA IS REQUIRED
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

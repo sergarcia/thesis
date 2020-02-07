@@ -1,0 +1,86 @@
+% Key developments in modular cell design principles
+
+\documentclass[tikz,border=.1cm]{standalone}
+\usetikzlibrary{decorations.markings,fadings,shadings}
+\tikzset{blurring/.cd,amplitude/.initial=3mm,drop factor/.initial=0.006,line
+width/.initial=1cm,%<-width of the arrow line
+length/.initial=9cm,%<- length of the arrow
+tick prominence/.initial=0.8cm,%<- length of the ticks
+color/.code={\colorlet{myarrowcolor}{#1}},
+color=gray}%<- try e.g. color=blue ;-)
+\begin{tikzfadingfrompicture}[name=fade right]
+\shade[left color=transparent!0,
+right color=transparent!100]
+    (0,-\pgfkeysvalueof{/tikz/blurring/line width}) rectangle
+    (\pgfkeysvalueof{/tikz/blurring/length}+\pgfkeysvalueof{/tikz/blurring/line width},\pgfkeysvalueof{/tikz/blurring/line width});
+\end{tikzfadingfrompicture}
+
+\begin{document}
+\begin{tikzpicture}[font=\sffamily]
+  \newcommand{\bkv}[1]{\pgfkeysvalueof{/tikz/blurring/#1}}
+  \begin{scope}[local bounding box=faded]
+    % this is the main routine. it draws little rectangles along the upper
+    % and lower border of the path. The size of these rectangles decreases.
+    % The decrease is exponential and depends on the drop factor, larger
+    % values imply faster decrease (initially it is 0.006).
+    \draw[myarrowcolor,line width=\bkv{line width},postaction={decorate,decoration={markings,
+    mark=between positions 0 and 1 step 1pt with {
+        \pgfmathsetmacro{\myamp}{exp(-(\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}*\bkv{drop factor}))}
+        \pgfmathsetmacro{\myoldamp}{exp(-((\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}-1)*\bkv{drop factor}))}
+        \shade[top color=white,bottom color=myarrowcolor]
+        (0pt,0.49*\bkv{line width}-\myoldamp*\bkv{amplitude})
+        -- (0pt,0.49*\bkv{line width}+\myoldamp*\bkv{amplitude})
+        -- (1.1pt,0.49*\bkv{line width}+\myamp*\bkv{amplitude})
+        -- (1.1pt,0.49*\bkv{line width}-\myamp*\bkv{amplitude});
+        \shade[top color=myarrowcolor,bottom color=white]
+        (0pt,-0.49*\bkv{line width}+\myoldamp*\bkv{amplitude})
+        -- (0pt,-0.49*\bkv{line width}-\myoldamp*\bkv{amplitude})
+        -- (1.1pt,-0.49*\bkv{line width}-\myamp*\bkv{amplitude})
+        -- (1.1pt,-0.49*\bkv{line width}+\myamp*\bkv{amplitude});}}}]
+        (0,0) -- (0.9*\bkv{length}, 0);
+    % the parts left of the arrow are patched together
+    % left
+    \shade[left color=white,right color=myarrowcolor]
+     (-3*\bkv{amplitude},-0.5*\bkv{line width}+\bkv{amplitude})
+      rectangle (0,0.5*\bkv{line width}-\bkv{amplitude});
+    % top left
+    \shade[upper left=white,upper right=white,lower left=white,lower right=myarrowcolor]
+     (-3*\bkv{amplitude},0.5*\bkv{line width}-\bkv{amplitude})
+      rectangle (0,0.5*\bkv{line width}+\bkv{amplitude});
+    % bottom left
+    \shade[upper left=white,upper right=myarrowcolor,lower left=white,lower right=white]
+    (-3*\bkv{amplitude},-0.5*\bkv{line width}+\bkv{amplitude})
+    rectangle (0,-0.5*\bkv{line width}-\bkv{amplitude});
+    %
+    \fill[myarrowcolor] (\bkv{length}-\bkv{line width},-\bkv{line width})
+    -- (\bkv{length}-\bkv{line width},\bkv{line width})
+    -- (\bkv{length}+\bkv{line width}, 0) -- cycle;
+
+
+      \newcommand{\boxw}{3.2cm}
+
+    \foreach \x/\en in {
+        0/\textbf{Primer}: Metabolic engineering strategies repeat across target molecules ,
+        3.7/\textbf{ModCell2}: Multi-objective optimization formulation to design Pareto optimal chassis and modules ,
+        7.5/\textbf{Modcell2-HPC}: Design chassis for hundredths of endogenous products providing general principles for synthetic and natural modular design
+      }{
+        \draw[myarrowcolor, ultra thick] (\x*1cm+\pgflinewidth/2,0)
+        -- (\x*1cm+\pgflinewidth/2,\bkv{tick prominence}) node [black, above, text width = \boxw, align=justify] {\en};}
+
+    \foreach \x/\en in {%
+        1.5/\textbf{MODCELL}: Design strains for individual products and find common manipulations,
+        5.5/\textbf{ModCell2-MILP}: Identify optimal solutions to design universal chassis and define key metabolic interfaces
+        } {
+        \draw[myarrowcolor, ultra thick] (\x*1cm+\pgflinewidth/2,0) --
+        (\x*1cm+\pgflinewidth/2,-\bkv{tick prominence}) node [black, below, text width = \boxw, align=justify] {\en};
+    }
+
+    % End of arrow:
+    \node[black, text width = \boxw, align=justify] at (11.6,0) {%
+        Modular design principles in metabolic engineering for efficient and robust systems};
+
+  \end{scope}
+  \fill[white,path fading=fade right] (faded.south west) rectangle
+      (faded.north east);
+\end{tikzpicture}
+\end{document}

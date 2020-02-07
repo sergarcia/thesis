@@ -1,0 +1,86 @@
+\rowcolors{2}{gray!25}{white}
+\resizebox{\textwidth}{!}{\begin{tabular}{>{\em}lllllc}
+\toprule
+\normalfont{Gene deletions}	& Medium 	& \multicolumn{3}{l}{Fraction of W.T. growth rate (\%)} 	\\
+		&			& \textit{iAT601}	& \textit{iCBI655}	& \textit{In vivo}  	\\
+\midrule
+hydg         	& MTC                  	& 100      	& 100 		& 73	\\
+hydg-ech     	& MTC                   & 85       	& 85 		& 67 	\\
+hydg-pta-ack 	& MTC           	& 100       	& 100		& 48 	\\
+hydG-ech-pfl	& MTC			& 58       	& 0		& 0	\\
+hydG-ech-pfl	& MTC + fumarate	& 377		& 726 		& 0	\\
+hydG-ech-pfl	& MTC + sulfate		& 58       	& 65		& +	\\
+hydG-ech-pfl	& MTC + ketoisovalerate & 97       	& 101		& +	\\
+\hline
+\end{tabular}}
+
+% In the fumarate addition case the over-prediction if growth is due to FUM, Fumarase, (mal__L <=> fum + h2o), if this reaction is removed, then growth prediction is 100%. Alternatively the fumarate uptake rate might be limited. Fumarase also operates close to equilibrium (see equilibrator), so that might be another rate limiting factor.
+
+% Annotation
+% + indicates the mutants grow
+
+% Notes:
+% - For in vivo calculations, the average growth rate value was used.
+% - all mediums use cellobiose
+
+% Calculation of growth rate for Tian2016
+% - Quote from Tian2016: "To examine strain improvements via evolution, the wild type and resulting three strains (AG553, AG601, and LL1210) were cultivated in serum bottles in defined medium. Maximum growth rate was determined on 5 g/L cellobiose (Table 1). The wild-type strain had the fastest growth rate, while the growth rate of the unevolved strain AG553 was the slowest." However the wild-type growth rate is not reported. A reference to Papaneck 2015 is provided.
+% - quote from Papaneck 2015 (which Tian2016 cites as the source of its strains): "While wild type C. thermocellum grew at a rate of 0.14±0.03 h−1, strain AG553 experienced a substantially longer lag phase and had an initial growth rate of 0.03±0.01 h−1. After reaching approximately an OD of 0.15, the growth rate increased to 0.13±0.02 h−1" This paper uses MTC
+% - Tian reports average growth rates for the mutant of 0.06 before adaptation, 0.10 after one round of adpatation, and 0.22 after a second round of adaptation.  While the adaptation procedures differ, all growth rates are characterized under the same MTC medium with 5 g/L of cellobiose. The initial and final growth rates are reported.
+
+% References
+%[1] Thompson, R. Adam, et al. "Elucidating central metabolic redox obstacles hindering ethanol production in Clostridium thermocellum." Metabolic engineering 32 (2015): 207-219.
+%[2] Tian, Liang, et al. "Simultaneous achievement of high ethanol yield and titer in Clostridium thermocellum." Biotechnology for biofuels 9.1 (2016): 116.
+%[3] Van Der Veen, Douwe, et al. "Characterization of Clostridium thermocellum strains with disrupted fermentation end-product pathways." Journal of industrial microbiology & biotechnology 40.7 (2013): 725-734.
+%[related to 2] Papanek, Beth, et al. "Elimination of metabolic pathways to all traditional fermentation products increases ethanol yields in Clostridium thermocellum." Metabolic engineering 32 (2015): 49-54.
+
+% Notes about additional growth rate data:
+% Ref 1 data can be extracted from figure/ Raw data
+% Ref 3 data can be extracted from figure 1
+
+
+
+
+% Earlier versions:
+
+% v1
+%\rowcolors{2}{gray!25}{white}
+%\resizebox{\textwidth}{!}{\begin{tabular}{>{\em}llllll}
+%\toprule
+%\normalfont{Gene deletions}	& Medium 	& \multicolumn{3}{l}{Fraction of W.T. growth rate}	& Reference \\
+%		&			& iAT601	& iCBI655	& \textit{In vivo} & 		\\
+%\midrule
+%hydg         	& MTC                  	& 100.0\%       & 100.0\% 	& 72.7\%	& \cite{thompson2015} \\
+%hydg-ech     	& MTC                   & 85.0\%        & 84.0\% 	& 66.6\% 	& \cite{thompson2015} \\
+%hydg-pta-ack 	& MTC           	& 100.0\%       & 100.0\%	& 48.5\% 	& \cite{thompson2015} \\
+%hydG-ech-pfl	& MTC			& 58.3\%	& 0\%		& 0\%		& \cite{thompson2015} \\
+%hydG-ech-pfl	& MTC + fumarate	& 376.6\%	& 101.7\%	& 0\%		& \cite{thompson2015} \\
+%hydG-ech-pfl	& MTC + sulfate		& 58.3\%	& 64.3\%	& +		& \cite{thompson2015} \\
+%hydG-ech-pfl	& MTC + ketoisovalerate & 96.6\%	& 101.1\%	& +		& \cite{thompson2015} \\
+%hydG-pfl-ldh-pta-ack &	MTC		& 94.1\%	& 77.7\%	& 42.85\%/157.1\%	& \cite{tian2016} \\
+%ldh		& MTC			& 100.0\%	& 100.0\%	& \textasciitilde100\%	& \cite{van2013} \\
+%pta-ack		& MTC			& 100.0\%	& 100.0\%	& +		& \cite{van2013} \\
+%ldh-pta-ack	& MTC			& 100.0\%	& 100.0\%	& +/+		& \cite{van2013} \\
+%\hline
+%\end{tabular}}
+
+%v2
+%\rowcolors{2}{gray!25}{white}
+%\resizebox{\textwidth}{!}{\begin{tabular}{>{\em}lllllc}
+%\toprule
+%	\normalfont{Gene deletions}	& Medium 	& \multicolumn{3}{l}{Fraction of W.T. growth rate (\%)}	& Reference \\
+%		&			& iAT601	& iCBI655	& \textit{In vivo} & 		\\
+%\midrule
+%hydg         	& MTC                  	& 100      	& 100 		& 73	& \cite{thompson2015} \\
+%hydg-ech     	& MTC                   & 85       	& 84 		& 67 	& \cite{thompson2015} \\
+%hydg-pta-ack 	& MTC           	& 100       	& 100		& 48 	& \cite{thompson2015} \\
+%hydG-ech-pfl	& MTC			& 58       	& 0		& 0		& \cite{thompson2015} \\
+%hydG-ech-pfl	& MTC + fumarate	& 377		& 102		& 0		& \cite{thompson2015} \\
+%hydG-ech-pfl	& MTC + sulfate		& 58       	& 64		& +		& \cite{thompson2015} \\
+%hydG-ech-pfl	& MTC + ketoisovalerate & 97       	& 101		& +		& \cite{thompson2015} \\
+%hydG-pfl-ldh-pta-ack &	MTC		& 94       	& 78		& 43/157	& \cite{tian2016} \\
+%ldh		& MTC			& 100		& 100		& \textasciitilde100	& \cite{van2013} \\
+%pta-ack		& MTC			& 100		& 100		& +		& \cite{van2013} \\
+%ldh-pta-ack	& MTC			& 100		& 100		& +/+		& \cite{van2013} \\
+%\hline
+%\end{tabular}}

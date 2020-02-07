@@ -85,8 +85,7 @@ To find the best MOEAs for ModCell2, we evaluated a recent and comprehensive set
 From over 50 algorithms available in PlatEMO, we selected 2 methods for benchmark study, including NSGAII/gamultiobj and MOEAIGDNS, and 8 methods that have been specifically developed to tackle many-objective problems with discrete variables like ModCell2, including ARMOEA, EFRRR, MaOEADDFC, SPEAR, tDEA, BiGE, NSGAIII, and SPEA2SDE (Table~\ref{tab4:moeas}).
 It should be noted that gamultiobj is an alternative implementation of the NSGAII algorithm available in Matlab.
 
-
-\begin{table}[H]
+\begin{table}[!hp]
     \caption[Summary of MOEAs]{Summary of MOEAs used in this study}
 \centering
 %% \tablesize{} %% You can specify the fontsize here, e.g., \tablesize{\footnotesize}. If commented out \small will be used.
@@ -110,10 +109,6 @@ It should be noted that gamultiobj is an alternative implementation of the NSGAI
 	SPEA2SDE & Strength Pareto evolutionary algorithm 2 with shift-based density estimation	& Many-objective EA	& \cite{li2014} \\
  \hline
 \end{tabular}
-
-
-
-
     \label{tab4:moeas}
 \end{table}
 
@@ -158,7 +153,7 @@ $\epsilon$: This metric is the additive epsilon indicator \cite{zitzler2002} tha
 
 Use of these metrics can be illustrated with a two-objective design example with 4 generations of improving Pareto front approximations, where the final Pareto front is used as a reference (i.e., $\PFs$) (Figure~\ref{fig4:example}e). As the Pareto fronts contain points that dominate the previous generations, all metrics decrease monotonically with the exception of $C$ that increases to a value of 1 when both Pareto front approximation and reference are the same (Figure~\ref{fig4:example}f).
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth,keepaspectratio]{example.png}
     \caption[Conceptual illustration of performance metrics]{(\textbf{a-d}) Conceptual illustration of performance metrics of MOEAs for a two-objectives design problem. $PF$ and $PF^*$ correspond to the Pareto front approximation and the best Pareto front available, respectively. The reference point $R$ must always dominate all solutions in $PF$. (\textbf{e-f}) An example of Pareto fronts with 2 dimensions and associated metrics. The 4th generation corresponds to $\PFs$ used as a reference for comparison.}
@@ -189,12 +184,35 @@ A total coverage of $\PFs$ ($C=1$)  was reached within 20 generations by several
 Although $C$, $\epsilon$, and $\Delta_p$ values of BiGE indicated inferior performance, this algorithm had the lowest $HV$ since it generated only one point with a high objective value (Figure~\ref{fig4:case1}o).
 Due to the simplicity of the problem, every algorithm except MaOEADDFC, tDEA, and BiGE converged to very similar Pareto fronts (Figure~\ref{fig4:case1}n-x), and 5 of them reached $C=1$, indicating convergence to the reference Pareto front (Figure~\ref{fig4:case1}y).
 
+%\afterpage{%
+\begin{figure}[p]
+    \centering
+    \includegraphics[height=.83\textheight,keepaspectratio]{case1.png}
+    %\caption{(Caption next page.)}
+    \caption[Comparison of MOEAs for a 3-objectives design problem]{Comparison of MOEAs for a 3-objectives design problem.
+	(\textbf{a}) The simplified metabolic pathways for conversion of glucose to the target products. Reducing equivalents are presented with $e^-$.
+	(\textbf{b-l}) Generation-dependent performance metrics for various MOEAs.
+	(\textbf{m}) Performance metrics for various MOEAs at the last generation.
+	(\textbf{n-x}) Pareto fronts of various MOEAs at the last generation. It should be noted that only the first replicate is plotted for clear illustration.
+	(\textbf{y}) Reference Pareto front ($\PFs$). Each line represents a solution.}
+    \label{fig4:case1}
+\end{figure}
+%}
+
 \subsection{Case 2: A 10-objectives design problem}
 Using the same model and design parameters as in Case 1, we expanded the number of objectives to represent a more realistic scenario.
 These objectives correspond to 6 endogenous pathways for biosynthesis of D-lactate, acetate, ethanol, formate, pyruvate and L-glutamate and 4 heterologous pathways for biosynthesis of propanol, butanol, isobutanol, and pentanol.
 The additional objectives increased the difficulty of the problem, leading to more notable difference among algorithm performances (Figure~\ref{fig4:case2}a-k).
 The SPEA2SDE algorithm displayed consistent improvement of $C$ as generations progressed, and quickly reached the smallest values of  $\epsilon$ and $\Delta_p$ (Figure~\ref{fig4:case2}h).
 Other algorithms, including ARMOEA and MOEAIGDNS, also improved their $\epsilon$ values with the increasing number of generations and reached the same final values of $\epsilon$ and $\Delta_p$ as SPEA2SDE (Figure~\ref{fig4:case2}a, d). However, SPEA2SDE approached $C\cong0.6$, which is twice the value reached by the next best-performing methods (Figure~\ref{fig4:case2}l). Remarkably, SPEA2SDE outperformed every other algorithm in all metrics, except $\HV$. The $\HV$ metric continues to show bias towards algorithms that generated a small number of points and scored poorly in other metrics.
+
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{case2.png}
+    \caption[Comparison of MOEAs for a 10-objective design problem]{Comparison of MOEAs for a 10-objective design problem. (\textbf{a-k}) Generation-dependent performance metrics for various MOAEs. (\textbf{l}) Performance metrics for various MOEAs at the last generation.}
+\label{fig4:case2}
+\end{figure}
 
 
 \subsection{Case 3: Use of large population size overcomes poor MOEA performance}
@@ -210,39 +228,7 @@ could reach $C$ of 0.7, $\epsilon$ of 0, and $\Delta_p$ of 0 in fewer than 50 ge
 These 5 algorithms also yielded very similar final values across all metrics  (Figure~\ref{fig4:case3}l). The remaining algorithms converged to considerably lower $C$ values (Figure~\ref{fig4:case3}b, c, e, f, i, k).
 Remarkably, NSGAII/\textit{gamultiobj}, that is not considered a many-objective solver, performed better than more recent many-objective algorithms such as NSGAIII.
 
-One limitation of using larger populations is an increased cost in computational time. We observed that a 10-fold increase in population sizes resulted in a 10-fold increase in the run times (Figure~\ref{fig4:timing}). Nonetheless, all metrics reached a stable value in the top performing algorithms after 50 generations (out of 200 total), suggesting that fewer generations were needed by using a larger population size.  Among the best performing algorithms with large population sizes, \textit{gamultiobj}, implemented in the Matlab Optimization Toolbox, required the shortest run time, followed by NSGAII and SPEA2SDE implemented in PlatEMO.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[height=.83\textheight,keepaspectratio]{case1.png}
-    %\caption{(Caption next page.)}
-    \caption[Comparison of MOEAs for a 3-objectives design problem]{Comparison of MOEAs for a 3-objectives design problem.
-	(\textbf{a}) The simplified metabolic pathways for conversion of glucose to the target products. Reducing equivalents are presented with $e^-$.
-	(\textbf{b-l}) Generation-dependent performance metrics for various MOEAs.
-	(\textbf{m}) Performance metrics for various MOEAs at the last generation.
-	(\textbf{n-x}) Pareto fronts of various MOEAs at the last generation. It should be noted that only the first replicate is plotted for clear illustration.
-	(\textbf{y}) Reference Pareto front ($\PFs$). Each line represents a solution.}
-    \label{fig4:case1}
-\end{figure}
-%\addtocounter{figure}{-1}
-%
-%\begin{figure}[t!]
-%	\caption{(Previous page.) Comparison of MOEAs for a 3-objectives design problem.
-%	(\textbf{a}) The simplified metabolic pathways for conversion of glucose to the target products. Reducing equivalents are presented with $e^-$.
-%	(\textbf{b-l}) Generation-dependent performance metrics for various MOEAs.
-%	(\textbf{m}) Performance metrics for various MOEAs at the last generation.
-%	(\textbf{n-x}) Pareto fronts of various MOEAs at the last generation. It should be noted that only the first replicate is plotted for clear illustration.
-%	(\textbf{y}) Reference Pareto front ($\PFs$). Each line represents a solution.}
-%\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{case2.png}
-    \caption[Comparison of MOEAs for a 10-objective design problem]{Comparison of MOEAs for a 10-objective design problem. (\textbf{a-k}) Generation-dependent performance metrics for various MOAEs. (\textbf{l}) Performance metrics for various MOEAs at the last generation.}
-\label{fig4:case2}
-\end{figure}
-
-\begin{figure}[H]
+\begin{figure}[p]
     \centering
     \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{case3.png}
     \caption[Comparison of MOEAs with increased population sizes]{Comparison of MOEAs for a 10-objectives design problem with larger population sizes
@@ -250,7 +236,10 @@ One limitation of using larger populations is an increased cost in computational
 \label{fig4:case3}
 \end{figure}
 
-\begin{figure}[H]
+One limitation of using larger populations is an increased cost in computational time. We observed that a 10-fold increase in population sizes resulted in a 10-fold increase in the run times (Figure~\ref{fig4:timing}). Nonetheless, all metrics reached a stable value in the top performing algorithms after 50 generations (out of 200 total), suggesting that fewer generations were needed by using a larger population size.  Among the best performing algorithms with large population sizes, \textit{gamultiobj}, implemented in the Matlab Optimization Toolbox, required the shortest run time, followed by NSGAII and SPEA2SDE implemented in PlatEMO.
+
+
+\begin{figure}[!t]
     \centering
     \includegraphics[width=0.45\textwidth,keepaspectratio]{timing.png}
     \caption[Wall-clock run times]{Wall-clock run times for the 10-objectives design problem with population sizes of 100 (Case 2) and 1000 (Case 3).}
