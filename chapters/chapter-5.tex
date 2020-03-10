@@ -36,9 +36,9 @@ The different biochemical nature of production modules to synthesize target meta
 
 %\afterpage{%
 \begin{figure}[p]
-    \caption[Principles of modular cell design]{Principles of modular cell design. (a) Modular cell chassis. (b) Interfaces. (c) Production modules. (d) Production strains. A modular cell is designed to provide the necessary precursors for biosynthesis pathway modules that are independently assembled with the modular cell to generate production strains exhibiting desirable phenotypes. The \textit{wGCP} phenotype, one of the possible design objectives, enforces the coupling between the desirable product synthesis rate and the maximum cellular growth rate.}
     \centering
     \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{modcell.png}
+    \caption[Principles of modular cell design]{Principles of modular cell design. (a) Modular cell chassis. (b) Interfaces. (c) Production modules. (d) Production strains. A modular cell is designed to provide the necessary precursors for biosynthesis pathway modules that are independently assembled with the modular cell to generate production strains exhibiting desirable phenotypes. The \textit{wGCP} phenotype, one of the possible design objectives, enforces the coupling between the desirable product synthesis rate and the maximum cellular growth rate.}
     \label{fig5:modcell}
 \end{figure}
 %}
@@ -224,11 +224,11 @@ These models were configured as in the previous ModCell2 study\citep{garcia2019}
 %\afterpage{%
 %\paragraph{Figure S1}
 \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth,keepaspectratio]{Figure-S1}
     \caption[Biochemical and metabolic diversity of the 20 production modules]{
 Biochemical and metabolic diversity of the 20 production modules. (a) Precursor metabolite distribution, using the 12 essential biomass precursors as a reference. (b) Degrees of reduction of the produced metabolites. (c) Production pathway metabolic modules excluding esters.
     }
-    \centering
-    \includegraphics[width=0.7\textwidth,keepaspectratio]{Figure-S1}
     \label{fig5:fig-s1}
 \end{figure}
 %}
@@ -289,7 +289,8 @@ We considered three techniques that can improve solution times of ModCell2-MILP,
 
 We evaluated these three techniques for tuning MILP formulations and used the core\textit{ E. coli} model\citep{garcia2019} for the benchmark study. The results showed that flux bound tightening, fixed $w_k$, and Benders decomposition could reduce the solution time to find solutions by 50\%, 80\%, and  95\%, respectively (Table~\ref{tab5:timing}). By combining these techniques, the solution time was shortened by 96\% from 63.3 s to 2.8 s. In subsequent studies, we used these three tuning techniques to solve the ModCell design problem unless otherwise noted.
 
-\begin{table}[!ht]
+%\begin{table}[!ht]
+\begin{table}[ht]
     \caption[Solution time reduction by tuning the ModCell2-MILP formulation]{Solution time reduction by tuning the ModCell2-MILP formulation.
     Fixed network indicator means $w_k = 1\;, \forall k \in \mathcal{K}$. The simulations were performed in triplicates.
     }
@@ -303,9 +304,9 @@ In designing a modular cell with ModCell2-MILP, the designer needs to specify th
 
 %\afterpage{%
 \begin{figure}[hp]
-    \caption[Effect of design parameters on solution time]{Effect of design parameters on solution time. We examined the target design objective (i.e., \textit{wGCP}, \textit{lsGCP}, and \textit{NGP}) and the limits of deletion reactions $\alpha$ and endogenous module-specific reactions $\beta_k$, on computation time for solving the ModCell2-MILP problem with the blended (a-c) and goal attainment (d-f) formulations. A time limit of 500 seconds indicated by a red dashed line was used in all cases, but only reached by certain \textit{wGCP} and \textit{lsGCP} cases with $\beta \ge2$. The simulations were performed in duplicates.}
     \centering
     \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{performance-timing.png}
+    \caption[Effect of design parameters on solution time]{Effect of design parameters on solution time. We examined the target design objective (i.e., \textit{wGCP}, \textit{lsGCP}, and \textit{NGP}) and the limits of deletion reactions $\alpha$ and endogenous module-specific reactions $\beta_k$, on computation time for solving the ModCell2-MILP problem with the blended (a-c) and goal attainment (d-f) formulations. A time limit of 500 seconds indicated by a red dashed line was used in all cases, but only reached by certain \textit{wGCP} and \textit{lsGCP} cases with $\beta \ge2$. The simulations were performed in duplicates.}
     \label{fig5:times}
 \end{figure}
 %}
@@ -321,11 +322,11 @@ Since MOEA implemented in ModCell2 does not guarantee optimality, here we aimed 
 We applied ModCell2-MILP to analyze the same iML1515 model with a set of 20 products using the same design parameters (i.e., $\alpha$ and $\beta_k$) and the blended formulation with all objective weights $a_k=1$. The simulation shows that ModCell2-MILP could not solve the ModCell design problem to optimality over 2 days of run time, likely due to the large number of candidate deletion reactions still present in the genome-scale model. Currently the best MILP solution algorithms do not scale well with parallel computing. In order to obtain solutions within an acceptable time, the set of candidate reactions must be further reduced. Since only a small subset of all metabolic reactions in genome-scale models tend to be deleted by strain design algorithms \citep{feist2010, king2017, garcia2019}, we used a pool of \textit{wGCP} designs with $\alpha= 4,5,6$ and $\beta = 0,1$ reported with ModCell2 \citep{garcia2019} to identify relevant deletion candidates. From a set of 601 designs found by ModCell2, only 33 out of 276 reaction deletion candidates were used at least once. Hence, these 33 reactions were used to create a new, computationally-tractable set of reaction candidates. This new set contains reactions mostly from the well-characterized central metabolic pathways (Figure~\ref{fig5:candidate-reactions}a) while the original set includes reactions in peripheral pathways that lead to biomass synthesis. Interestingly, within these 33 reaction candidates, only a few are used in most designs (Figure~\ref{fig5:candidate-reactions}b), highlighting the importance of their removal in growth-coupled production phenotypes. Reactions with high deletion frequencies mainly occur in high-flux central metabolic pathways (Figure~\ref{fig5:candidate-reactions}c), closely associated with cellular energetics and carbon precursors that interface with the production modules (Figure~\ref{fig5:candidate-reactions}d).
 
 \begin{figure}[p]
-    \caption[Metabolic functions of deletion candidate reactions]{Metabolic functions of deletion candidate reactions. (a) Subsystem distribution for the original set of 276 candidate reactions in the iML1515 model. Those subsystems that contain a reaction used in at least one design are colored.  (b) Deletion frequency for the reduced set of 33 candidate reactions. The analysis is based on a pool of 601 \textit{wGCP} designs from different $\alpha$ and $\beta$ parameters whose Pareto fronts were previously determined with ModCell2.\citep{garcia2019} Bar colors indicate membership of these reactions to the subsystems. (c) Metabolic map of core metabolism. Key metabolites, including precursors for the 20 product modules (i.e., pyruvate, acetyl-CoA, succinyl-CoA, succinate, and $\alpha$-ketoglutarate), are highlighted in green. Reactions are colored according to subsytem labels indicated in (a), reactions colored in light gray do not appear  in any of the subsytems of (a), and reactions that are candidates for deletion, listed in (b), are labeled in red. (d) Link between major precursors and target products where colors are only used to facilitate visualization. Reaction and metabolite abbreviations correspond to BiGG\citep{king2015} identifiers (\protect\url{http://bigg.ucsd.edu/}).
-    }
     %\textit{Figure on previous page.}}
     \centering
-    \includegraphics[height=.75\textheight,keepaspectratio]{candidate-reactions.png}
+    \includegraphics[height=.71\textheight,keepaspectratio]{candidate-reactions.png}
+    \caption[Metabolic functions of deletion candidate reactions]{Metabolic functions of deletion candidate reactions. (a) Subsystem distribution for the original set of 276 candidate reactions in the iML1515 model. Those subsystems that contain a reaction used in at least one design are colored.  (b) Deletion frequency for the reduced set of 33 candidate reactions. The analysis is based on a pool of 601 \textit{wGCP} designs from different $\alpha$ and $\beta$ parameters whose Pareto fronts were previously determined with ModCell2.\citep{garcia2019} Bar colors indicate membership of these reactions to the subsystems. (c) Metabolic map of core metabolism. Key metabolites, including precursors for the 20 product modules (i.e., pyruvate, acetyl-CoA, succinyl-CoA, succinate, and $\alpha$-ketoglutarate), are highlighted in green. Reactions are colored according to subsytem labels indicated in (a), reactions colored in light gray do not appear  in any of the subsytems of (a), and reactions that are candidates for deletion, listed in (b), are labeled in red. (d) Link between major precursors and target products where colors are only used to facilitate visualization. Reaction and metabolite abbreviations correspond to BiGG\citep{king2015} identifiers (\protect\url{http://bigg.ucsd.edu/}).
+    }
     \label{fig5:candidate-reactions}
 \end{figure}
 %\addtocounter{figure}{-1}
@@ -347,9 +348,9 @@ Remarkably, most products surpassed this minimum goal with yields above 90\% of 
 %\afterpage{%
 \begin{figure}[p]
 %\begin{adjustwidth}{-2.25in}{0in}
-    \caption[Identification of a universal modular cell compatible with all production modules under the \textit{wGCP} design phenotype]{Identification of a universal modular cell compatible with all production modules under the \textit{wGCP} design phenotype. (a) Goal programming solutions with increasing $\alpha$ and $\beta$ values. The goal programming objective value \eqref{eq5:goal_obj} in the y-axis measures the difference between the performance of production strains and the target goal, i.e., $\sum_{k\in \{ k \in \mathcal{K}: f'_k < g_k\}}(f'_k - g_k)$ where the target goal is set to be $g_k=0.5$. The parameters $\alpha=6$ and $\beta=1$ are sufficient to identify a universal modular cell design meeting the required goal for all production networks. (b) Comparison between the yield performances of the designed modular production strains and maximum theoretical values. (c) The feasible flux spaces for the wild-type (gray) and designed modular production strains (crimson). Based on the \textit{wGCP} design phenotype, to increase growth rate, each mutant must increase product synthesis rate. The genetic manipulations of this universal modular cell design are indicated in the metabolic map of Figure~\ref{fig5:core-modules}c.}
     \centering
     \includegraphics[width=\textwidth,keepaspectratio]{universal-design.png}
+    \caption[Identification of a universal modular cell compatible with all production modules under the \textit{wGCP} design phenotype]{Identification of a universal modular cell compatible with all production modules under the \textit{wGCP} design phenotype. (a) Goal programming solutions with increasing $\alpha$ and $\beta$ values. The goal programming objective value \eqref{eq5:goal_obj} in the y-axis measures the difference between the performance of production strains and the target goal, i.e., $\sum_{k\in \{ k \in \mathcal{K}: f'_k < g_k\}}(f'_k - g_k)$ where the target goal is set to be $g_k=0.5$. The parameters $\alpha=6$ and $\beta=1$ are sufficient to identify a universal modular cell design meeting the required goal for all production networks. (b) Comparison between the yield performances of the designed modular production strains and maximum theoretical values. (c) The feasible flux spaces for the wild-type (gray) and designed modular production strains (crimson). Based on the \textit{wGCP} design phenotype, to increase growth rate, each mutant must increase product synthesis rate. The genetic manipulations of this universal modular cell design are indicated in the metabolic map of Figure~\ref{fig5:core-modules}c.}
     \label{fig5:universal-design}
 %\end{adjustwidth}
 \end{figure}
@@ -365,7 +366,8 @@ Such reactions were identified by filtering their reference flux standard deviat
 Over 90\% of the 535 active reactions, each of which carries a non-zero flux in at least one production network, had standard deviation values below the threshold, indicating  highly conserved metabolic core pathways among production networks. Only 9.5\% of the active reactions presented a standard deviation magnitude above the threshold (Figure~\ref{fig5:core-modules}a).
 
 
-\begin{table}[!ht]
+\begin{table}[ht]
+%\begin{table}[!ht]
 %\begin{adjustwidth}{-2.25in}{0in}
     \caption[Overall production module pathway stoichiometries and associated simulated secretion fluxes of the universal modular cell design]{Overall production module pathway stoichiometries and associated simulated secretion fluxes of the universal modular cell design.
     DoR is the degree of reduction of the final product (mol~$e^-$ / mol~C). Metabolite secretion profiles are determined from the simulated reference flux distributions (mol~C / mol~C) of the universal modular cell design.
@@ -418,10 +420,11 @@ Acetate has the smallest degree of reduction after pyruvate, which results in re
 %
 %\addtocounter{figure}{-1}
 \begin{figure}[!hp]
-    \caption[Flexible metabolic flux capacity of \textit{E. coli} metabolism enables the universal modular cell design]{Flexible metabolic flux capacity of \textit{E. coli} metabolism enables the universal modular cell design. (a) Standard deviation of each reaction flux  across production networks. (b) Scaled fluxes of the 51 reactions with standard deviation magnitude above 0.2,  excluding proton, water transport, and exchange reactions. A scaled flux for a reaction is determined by the reference flux distribution value divided by the maximum value of that reaction across all production networks. Hence, a scaled flux of 0 indicates a given reaction does not carry any flux, and a scaled flux of 1 indicates that this reaction carries the highest flux across production networks.  Several columns have multiple reactions, separated by $\vert$, since they carry exactly the same flux. (c) Endogenous modules of the universal modular cell.  The reactions colored in red are deleted in the chassis, but are used as module reactions in the production networks shown in the adjacent gray boxes. Metabolites in periplasmic and extracellular compartments have ``\_p" and ``\_e" suffixed to their abbreviations, respectively. Metabolite and reaction abbreviations follow BiGG\citep{king2015} notation.  (d) Comparison between simulated and measured fluxes. The solid lines within the ``violins" correspond to samples. The simulated fluxes for the  reversible reactions, including FUM, LDH, MDH, and ACALD, were multiplied by -1 to reflect their most common direction.
-    }%\textit{Figure on previous page.}}
     \centering
     \includegraphics[height=.7\textheight,keepaspectratio]{core-modules.png}
+    \caption[Flexible metabolic flux capacity of \textit{E. coli} metabolism enables the universal modular cell design]{Flexible metabolic flux capacity of \textit{E. coli} metabolism enables the universal modular cell design. (a) Standard deviation of each reaction flux  across production networks. (b) Scaled fluxes of the 51 reactions with standard deviation magnitude above 0.2,  excluding proton, water transport, and exchange reactions. A scaled flux for a reaction is determined by the reference flux distribution value divided by the maximum value of that reaction across all production networks. Hence, a scaled flux of 0 indicates a given reaction does not carry any flux, and a scaled flux of 1 indicates that this reaction carries the highest flux across production networks.  Several columns have multiple reactions, separated by $\vert$, since they carry exactly the same flux. (c) Endogenous modules of the universal modular cell.  The reactions colored in red are deleted in the chassis, but are used as module reactions in the production networks shown in the adjacent gray boxes. Metabolites in periplasmic and extracellular compartments have ``\_p" and ``\_e" suffixed to their abbreviations, respectively. Metabolite and reaction abbreviations follow BiGG\citep{king2015} notation.  (d) Comparison between simulated and measured fluxes. The solid lines within the ``violins" correspond to samples.
+    %The simulated fluxes for the  reversible reactions, including FUM, LDH, MDH, and ACALD, were multiplied by -1 to reflect their most common direction.
+    }%\textit{Figure on previous page.}}
     \label{fig5:core-modules}
 \end{figure}
 %}
@@ -454,20 +457,20 @@ In summary, even though reactions in the endogenous modules must have flexible m
 %\afterpage{%
 %\paragraph{Figure S2}
 \begin{figure}[!hp]
+    \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Figure-S2}
     \caption[Violin plot of sampled reaction flux distributions]{
 Violin plot of sampled reaction flux distributions. Reaction colors are consistent with Figure~\ref{fig5:core-modules}. The flux of SUCOAS could not be sampled since this reaction is involved in a thermodynamically infeasible cycle.
     }
-    \centering
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Figure-S2}
     \label{fig5:fig-s2}
 \end{figure}
 %}
 
 %\afterpage{%
 \begin{figure}[!ht]
-    \caption[Sampled flux distributions of the ethanol biosynthesis pathways]{Sampled flux distributions of the ethanol biosynthesis pathways. (a)~Probability density function of sampled fluxes for pyruvate dehydrogenase (PDH) across all production networks. Note that ethanol and ethyl pentanoate have the widest operation range. (b)~Sampled metabolic fluxes of pyruvate decarboxylase (PYRDC) and PDH in the ethanol production network.}
     \centering
     \includegraphics[width=.9\textwidth,keepaspectratio]{ethanol_sampling.png}
+    \caption[Sampled flux distributions of the ethanol biosynthesis pathways]{Sampled flux distributions of the ethanol biosynthesis pathways. (a)~Probability density function of sampled fluxes for pyruvate dehydrogenase (PDH) across all production networks. Note that ethanol and ethyl pentanoate have the widest operation range. (b)~Sampled metabolic fluxes of pyruvate decarboxylase (PYRDC) and PDH in the ethanol production network.}
     \label{fig5:sampling}
 \end{figure}%}
 

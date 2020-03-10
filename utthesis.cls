@@ -34,14 +34,14 @@
 %	 T H E S I S   &   D I S S E R T A T I O N    T E M P L A T E  	  %
 %---------------------------------------------------------------------%
 %---------------------------------------------------------------------%
-% This template is distributed with ABSOLUTELY NO WARRANTY. It serves 
+% This template is distributed with ABSOLUTELY NO WARRANTY. It serves
 % as a guideline and constitutes a basic structure for a
-% thesis/dissertation. The user assumes full responsibility for 
+% thesis/dissertation. The user assumes full responsibility for
 % formatting and typesetting their document and for verifying that all
-% the thesis requirements set by the University of Tennessee are met. 
-% Please refer to the most recent UT thesis guide 
+% the thesis requirements set by the University of Tennessee are met.
+% Please refer to the most recent UT thesis guide
 % (http://gradschool.utk.edu/thesesdissertations/formatting/) or
-% contact the thesis consultant 
+% contact the thesis consultant
 % (http://gradschool.utk.edu/thesesdissertations/).
 % Please report any bugs to the thesis consultant.
 \NeedsTeXFormat{LaTeX2e}%
@@ -121,7 +121,7 @@
 	pdfpagelayout=SinglePage,
     bookmarksopen=False,
 	%pdfview=FitV,
-	pdfborder=0 0 0, 		% make all links invisible, so the pdf looks good when printed	
+	pdfborder=0 0 0, 		% make all links invisible, so the pdf looks good when printed
     pdffitwindow=true,      % window fit to page when opened
     %pdfstartview={FitV},   % fits the width of the page to the window
     pdfcreator={\@author},  % creator of the document
@@ -157,9 +157,10 @@
 \newcommand{\makeTitlePage} {
 	\thispagestyle{empty}
     \begin{spacing}{1.5}
-	\vspace*{0.3in}
+	%\vspace*{0.3in}
 	\begin{center}
-		\huge
+		%\huge
+        \Large
 		\bf
 		\@title
         \vfill
@@ -173,13 +174,14 @@
 
             \@degree
         } \fi
-		
+
 		Degree
-		
+
 		\@university
-		
-		\vspace*{1.0in}%
-		
+
+		%\vspace*{1.0in}%
+        \vfill
+
 		\@author %
 		\\%
 		\@graduationMonth\ \@copyrightYear
@@ -202,7 +204,7 @@
     	\addToTOC{Appendix}
     	\vspace*{2.0in}
     	\begin{center}
-    		\Huge \bf{Appendix} 
+    		\Huge \bf{Appendix}
     	\end{center}
 	\else
 	    \addToTOC{Appendices}
@@ -237,7 +239,9 @@
         \begingroup
         \def\chapter*#1{}
         \bibliographystyle{#2}
+        \interlinepenalty=10000 % Make sure to not break bib entries between pages
         \bibliography{#3}
+        \interlinepenalty=0 %reset
         \endgroup
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -260,4 +264,15 @@
     \end{center}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\endinput 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SG addtions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Meet half-inch requirement. See: https://tex.stackexchange.com/questions/26521/how-to-change-the-spacing-between-figures-tables-and-text
+\setlength{\textfloatsep}{.5in}
+\setlength{\intextsep}{.5in}
+
+%(some style fixes are also in the my-dissertation.tex file)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\endinput

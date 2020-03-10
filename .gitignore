@@ -16,3 +16,4 @@ figtemplate.tex
 *.bbl
 *.blg
 *.toc
+*.fdb_latexmk

@@ -1,6 +1,11 @@
 Questions:
 - How to deal with supplementary files (of data/spreadsheets, etc?) (Others an be placed in the appendix) -> This files can actually be provided with the thesis (see attachements on page 10)
 - Should I keep copyright note? (Not mandatory)
+- How to use comments (Portions of this document were previously published in journal...
+- I have not uploaded supplemental files yet
+
+# Keywords (up to 6)
+Multi-objecitve optimization, modular design, biocatalysis, strain design, genome-scale modeling, metabolic engineering
 
 # Per chapter TODO:
 

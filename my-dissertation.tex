@@ -22,7 +22,7 @@
 % TO DO: FILL IN YOUR INFORMATION BELOW - READ THIS SECTION CAREFULLY
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Design of Modular Cell Systems for Biocatalysis with Multi-Objective Optimization}	       	% title of thesis/dissertation
-\author{Sergio Garcia}                			% author's name
+\author{Sergio Garcia Manogil Fernandez}                			% author's name
 \copyrightYear{2020}            				% copyright year of your thesis/dissertation
 \graduationMonth{May}           				% month of graduation for your thesis/dissertation
 \degree{Doctor of Philosophy}	    			% degree: Doctor of Philosophy, Master of Science, Master of Engineering...
@@ -71,7 +71,7 @@
 %%% Figures
 \usepackage{afterpage} % NOTE: This should not be used for figure placement, use [p] instead
 %%% Chapter 6 appendix:
-\usepackage{supertabular} % TODO: Get rid of this
+%\usepackage{supertabular} % TODO: Get rid of this
 \usepackage{longtable}
 
 \usepackage{multirow}
@@ -91,6 +91,17 @@
 %\newcommand{\disclose}[2] {This chapter is based on the publication \textit{#1}.\citep{#2} As first author I lead the development, implementation, and writing of this study.}
 % cite these papers at the beginning
 \newcommand{\disclose}[1] {This chapter is based on the publication \textit{#1}. As first author I lead the development, implementation, and writing of this study.}
+
+%%% Style fixes
+\captionsetup{justification=raggedright, singlelinecheck=false} % Even short captiosn begin on left
+%%%%% Avoid bibliography breaks
+%\usepackage{etoolbox}
+%\makeatletter
+%\AtBeginEnvironment{thebibliography}{%
+%   \clubpenalty10000
+%   \@clubpenalty \clubpenalty
+%   \widowpenalty10000}
+%\makeatother
 
 %%% Unicode
 \DeclareUnicodeCharacter{0301}{\'{e}}

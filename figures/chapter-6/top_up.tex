@@ -1,4 +1,22 @@
 \small
+\rowcolors{2}{gray!25}{white}
+\begin{longtable}{lp{0.5\textwidth}ccc}
+    \caption{The 70 consistent reactions in the $\Delta$\textit{hydG}-$\Delta$\textit{ech} case study and their associated fold changes. The biomass reaction is not included due to size. This table is continued in the following pages.\label{foo}}\\\toprule
+\rowcolor{white} \multirow{1}{*}{ID} & \multirow{1}{*}{Formula}  & \multicolumn{3}{c}{Fold change} \\
+\rowcolor{white} & & \emph{proteomics} & \emph{pFBA} & \emph{FVAcenter} \\
+\midrule
+\endfirsthead
+\caption* {\textbf{Table \ref{foo} Continued}}\\\toprule
+\rowcolor{white} \multirow{1}{*}{ID} & \multirow{1}{*}{Formula}  & \multicolumn{3}{c}{Fold change} \\
+\rowcolor{white} & & \emph{proteomics} & \emph{pFBA} & \emph{FVAcenter} \\
+\midrule
+\endhead % all the lines above this will be repeated on every page
+%\hline
+%\multicolumn{5}{r@{}}{continued \ldots}\\
+\endfoot
+\hline
+\endlastfoot
+%
 %\tablehead{%
 %\toprule
 %\rowcolor{white} \multirow{1}{*}{ID} & \multirow{1}{*}{Formula}  & \multicolumn{3}{c}{Fold change} \\
@@ -6,14 +24,8 @@
 %\rowcolor{white} & & \emph{proteomics} & \emph{pFBA} & \emph{FVAcenter} \\
 %\midrule}
 %\tabletail{\hline}
-\rowcolors{2}{gray!25}{white}
-\begin{longtable}{lp{0.5\textwidth}ccc}
-\caption[Consistent reactions between flux simulations and proteomic data]{The 70 consistent reactions in the \textit{$\Delta$hydG-$\Delta$ech} case study and their associated fold changes. The biomass reaction is not included due to size. This table is continued in the following pages.} \\
-\toprule
-\rowcolor{white} \multirow{1}{*}{ID} & \multirow{1}{*}{Formula}  & \multicolumn{3}{c}{Fold change} \\
-%\rowcolor{white} & & \emph{prote-\\omics} & \emph{pFBA} & \emph{FVA\\center} \\
-\rowcolor{white} & & \emph{proteomics} & \emph{pFBA} & \emph{FVAcenter} \\
-\midrule
+%\rowcolors{2}{gray!25}{white}
+%\begin{supertabular}{lp{0.5\textwidth}ccc}
 MDH	&	mal\_\_L\_c + nad\_c $\leftrightarrow$ h\_c + nadh\_c + oaa\_c	&	1.4	&	0.2	&	0.1	\\
 PEPCK\_re	&	co2\_c + gdp\_c + pep\_c $\rightarrow$ gtp\_c + oaa\_c	&	0.9	&	0.1	&	0.1	\\
 VOR2b	&	3mob\_c + coa\_c + 2.0 fdxo\_42\_c $\rightarrow$ co2\_c + 2.0 fdxr\_42\_c + h\_c + ibcoa\_c	&	0.9	&	12.3	&	0.8	\\

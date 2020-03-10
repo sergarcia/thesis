@@ -57,7 +57,52 @@
 %\begin{table}[!ht]
 %\caption[Consistent reactions between flux simulations and proteomic data]{The 70 consistent reactions in the
 %\textit{$\Delta$hydG-$\Delta$ech} case study and their associated fold changes. The biomass reaction is not included due to size. This table is continued in the following pages.}
+
+%\topcaption{The 70 consistent reactions in the \protect\ko{hydG,ech} case study and their associated fold changes. The biomass reaction is not included due to size. This table is continued in the following pages.}%
+
+%\begin{longtable}{ccc}
+%\caption {Some Members of the Suggested Estimator}\label{Tab:1}\\\toprule
+%\endfirsthead
+%\caption* {\textbf{Table \ref{Tab:1} Continued:} Blablabla}\\\toprule
+%\endhead
+%\endfoot
+%\bottomrule
+%\endlastfoot
+%A subset of $\overline{y}_{NH}$ & $\textbf{a}$ & $\textbf{b}$\\
+%\midrule
+%test1 & 1 & 0 \\
+%\midrule
+%test2 & 1 & 1 \\
+%\midrule
+%test3 & \newline 1 & \newline $\beta_{2} \left(x\right)$ \\
+%\midrule
+%A subset of $\overline{y}_{NH}$ & $\textbf{a}$ & $\textbf{b}$\\
+%\midrule
+%test4 & $C_{x} $ & $\rho_{yx} $ \\
+%\midrule
+%test5 & $\rho _{yx} $ & $C_{x} $ \\
+%\midrule
+%test6 & $\rho _{yx} $ \\
+%A subset of $\overline{y}_{NH}$ & $\textbf{a}$ & $\textbf{b}$\\
+%\midrule
+%test1 & 1 & 0 \\
+%\midrule
+%test2 & 1 & 1 \\
+%\midrule
+%test3 & \newline 1 & \newline $\beta_{2} \left(x\right)$ \\
+%\midrule
+%A subset of $\overline{y}_{NH}$ & $\textbf{a}$ & $\textbf{b}$\\
+%\midrule
+%test4 & $C_{x} $ & $\rho_{yx} $ \\
+%\midrule
+%test5 & $\rho _{yx} $ & $C_{x} $ \\
+%\midrule
+%test6 & $\rho _{yx} $ \\
+%\end{longtable}
+
+\newpage
 \input{./figures/chapter-6/top_up.tex}
+\newpage
 %\end{table}
 
 % Supertabular
@@ -69,8 +114,16 @@
 %\pagebreak
 %\section{Flux simulations to further elucidate possible fate of \textit{nadph}}
 
-\begin{table}[!ht]
-\caption[Simulated fluxes for \textit{$\Delta$hydG-$\Delta$ech}]{pFBA simulated fluxes from \textit{$\Delta$hydG-$\Delta$ech} case study. Only includes reactions involving NADPH or exchange reactions that have different flux between wild-type and mutant. The biomass reaction is not included due to size. Additionally, we also excluded reactions with the same fold change magnitude as the biomass reaction ($|\textrm{FC}|=0.26$), likely because they are fully correlated.}
+\begin{table}[ht]
+\caption[Simulated fluxes for \textit{$\Delta$hydG-$\Delta$ech}]{pFBA simulated fluxes from \textit{$\Delta$hydG-$\Delta$ech} case study. Only includes reactions involving NADPH or exchange reactions that have different flux between wild-type and mutant. The biomass reaction is not included due to size. Additionally, we also excluded reactions with the same fold change magnitude as the biomass reaction ($|\textrm{FC}|=0.26$), because their fluxes are likely fully correlated.}
 \input{./figures/chapter-6/nadph_and_ex.tex}
+\end{table}
+
+%\thispagestyle{empty}
+\begin{table}[h]
+    \caption{Reaction deletions sorted by appeareance frequency (counts) in the designs of the Pareto front for $\alpha=6,\beta=0$.}
+    \centering
+    \input{./figures/chapter-6/table-deletions.tex}
+    \label{tab:deletions}
 \end{table}
 
