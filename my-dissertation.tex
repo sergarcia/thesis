@@ -93,15 +93,7 @@
 \newcommand{\disclose}[1] {This chapter is based on the publication \textit{#1}. As first author I lead the development, implementation, and writing of this study.}
 
 %%% Style fixes
-\captionsetup{justification=raggedright, singlelinecheck=false} % Even short captiosn begin on left
-%%%%% Avoid bibliography breaks
-%\usepackage{etoolbox}
-%\makeatletter
-%\AtBeginEnvironment{thebibliography}{%
-%   \clubpenalty10000
-%   \@clubpenalty \clubpenalty
-%   \widowpenalty10000}
-%\makeatother
+\captionsetup{justification=justified, singlelinecheck=false} % Even short captions begin on left.
 
 %%% Unicode
 \DeclareUnicodeCharacter{0301}{\'{e}}
@@ -191,6 +183,7 @@
     \include{back-matter/appendix-1a}
     \include{back-matter/appendix-1b}
     \include{back-matter/appendix-2}
+    \include{back-matter/appendix-3}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % A VITA IS REQUIRED
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
