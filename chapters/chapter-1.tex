@@ -24,29 +24,30 @@
 
 % 1. Developments in biology and biotechnology and the challenge ahead
 Vitalism was the notion that life arises from an essential principle that cannot be explained in terms of physical and chemical phenomena.
-Eduard Buchner's discovery of what would later be called enzymes during the late 19th century provided the final blow to vitalism, opening the door to
+The observable behavior of living organisms (e.g., growth, reproduction) remained a mistery to science.
+Eduard Buchner's discovery of what would later be called enzymes during the late 19th century provided one of the final blows to vitalism, opening the door to
 great developments in our mechanistic understanding of living systems throught the 20th century.
 %After the final blow to this theory provided by Eduard Buchner's discovery of what would later be called enzymes during the late 19th century, the mechanistic understanding of living systems greatly developed over the 20th century.
-However, it was not until the last few decades that bioengineers began to manipulate cellular DNA for diverse applications ranging from renewable chemical production to medical treatment. Despite recent success stories, such applied fields remain highly constrained by a lack of models with sufficent predictive and explanatory power to bridge the gap between first principles and emerging phenomena.
+This knowledge has recently enabled bioengineers to manipulate cellular DNA for diverse applications ranging from renewable chemical production to medical treatment. Despite recent success stories, such applied fields remain highly constrained by a lack of models with sufficent predictive and explanatory power to bridge the gap between first principles and emerging phenomena.
 %Our current understanding of fundamental biological phenomena is sufficient to make a biological version of Laplace's Demon theoretically plausible, .i.e., if we were to know all biochemical and biophysical events of an organism and their parameters we could predict all biological behavior given sufficient computational power. However, other areas of science need not to relay on such Demon for their application, but rather phenomenological and statistical models with high predictive power.
 %(models with sufficient explanatory power to conduct chemical transformations and treat diseases)
 Finding such models for biological systems might be an unprecedented challenge, and remains a remarkable opportunity for scientific discovery.
 % Bridge the gap between first principles and emergent behavoir
 In addition to this scientific challenge, our increasing capabilities to engineer biological systems need to be complemented by design principles and methods that will ensure efficient development of predictable devices. %TODO: clarify last sentence
-Among potential applications, biocatalysis technologies can broaden the accessibility of essential goods, such as food and medication, and reduce global warming, two issues that will likely become the major drivers of civil conflict during the 21st century \citep{barnett2007, hsiang2011, dod2015}. % Last sentence is not very clear
+Among potential applications, biocatalysis technologies can broaden the accessibility of essential goods, such as food and medication, and reduce global warming, two issues that can become the major drivers of civil conflict during the 21st century \citep{barnett2007, hsiang2011, dod2015}. % Last sentence is not very clear
 
 %  TODO: this paragraph needs to transition to the focus on biocatalysis !!
 % 2. Hypothesis and comparison to existing modular design views
-The succesful development of biocatalys technologies depends on the use of genetic engineering techniques in combination with abstract systems engineering approaches.
-The most important concept is modern engineering is modular design. Computers, vehicles, factories, and many other complex devices are often assembled from exchangeable units of self-contained functionality known as modules.
+Succesful development of biocatalysis technologies currently relays on genetic engineering techniques in combination with abstract systems engineering concepts.
+Among such abstractions, one of the most important in modern engineering is modular design.
+Computers, vehicles, factories, and many other complex devices are often assembled from exchangeable units of self-contained functionality known as modules.
 By analogy with electrical engineering, synthetic biologist have aimed to build biological parts that enable modular assembly and re-usability in different contexts.
 However, most modularization efforts in this field have been applied qualitatevely and in isolation to specific cellular components (e.g., modular metabolic pathways \citep{biggs2014} or modular proteins \citep{maervoet2017}) rather than treating the cell as a chassis and enablers of desirable functions as modules. %TODO: THis is not very clear
-Hence, such approaches are difficult to generalize and do not explore the potential advantages of building whole-cell modular systems, such as platform strains for diverse chemical production.
+Hence, such approaches are difficult to generalize and do not explore the potential advantages of building whole-cell modular systems, such as platform strains \citep{nielsen2016} for diverse chemical production.
 %Hence, such approaches are difficult to generalize, due to their qualitative nature, and isolated approaches are difficult to generalize and do not take advantage of the potential to build platform strains. % TODO: Last part sounds weak
 The primary aim of this thesis is to advance modular design principles in synthetic biology and metabolic engineering with emphasis on biocatalysis applications.
 Unlike previous modularization approaches, this work considers modular design at the system level and provides quantitative tools for its application.
-%This overall view is developed in Chapter~\ref{ch:review}, using  based on an in depth review of the engineering and bioengineering literature.
-Chapter~\ref{ch:review} reviews the engineering and bioengineering literature in depth to develop this overall view. % TODO: This might not be clear
+This view is developed in Chapter~\ref{ch:review}, which contains a review of modularity accross the engineering, biology, and bioengineering literature.
 
 
 %Conceptually, modular design is often discussed in synthetic biology, in particular since analogies with electronical engineering are common.
@@ -71,10 +72,14 @@ Chapter~\ref{ch:review} reviews the engineering and bioengineering literature in
 % 3. Developments/goals of the thesis
 % NOTE: The language in this paragraph is a bit too specific, which might make it difficult to understand
 %The ~~development~~ of modular cell biocatalysis systems in this thesis is divided into three parts:
-The contribution of this thesis is divided into three aspects:
+The main contribution of this thesis is divided into three aspects:
 %The primary aim of the thesis is divided into three aspects: %TODO: This sentence is a bit weird, because the "aim" could be unknown to the reader at this poitn
 i) The development of general modular cell design principles and associated mathematical models (Chapters~\ref{ch:review}, \ref{ch:modcell2});
 ii) the development of scalable algorithms to solve the mathematical models (Chapters~\ref{ch:moea}, \ref{ch:milp}, \ref{ch:hpc});
 and iii) the application of the resulting modular cell design tool to understand driving principles of natural biological modularity and to design modular biocatalyst strains based on industrially-relevant hosts and production modules (Chapters~\ref{ch:modcell2}, \ref{ch:milp}, \ref{ch:ctherm}, \ref{ch:hpc}). % Again here in C. therm chapter, no modcell designs are prosposed
-In conclusion, the outcome of this research is to bring modularity principles proven in conventional engineering to metabolic engineering, leading to increased robustness and efficiency, thereby accelerating the strain engineering process that remains the major roadblock for widespread industrial application of microbial catalysis.
+In conclusion, the applied outcome of this research is to bring modularity principles proven in conventional engineering to metabolic engineering for more efficient and robust systems;
+hence lowering the R\&D costs that remain a major roadblock for widespread industrial application of microbial catalysis.
+%leading to increased robustness and efficiency, thereby accelerating the strain engineering process that remains the major roadblock for widespread industrial application of microbial catalysis.
+
+
 
