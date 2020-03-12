@@ -2,7 +2,7 @@
 \renewcommand{\thefigure}{\roman{figure}} % See here for other options: http://timmurphy.org/2011/07/18/latex-table-and-figure-numbering-style/
 \setcounter{figure}{0}
 
-\chapter*{Conclusions} \label{ch:conclusion}
+\chapter*{Conclusions}\label{ch:conclusion}
 \addcontentsline{toc}{chapter}{Conclusions}
 
 % Main points:
@@ -18,17 +18,18 @@
 % - ...
 % - (reference to the arrow figure)
 
-Despite the high interest in the application of modular design in synthetic biology and related fields,
-%and more specifically platform strain design in metabolic engineering, are important topics in the field, however
-not many quantitative and systematic design frameworks exist.
-This thesis has developed such tools, notably using multi-objective optimization as basis to formulate modular design problems in synthetic biology.
-The driving application behind these developments is whole-cell biocatalysis, a technology that can lead to renewable and efficient manufacturing of chemicals, fuels, and materials.
-Researchers at companies and universities have built platform strains that recycle the knowledge and labor applied for a certain product towards other molecules that use similar metabolic pathways \citep{nielsen2016}.
+
+%TODO: Could move the contribution to later in the pargraph?
+%In this thesis we have developed quantitative and systematic tools for modular design of cellular systems, primarly through multi-objective optimization theory.
+%The driving application behind these developments is
+Whole-cell biocatalysis technology can lead to renewable and efficient manufacturing of chemicals, fuels, and materials.
+Over the last two decades, researchers at companies and universities have built platform strains that recycle the knowledge and labor applied for a certain product towards other molecules that use similar metabolic pathways \citep{nielsen2016}.
 However, these efforts have been limited by the use of qualitative and reductionistic approaches.
-Motivated by the goals of platform strain design and modular design, we developed several iterations of the ModCell design method and applied it to design modular biocatalytic strains that enable various phenotypes in a plug-and-play fashion (Figure~\ref{fig8:arrow}).
-%Additionally, tools have been developed to characterized expected module behavior (compatibility) and key areas of core chassis metabolism (interfaces) that are critical for correct module operation.
-Overall, this effort contributes to the current wave of tackling problems in molecular biology through more quantitative and holistic approaches, by developing and applying mechanistic models of metabolism, and provides new tools to develop modular biocatalytic strains. %TODO: MAKE SHORTER
-We envision these new design tools will lower the cost and time required to develop efficient an robust biocatalytic strains that harness the large space of molecules resulting from natural and synthetic metabolic pathways.
+Motivated by the goals of modular platform strain design, we used multi-objective optimization theory and  genome-scale metabolic models to develop several iterations of the ModCell design method (Figure~\ref{fig8:arrow}).
+We applied ModCell tools to design modular biocatalytic strains of \textit{E. coli} and \textit{C. thermocellum} that enable various product synthesis phenotypes in a plug-and-play fashion.
+These proposed modular designs require few genetic manipulations thanks to the natural modular features of metabolic networks.
+Overall, this effort contributes to the current wave in molecular biology of tackling problems through more quantitative and holistic approaches.
+We envision the new design tools will lower the cost and time required to develop efficient an robust biocatalytic strains that harness the large space of molecules resulting from natural and synthetic metabolic pathways.
 
 \begin{figure}[h]
   \centering
@@ -51,7 +52,7 @@ However, as an applied field, simulation efforts should often go along experimen
 There are two approaches to bridge the gap between simulations and experiments:
 i) Simulations are used a priori to generate a hypothesis, then experiments are conducted to test the hypothesis and also perhaps to validate the accuracy of the simulation;
 ii) Experimental observations are available, and simulations are used to explain them, i.e., to assist in developing a scientific theory.
-Chapter~\ref{ch:ctherm} falls under the second category, where the developed metabolic model is used to explain proteomics data at the system level to contribute towards a redox-imbalance theory of biocatalytic \textit{C. thermocellum} strains. % NOTE: Don't be too specific here
+Chapter~\ref{ch:ctherm} falls under the second category, where the developed metabolic model is used to explain proteomics data at the system level to contribute towards a redox imbalance theory of biocatalytic \textit{C. thermocellum} strains. % NOTE: Don't be too specific here
 However, the majority of this work, formulated as a biocatalysis strain design problem, falls under the first category.
 Hence, the next wave of development of modular cell design principles should be focused on the implementation and characterization of the strains proposed here, closing the design-build-test cycle.
 
@@ -66,28 +67,32 @@ Hence, the next wave of development of modular cell design principles should be 
 
 As with most contemporary research works, this thesis contributes a drop to the ocean of knowledge needed to address the scientific and social challenges of our time.
 %Scientific and social challenges,
-While we consider that the implementation of modular design principles can be impactful in the development of whole-cell biocatalysis, there are other important facets of this problem.
+The implementation of modular design principles developed here can be impactful in addressing the challenge of whole-cell biocatalysis, however, there are other important facets of this problem.
 %There are multiple relevant facets to the problem of whole-cell biocatalysis.
-Most notably, biological modeling remains limited by our ability to integrate disparate data types, and the technical challenges of measuring certain parameters such as the catalytic efficiency of each enzyme.
-Furthermore, even if the necessary metabolic fluxes and required enzyme concentrations were known, appropriate enzyme expression and function in pathways of interest remains a major challenge.
+Most notably, the predictive and explanatory capacities of cellular models remain highly limited by the lack of tools to integrate disparate data types and to efficiently measure enzymatic kinetic parameters.
+%integration ability to integrate disparate data types and the technical challenges of measuring certain parameters such as the catalytic efficiency of each enzyme.
+Furthermore, even if the necessary metabolic fluxes and required enzyme concentrations were known, it remains highly challenging to accomplish appropriate enzyme expression and function in targeted pathways. %of interest.
 %Similarly
-Overall, our ability to build and manipulate living organisms for any feasible biological function, does not seem to be around the corner.
+Overall, our ability to build and manipulate living organisms for any conceivably feasible biological function does not seem to be around the corner.
+Since precise comprehensive description of already known phenomena (e.g., metabolic reactions) is unavailable, additionally unknown or poorly explored biophysical phenomena (e.g., macromolecular crowding) are likely to highly influence cellular function.
+%As much information regarding already known principles of metabolism and regulation, resist precise description, and the importance of biophysical phenomena such as crowding remains largely unexplored.
 % TODO: due to what? due to the lack of both essential information and models that integrate the information.
-However, we are rapidly overcoming the key challenges needed for applied technologies, as evidenced by the many biotechnology companies emerging over the last decade.
+The good news is that we are rapidly overcoming the key challenges needed for applied technologies, as evidenced by the many biotechnology companies emerging over the last decade.
+
 As we develop novel technologies, we must also become aware of the ethical and existential risks associated with them.
 For example, genetic engineering for enhanced cognitive abilities could likely become an expensive medical treatment that increases the wealth gap in society.
-These concerns are specially relevant for the field of synthetic biology, as genetic engineering tools becomes more widely available enabling DIY biohacking \citep{bennett2009}.
+These concerns are specially relevant for the field of synthetic biology, as tools continue to become more widely available hence enabling DIY biohacking \citep{bennett2009}.
 These developments could pose an existential risk for our current civilization given that a highly destructive technology becomes sufficiently easy to use,  and such technology cannot be ``uninvented" or effectively policed.
 This challenge can be illustrated through The Urn of Inventions metaphor (Figure~\ref{fig8:vwh}) \citep{bostrom2019}. % NOTE: Follow up this sentence to expl
 % NOTE: Make sure this feels "complete" but that further reading is available to expand, do not lean on citations. It has to make sense entirely in this context.
 % NOTE: Last sentence needs to be conclusive
 Briefly, consider technologies to be balls in an urn, and our current strategy is to draw balls as fast as possible, perhaps to obtain wealth, prestige, and citations.
-If there is a ``black ball" technology, which discovery would cause high damage, alternative research strategies should be considered.
+If there is a ``black ball'' technology, which discovery would cause high damage, alternative research strategies should be considered.
 In summary, while issues like climate change already receive considerable attention, we should become more aware of other dangers of technological development and create policies accordingly.
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{urn-of-inventions}
-    \caption[The Vulnerable World Hypothesis]{The Vulnerable World Hypothesis described through the Urn of Inventions metaphor. The hypothesis is that there exists a technology that once discovered would have devastating effects to civiliation. If the hypothesis is true, we should reconsider how scientific discovery is to be conducted to minimize such risk. See \citep{bostrom2019} for further explanation of the topic and proposed solutions.}
+    \caption[The Vulnerable World Hypothesis]{The Vulnerable World Hypothesis described through the Urn of Inventions metaphor. The hypothesis is that there exists a technology that once discovered would have devastating effects to civiliation. If the hypothesis is true, we should reconsider how scientific and technological discovery is to be conducted to minimize such risk. See \citep{bostrom2019} for further explanation of the topic and proposed solutions.}
     \label{fig8:vwh}
 \end{figure}
