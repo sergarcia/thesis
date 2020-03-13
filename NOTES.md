@@ -1,33 +1,25 @@
-Questions:
-- How to deal with supplementary files (of data/spreadsheets, etc?) (Others an be placed in the appendix) -> This files can actually be provided with the thesis (see attachements on page 10)
+Random:
 - Should I keep copyright note? (Not mandatory)
-- How to use comments (Portions of this document were previously published in journal...
-- I have not uploaded supplemental files yet
+- Don't forget to upload supplemental files
+
 
 # Keywords (up to 6)
 Multi-objecitve optimization, modular design, biocatalysis, strain design, genome-scale modeling, metabolic engineering
 
 # Per chapter TODO:
 
-## Chapter 3:
-	- fix missing references
+# Intro/conclusions:
+- Do not use future tense
 
 ## Chapter 6:
-	- (fix citation style to "before" punctuation mark)
+	- Get rid of some SM: (e.g., modcell-hpc just leave as link)
 
 ## Chapter 7:
-	- Add all content
-
+	- Get rid of some SM?
 
 
 # Overall TODO:
 - grep -R 'FIXME\|TODO'
-
-
-# Overall format consistency
-- In figure captions, bold or not bold subpanel a,b,c references (this arguably also depends on weather the leaters look bold in the figure?)
-- Have citations after punctuation marks
-
 
 # Conversion steps for LaTeX papers:
 - Identify \input{} and insert appropriate paths (e.g., for tables). Remove paths for figures and only keep name (that is delete figures/)
