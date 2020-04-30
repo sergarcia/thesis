@@ -1,0 +1,555 @@
+%{{{ Preamble
+
+\documentclass[12pt]{article}
+\usepackage[double]{paper}
+\addbibresource{bibliography.bib}
+\DeclareUnicodeCharacter{0301}{\'{e}}
+
+\graphicspath{{figures/}}
+
+% Macros
+\newcommand\PF{\mathcal{PF}}
+\newcommand\PFs{\mathcal{PF}^*}
+
+
+\title{Computational design of modular cells for large libraries of exchangeable product synthesis modules}
+
+\author[1,2]{Sergio Garcia}
+\author[1,2,*]{Cong T. Trinh}
+\affil[1]{Department of Chemical and Biomolecular Engineering, The University of Tennessee, Knoxville, TN, United States}
+\affil[2]{Center for Bioenergy Innovation, Oak Ridge National Laboratory Oak Ridge, TN, United States}
+\affil[*]{Corresponding author: 1512 Middle Drive, DO432, Department of Chemical and Biomolecular Engineering, University of Tennessee, Knoxville, TN 37996, United States. Tel: 865-974-2181. Email: ctrinh@utk.edu.}
+
+
+\begin{document}
+\singlespace
+\maketitle
+\doublespace
+%}}}
+
+\section*{Highlights}
+\begin{itemize}
+    \item Develop a computational method to design modular cells compatible with hundreds of product synthesis modules.
+    \item Design three \textit{Escherichia coli} modular cells with few genetic manipulations that can couple growth with product synthesis of a total of 85 molecules.
+    \item Identify removal of major byproducts and modification of branch points in central metabolism as key interventions for the design of modular cells.
+    \item Design \textit{E.~coli} modular cells that consume various hexoses and pentoses and identify the limitations of pentoses for growth-coupled product synthesis.
+    %\item Identify the features of an exiting strain that enable its re-purposing towards new production modules.
+    \item Determine compatibility of an existing modular cell with new production modules.
+\end{itemize}
+
+\pagebreak
+
+\begin{abstract}
+    Microbial metabolism can be harnessed to produce a large library of useful chemicals from renewable resources such as plant biomass.
+However, it is laborious and expensive to create microbial biocatalysts to produce each new product.
+    To tackle this challenge, we have recently developed modular cell (ModCell) design principle that enables rapid generation of production strains by assembling a modular (chassis) cell with exchangeable production modules to achieve target molecule overproduction.
+    Previous computational ModCell design methods are capable of handling small libraries of around 20 products.
+In this study, we developed a new computational method, named ModCell-HPC, that is based a on highly parallel multi-objective evolutionary algorithm and capable of designing modular cells for libraries with hundredths of products.
+    We demonstrate ModCell-HPC to design \textit{Escherichia~coli} modular cells towards a library of 161 endogenous production modules.
+    From these simulations, we identify \textit{E.~coli} modular cells with few genetic manipulations that can produce dozens of molecules in a growth-coupled manner under different carbons sources.
+    These designs reveal key genetic manipulations at the chassis and module levels to accomplish versatile modular cells.
+    Furthermore, we use ModCell-HPC to identify design features that allow an existing modular cell to be re-purposed towards production of new molecules.
+    Overall, ModCell-HPC is a useful tool towards more efficient and generalizable design of modular cells to reduce the R\&D cost of biocatalysis.
+\end{abstract}
+
+\section{Introduction}
+Modular design has gained recent interest as an effective approach to understand and redesign cellular systems. \citep{garcia2019b}
+In the field of metabolic engineering, various modularization strategies\citep{biggs2014,trinh2015,garcia2019,garcia2019c,garcia2019d} have been proposed to address the slow and expensive design-build-test cycles of microbial catalysts for renewable chemical synthesis.\citep{nielsen2016}
+A promising system-level modularization\citep{purnick2009} approach is ModCell,\citep{garcia2019} that aims to design a modular (chassis) cell compatible with exchangeable production modules that enable metabolite overproduction.
+Modular cell design could be an effective tool to efficiently produce the vast number of molecules offered by nature,\citep{trinh2016, lee2019}
+but it remains unexplored for large product libraries.
+
+%1) Elaborate on how why the previous methods failed to handle large number of modules.
+%2) What is the parallel computation done in the previous studies and limitations?
+%3) What are the current state-of-the-art of parallel computation using MOEA framework?
+%4) Why do we need to analyze modular cell design for large networks? The description of the last item allows us to set a stage of case studies to be investigated in the manuscript.
+
+Previous efforts in computational modular cell design investigated libraries of up to 20 products derived from central metabolism.\citep{garcia2019,garcia2019d}
+%This small number of products is useful from an implementation point of view,  since each product synthesis pathway module remains time consuming to build.
+%However, to generalize design rules for modular platform strains is necessary to increase the product library size.
+However, the design of modular cells for larger product libraries is both of practical and theoretical interest.
+%From a theoretical perspective,
+Theoretically, using large libraries can lead to more general modular cell design rules, which might also help to explain the naturally existing modularity of metabolic networks.\citep{garcia2019b}
+Practically, such modular cells could be implemented with genetic engineering techniques that enable rapid pathway generation, such as combinatorial ester pathways,\citep{layton2014} and the modular cell could also serve as a versatile platform for pathway selection and optimization using adaptive laboratory evolution.\citep{wilbanks2017}
+
+
+Modular cell design was formulated as a multi-objective optimization problem (MOP), named ModCell2, where each target phenotype activated by a module is an independent objective.\citep{garcia2019}
+ModCell2 was solved with multi-objective evolutionary algorithms (MOEA) that used a master-slave parallelization scheme, where the objective functions are evaluated in parallel by slave processes, but every other step in the algorithm is performed serially (Figure~\ref{fig7:algorithm}~a).\citep{garcia2019, garcia2019c}
+This approach contains many serial steps, hence limiting the scalability of the algorithm with the number processes according to Ahmdal's law.\citep{hill2008}
+In particular, large population sizes, an effective strategy to deal with many objectives,\citep{garcia2019c,ishibuchi2009} can dramatically slow down serial algorithm operations such as non-dominated sorting in NSGA-II, \citep{deb2002} one of the best performing MOEA to solve ModCell2.\citep{garcia2019c}
+Hence the master-slave approach used in ModCell2 is limited to small problems.
+Increasing the product library size for ModCell leads to many-objective multi-objective optimization problems, which are notoriously difficult to solve.\citep{ishibuchi2008, li2018}
+Parallelization schemes that harness the power of high-performance computing (HPC) to solve challenging many-objective problems remain poorly explored.
+However, multiple approaches to harness HPC can be found in the more mature field of single-objective evolutionary algorithms (EA). \citep{alba2013}
+In particular, the island-parallelization approach, where multiple instances of the EA are run independently but communicate with each other to enhance overall convergence towards optimal solutions (Figure~\ref{fig7:algorithm}~b), has been successfully applied to MOEA.\citep{martens2013, jozefowiez2005, garcia2016}
+
+
+
+%Such problems are often solved with multi-objective evolutionary algorithms (MOEA), however
+%parallelization schemes that harness the power of high-performance computing (HPC) to solve challenging many-objective problems remain poorly explored.
+%
+%Fortunately, conventional genetic algorithms for single-objective problems
+%have developed multiple approaches to harness HPC \citep{alba2013} that seem applicable to MOEA.\citep{martens2013, jozefowiez2005, garcia2016}
+
+%To overcome the issues of the master-slave approach (Figure~\ref{fig7:algorithm}~a) used in ModCell2,\citep{garcia2019} we implemented an island parallelization scheme,\citep{alba2013} where each computing process is an instance of the MOEA (Figure~\ref{fig7:algorithm}~b).
+%These instances exchange individuals (i.e., potential solutions) in a process called migration, hence enhancing overall convergence towards optimal solutions (Figure~\ref{fig7:algorithm}~c).
+%
+
+In this study we developed ModCell-HPC, a highly parallel MOEA that uses HPC to solve modular cell design problems with hundredths of objectives.
+We demonstrated ModCell-HPC to design \textit{Escherichia coli} modular cells with a large production module library of metabolically and biochemically diverse endogenous compounds.
+Analysis of these designs revealed key genetic manipulations both at the chassis and module levels required for highly compatible modular cells.
+Furthermore, we designed modular cells for conversion of various hexoses and pentoses, since these sugars are the main result of biomass feedstock pretreatment.\citep{brodeur2011}
+Finally, we used ModCell-HPC to identify the features of a modular cell that make it compatible towards new production modules. %unknown at the time of design.
+
+\section{Methods}
+
+\subsection{Modular cell design multi-objective optimization formulation} \label{sec:formulation}
+
+The modular (chassis) cell is built in a top-down manner by removing metabolic functions from a parent strain, then different modules are inserted into the chassis to obtain production strains that optimally display the target phenotype .
+Due to the conflicting biochemical and metabolic requirements of different product synthesis pathways, the modular cell design problem was formulated as the following MOP known as ModCell2:\citep{garcia2019}
+\begin{alignat}{3}
+    & \underset{ \; y_j, z_{jk}}{\max} \quad (f_1, f_2, \ldots, f_{|\mathcal{K}|})^T \quad \text{s.t.}  \label{eq7:of1} \\
+    &  \quad f_k \in \, \text{arg }\underset{}{\text{max}} \Bigg\{ \frac{1}{f_k^{max}}\sum_{j \in \mathcal{J}_k} c_{jk}  v_{jk} \quad \text{s.t.} \label{eq7:of2}\\
+    & \quad \qquad \sum_{j\in \mathcal{J}_k}S_{ijk}v_{jk} = 0 && \text{for all } i \in \mathcal{I}_k  \label{eq7:mb}\\
+    & \quad \qquad  l_{jk} \le v_{jk} \le u_{jk}  && \text{for all } j \in \mathcal{J}_k \label{eq7:rb}\\
+    & \quad \qquad  l_{jk} d_{jk} \le v_{jk} \le u_{jk} d_{jk} && \text{for all } j \in \mathcal{C} \label{eq7:db}\\
+    & \quad \qquad \; d_{jk} = y_j \lor z_{jk} \; \Bigg\} && \text{for all } k \in \mathcal{K} \label{eq7:defdjk} \\
+    & \quad z_{jk}\le (1-y_j) && \text{for all } j \in \mathcal{C}, \, k \in \mathcal{K} \label{eq7:mr1}\\
+    & \quad \sum_{j \in \mathcal{C}}z_{jk} \le \beta && \text{for all } k \in \mathcal{K} \label{eq7:mr2} \\
+    & \quad \sum_{j \in \mathcal{C}} (1-y_j) \le \alpha \label{eq7:a}
+\end{alignat}
+
+%\noindent
+This MOP simultaneously maximizes all objectives $f_k$ \eqref{eq7:of1}, where $k$ belongs to the set of production networks $\mathcal{K}$.
+Each production network represents the combination of the chassis with a specific production module, and it is simulated through a stoichiometric model\citep{palsson2015} (\ref{eq7:of2}-\ref{eq7:defdjk}) with a set of metabolites $\mathcal{I}_k$ and a set of reactions $\mathcal{J}_k$.
+The stoichiometric model predicts metabolic fluxes according to the following constraints:
+(i) mass-balance \eqref{eq7:mb}, where $S_{ijk}$ represents the stoichiometric coefficient of metabolite $i$ in reaction $j$ of production network $k$, (ii) flux bound \eqref{eq7:rb} that determine reaction reversibility and available substrates, where $l_{jk}$ and $u_{jk}$ are lower and upper bounds respectively, and (iii) genetic manipulation \eqref{eq7:db}, i.e., deletion of a reaction $j$ in the chassis through the binary indicator $y_{j}$, or insertion of a reaction $j$ in a specific production network $k$ through the binary indicator $z_{jk}$.
+Only a subset of all metabolic reactions, $\mathcal{C}$, are considered as candidates for deletion, since many of the reactions in the metabolic model cannot be manipulated to enhance the target phenotype.
+
+The desirable phenotype $f_k$ for production module $k$ is determined based on key metabolic fluxes $v_{jk}$ (mmol/gDCW/h) predicted by the model (\ref{eq7:of2}-\ref{eq7:db}).
+For this study we selected the weak growth coupled to product formation (\emph{wGCP}) design objective that requires a high minimum product synthesis rate at the maximum growth-rate, enabling growth selection of optimal production strains.
+Hence, in \emph{wGCP} design, the inner optimization problem seeks to maximize growth rate while calculating the minimum product synthesis rate through the linear objective function \eqref{eq7:of2} (where {$c_{jk}$ is $1$ and $-0.0001$ for $j$ corresponding to the biomass and product reactions across all networks $k$, respectively, and 0 otherwise).
+In general, the definition of $f_k$ need not be linear and other design phenotypes can be defined.\citep{garcia2019}
+
+Finally, design constraints (\ref{eq7:mr1}-\ref{eq7:a}) define the limitations of the design variables representing genetic manipulations, $y_j$ and $z_{jk}$.
+As part of modular cell design, reactions can be removed from the chassis but inserted back to specific production modules, enabling the chassis to be compatible with a broader number of modules \eqref{eq7:mr1}.
+The total module reaction additions and reaction deletions in the chassis are limited by parameters $\beta$ \eqref{eq7:mr2} and $\alpha$ \eqref{eq7:a}, respectively.%, to avoid unnecessary genetic manipulations that are generally time-consuming to implement and can lead to unforeseen phenotypes.
+
+To define the solutions of ModCell2 (\ref{eq7:of1}-\ref{eq7:a}), consider the following general multi-objective optimization problem with design variables $x$ from a set $\mathcal{X}$ and objective functions $f_i(x)$:
+\begin{equation*}
+    \underset{ \;x}{\max} \quad F(x) = (f_1(x), f_2(x), \ldots)^T \; \forall x \in \mathcal{X}
+\end{equation*}
+The solution of such optimization problem is denoted as Pareto set:
+\begin{equation*}
+    \mathcal{PS}:=\{x \in \mathcal{X}:\nexists \, x' \in \mathcal{X}, F(x') \prec F(x)\} \label{eq7:ps}
+\end{equation*}
+Here $F(x') \prec F(x)$ indicates that the objective vector $F(x')$ \emph{dominates} $F(x)$, defined as $f_i(x') \ge f_i(x)$ for all objectives $i$, and $f_i(x') \ne f_i(x)$ for at least one $i$. Hence, the Pareto set contains all non-dominated solutions to the optimization problem, i.e., when comparing any two non-dominated solutions, the value of a certain objective must be diminished in order to increase the value of a different objective. The projection of the Pareto set on the objective space is denoted Pareto front:
+\begin{equation*}
+    \PF:=\{F(x): x \in \mathcal{PS} \}
+\end{equation*}
+
+\subsection{Implementation of high-performance parallel many-objective evolutionary algorithm}
+
+%We aim to solve the previously introduced MOP formulation for modular cell design (Supplementary Text 1) for cases with many objectives (>20).
+%Briefly, in this MOP each objective corresponds to the growth-coupled-to-product-formation phenotype of a production strain (i.e., the combination of a chassis strain and production module).
+%The design variables to optimize these objectives are deletion reactions in the chassis and module reactions.
+%Deletions reactions re-route metabolic fluxes in the chassis towards the precursors required by the modules, while module reactions allow a production module to improve its target phenotype by re-introducing reactions that have been deleted in the chassis.
+%The total number of deletions reactions and module reactions is limited by the design parameters $\alpha$ and $\beta$, respectively.
+%
+
+To overcome the issues of the master-slave approach (Figure~\ref{fig7:algorithm}~a) used in ModCell2,\citep{garcia2019} we implemented an island parallelization scheme,\citep{alba2013} where each computing process is an instance of the MOEA (Figure~\ref{fig7:algorithm}~b).
+These instances exchange individuals (i.e., potential solutions) in a process called migration, hence enhancing overall convergence towards optimal solutions (Figure~\ref{fig7:algorithm}~c).
+The migration operation can be performed in different modes, depending on which individuals from the local population are exchanged, and also how often such exchanges happen.
+These options are captured by the migration type and migration interval parameters, respectively (Table~\ref{tab7:parameters}).
+To enhance performance and scalability, the migration process was implemented asynchronously, i.e., the population within each island can continue to evolve without needing to wait for sent individuals to arrive at their destination island or for incoming individuals to be received.
+
+To improve the quality of the MOEA solutions, we implemented two post-processing steps specific to ModCell (Figure~\ref{fig7:processing}): i) eliminating \emph{futile module reactions}, these are module reactions that when removed do not diminish the objective value of the associated production network; and ii) coalescing module reactions, i.e., in multiple designs with the same deletions, but different module reactions, can often be combined to obtain a superior solution.
+
+The software implementation of the proposed island-MOEA, denoted \textit{ModCell-HPC}, is written from the bottom up in the C programming language and available in Supplementary~Material~\ref{sm:code} and \url{https://github.com/TrinhLab/modcell-hpc}.
+
+\subsection{Computation hardware}
+We conducted all ModCell-HPC computations in \emph{beacon} nodes from the Advanced Computing Facility at the Joint Institute for Computational Science (The University of Tennessee and Oak Ridge National Laboratory). Each node contains a 16 core Intel Xeon E5-2670 central processing unit (CPU) and 256 GB of random access memory (RAM). The results were analyzed in a desktop computer with an Intel Core i7-3770 CPU and 32 GB of RAM.
+
+\subsection{Target product identification}
+The target products are endogenous \textit{E. coli} metabolites that meet the following requirements: i) Their maximum theoretical yields are above 0.1 (mol product/mol of substrate); ii) they are organic; iii) they could be produced anaerobically in a growth coupled manner with a yield above 50\%, a proprety determined in a previous study;\citep{kamp2017}
+%be coupled to growth under anaerobic conditions, indicated by the existence of a constrained Minimal Cut Set (cMCS) with yield above 50\% under anaerobic conditions identified in a previous study; \citep{kamp2017}
+If a given metabolite meets all these conditions but appears in multiple compartments, only one location is choosen.  %following extracellular, periblas
+%prioritizing extracellular, then periplasm, then cytosol.
+This resulted in 161 target metabolites.
+Metabolites that did not have a secretion mechanism originally present in the model required an exchange pseudo-reaction that represents metabolite secretion to the growth medium or intracellular accumulation at steady-state.
+The products in the resulting library have diverse molecular weights and are overall highly reduced %due to the use of anaerobic conditions
+(Figure~\ref{fig7:biochemical-properties}).
+
+\subsection{Model configuration}
+For all simulations we used the iML1515 \textit{E. coli} model.\citep{monk2017}
+To configure the model glucose uptake was set to 15 (mmol/gCDW/h); the default ATP maintenance value in iML1515 was used; 20\% of the maximum anaerobic growth rate was used as the minimum growth rate, corresponding to 0.0532 (1/h); and only commonly observed fermentation products were allowed for secretion. This model configuration is equivalent to previous modular cell design studies\citep{garcia2019} except for the higher glucose uptake rate, that was increased to match the study of Kamp and Klamt\citep{kamp2017} which was partially used here to identify target products.
+
+\subsection{Design characterization} \label{sec:design_characterization}
+\subsubsection{Compatible modules and compatibility}
+An important qualitative feature of a designed modular (chassis) cell is module compatibility.
+The chassis is \emph{compatible} with a module if the performance of the resulting production strain is above a defined threshold.
+In this study, we used the \textit{wGCP} design objective that corresponds to the minimum product yield at the maximum growth rate,\citep{garcia2019} and selected a threshold of 0.5 to establish compatibility. Under these conditions, we expect a module compatible with the chassis can lead to a product yield above 50\% of the theoretical maximum during the growth phase.
+The \emph{compatibility} of a modular (chassis) cell corresponds to the number of modules that are compatible with it.
+
+\subsubsection{Minimal covers} \label{sec:minimal_covers}
+%Consider a product library for which we want to design modular cells.
+A \emph{minimal cover} is the smallest group of modular cells needed to ensure all potentially compatible products in a library are compatible with at least one of the modular cells.
+%Practically, the strains in a minimal cover are the most efficient way to produce all possible products from our library.
+To identify minimal (set) covers computationally we use the classical integer programming formulation:
+
+\begin{align}
+    & \underset{ \;x_h \in \{0,1\}}{\min} \sum_{h \in \mathcal{H}} ( \gamma_h x_h) \label{eq7:mc_1}\\
+    & \nonumber \; \text{subject to:} \\
+    & \quad \sum_{h \in \mathcal{H}} a_{hk} x_h \ge 1 & \forall \; k \in \mathcal{K'} \label{eq7:mc_2}%\\
+\end{align}
+
+This optimization problem minimizes the number of designs in the set cover, where $\mathcal{H}$ is the set of strain designs, $h$, produced by ModCell-HPC \eqref{eq7:mc_1}.
+%The result of ModCell-HPC, which is a set, $\mathcal{H}$, of strain designs, $h$, each compatible with a set of products.
+%Hence, a \emph{set cover} is as a collection of designs such that any possible compatible product appears in at least one of the designs.
+%For example, given designs $h_1$, $h_2$, and $h_3$ each with compatible product sets $\{P1, P3\},\, \{P1, P2\},$ and $\{P2\}$, respectively, the collections $\{h_1, h_2\}$ and $\{h_1, h_3\}$ are feasible set covers, however $\{h_2,h_3\}$ is not since it lacks $P3$.
+The binary indicator variable $x_h$ takes a value of 1 if design $h$ is selected as part of the set cover and 0 otherwise.
+Certain designs can be prioritized (e.g., they contain preferable genetic manipulations) using the weighting parameter $\gamma_h$, however in all our simulations we set $\gamma_h = 1$. All compatible products $k$ must be included in at least one of the selected designs \eqref{eq7:mc_2}. The parameter $a_{hk}$ takes a value of 1 if product $k$ is compatible with design $h$ and 0 otherwise. There must exist at least one $h \in \mathcal{H}$ for which $a_{hk} = 1$ to ensure a feasible solution exists, hence $\mathcal{K'}$ is the subset of products compatible in at least one design of $\mathcal{H}$.
+
+To enumerate all minimal covers we iteratively solved the minimal cover problem (\ref{eq7:mc_1}-\ref{eq7:mc_2}) with the addition, in each iteration, of an integer cut inequality \eqref{eq7:ic} that removes a previously found solution $\mathcal{S}$.
+\begin{equation}
+    \sum_{h\in\mathcal{S}} x_h \le |\mathcal{S}|  - 1 \label{eq7:ic}
+\end{equation}
+
+\subsection{Coverage performance indicator} \label{sec:coverage_metric}
+Algorithm performance is tested against several parameter configurations, each producing a Pareto front approximation ($\PF$). All resulting Pareto fronts are gathered into a reference Pareto front ($\PFs$).
+Coverage, $C$, is defined as the fraction of solutions in $\PFs$ captured by a given approximation $\PF$:
+\begin{equation}
+    C = \frac{|\PF \cap \PFs|}{|\PFs|}
+\end{equation}
+In our analysis we only use unique non-dominated points in both $\PF$ and $\PFs$ to avoid many alternative solutions from biasing the coverage indicator.
+
+\section{Results}
+
+\subsection{Tuning of ModCell-HPC method parameters}
+%\subsection*{Supplementary Text 1: Island-MOEA benchmarking}
+
+%% Context
+%\paragraph{Benchmarking procedure}
+A known challenge of heuristic optimization approaches is their reliance on parameter tuning for rapid convergence towards optimal solutions.
+To identify sensible default parameters for ModCell-HPC, we first scanned parameter combinations with a previous\citep{garcia2019} 20-objective problem that is fast to solve, then we focused on the most relevant parameters for a large-scale problem with 161 objectives corresponding to the current product library.
+In both cases, we used two performance metrics to identify the best algorithm parameters:
+\emph{Coverage}, that indicates the fraction of Pareto optimal solutions identified by a given parameter configuration (Section~\ref{sec:coverage_metric});
+and \emph{minimal cover size}, i.e., the smallest number of modular cells needed to ensure all compatible products in the library are compatible in at least one (Section~\ref{sec:minimal_covers}). Coverage is a general and unbiased quantitative measure which was preferred over other similar metrics in a previous study,\citep{garcia2019c} while minimal cover size is based on practical goals.
+
+%% 20 objective problem and conclusion
+\paragraph{Initial benchmark}
+With the small 20 objective problem, we screened different total run times, migration interval, migration types, and population sizes (Table~\ref{tab7:parameters}). The design parameters were set to $\alpha=6$ and $\beta=1$, which are sufficient to find highly compatible designs.\citep{garcia2019d}
+For 1 hour run time, we observed the smallest population size (100) undergoes more generations (Figure~\ref{fig7:benchmark-20prod} e,f) and hence achieves better results in both metrics (Figure~\ref{fig7:benchmark-20prod} a,b); while for a 2 hour run time, both population size of 100 and 500 attain similar cover sizes (Figure~\ref{fig7:benchmark-20prod} g), indicating that a minimum of approximately 150 generations (Figure~\ref{fig7:benchmark-20prod} e,f,k,l) is necessary for convergence of this problem irrespectively of population size.
+Taken together, the different performance between 100 and 500 population sizes in relation to run time indicates that under limited run times an optimal population size can be found to attain sufficient generations for convergence.
+The migration interval only appears detrimental at the highest value of 50 under the smallest population size of 100 at 1 hour (Figure~\ref{fig7:benchmark-20prod} a,b,g,h), otherwise this parameter is secondary, hence an intermediate value of 25 will be selected for further simulations. Similarly, migration policy also appears to be a secondary parameter, nonetheless, the ``ReplaceBottom'' migration policy will be selected for further simulations since it is better or equal to the ``Random'' policy in all cases (Figure~\ref{fig7:benchmark-20prod} c,d,i,j).
+
+\paragraph{Large-scale benchmark}
+Now that secondary parameters are established, the focus of the large-scale problem benchmark is to asses the importance of run time, population size, and the number of computational cores (Table~\ref{tab7:parameters}).
+For this benchmark the design parameters were set to $\alpha=10$ and $\beta=2$ to enable successful designs without a large number of genetic modifications that can lead to unrealistic model predictions and implementation requirements.
+We evaluated 5 and 10 hour run times. At 5 hours a population size of 200 is better in all metrics (Figure~\ref{fig7:benchmark-161prod} a,b,c,e,f,g) and reaches 50-100 generations (Figure~\ref{fig7:benchmark-161prod} d), while at 10 hours, the population sizes of 200 and 300 have equivalent performance (Figure~\ref{fig7:benchmark-161prod} e-g), despite the population size of 200 reaching  approximately 50 generations more than the 300 population size.
+The population size of 100 under-performs at both run-times (Figure~\ref{fig7:benchmark-161prod} a,b,e,f).
+Taken together, this indicates that after a given number of generations, larger population sizes are comparable as long as they are above a minimum size.
+Hence, a population size of 200 is the minimum required for proper convergence and should be used under limited run times.
+Increasing the number of cores leads to more solutions (Figure~\ref{fig7:benchmark-161prod} c,g), due to a larger meta-population (the total population of all islands). However, additional cores do not necessary find better solutions in terms of minimal cover size and individual product compatibility
+(Figure~\ref{fig7:benchmark-161prod} b,f), these indicators plateau at around 48 cores in both cases so this value will be used for further simulations.
+Alternative communication topologies among islands \citep{hijaze2009} may provide better scaling with cores but are not explored here.
+
+
+\paragraph{Conclusions}
+The benchmark performed here aims to provide a general guideline to use the ModCell-HPC. Furthermore, this parameter meta-optimization procedure can be replicated to fine-tune the algorithm to specific problem features (e.g., number of objectives) and computational resources available (e.g., run time and computing cores).
+
+\subsection{Design of \textit{E.~coli} modular cells for large product library}
+
+\paragraph{A small number of genetic manipulations are sufficient for highly compatible modular cell}
+After tuning ModCell-HPC we used it to design \textit{E.~coli} modular cells for our library of 161 products.
+%, we used ModCell-HPC to design modular cells.
+First, we scanned a broad range of design parameter combinations ($\alpha$-$\beta$: 5-1, 10-2, 20-4, and 40-8) to identify the required genetic manipulations for highly compatible designs (Figure~\ref{fig7:parameter-scan} a).
+Increasing the number of genetic manipulations leads to an average increase in design compatibility.
+However, the maximum compatibility remains around 50\% of the library (80 products) for all cases.
+This result indicates that highly compatible platforms can be built with a small number of genetic manipulations.
+We selected the designs with $\alpha=5$, $\beta=1$ (Supplementary~Material~\ref{sm:designs}) for further analysis, since designs with few genetic manipulations are more accurately simulated and also better to implement in practice.
+
+\paragraph{A few reaction deletions in central metabolism targeting byproducts and branch-points are key to build modular cells}
+
+We sorted reaction deletions according to how often they appear across designs (Table~\ref{tab7:top20deletions}).
+The top 7 reactions are used $\ge$10\% of the designs and belong to central metabolism, indicating their importance to accomplish growth-coupled-to-product-formation phenotypes.
+Overall, the role of these deletions can be classified into two functions: i) To eliminate major byproducts; ii) to alter key branch-points in metabolism that influence the pools of precursor metabolites (including carbon, redox, and energy precursors).
+The first type of manipulations is generally intuitive and often used in metabolic engineering efforts.\citep{winkler2015}
+The second type of manipulations are not commonly identified unless metabolic model simulations are used, \citep{tokuyama2014, venayak2018, chemler2010}
+even though the importance of targeting metabolic branch-points was noted early. \citep{stephanopoulos1991}
+An example of this second type observed in our designs is TPI deletion, that activates the methylglyoxal bypass,\citep{fong2006} reducing the overall ATP yield resulting from glucose conversion into pyruvate.
+Lower ATP yield limits biomass formation hence redirecting carbon flow towards products of interest.
+While such strategies are not common, TPI deletion predicted by model simulations was successfully used for enhanced 3-hydroxypropionic acid production,\citep{tokuyama2014} and ATP waisting is receiving increased attention to enhance production of certain molecules.\citep{boecker2019}
+Another example of branch-point manipulation is PPC deletion, that has been shown to lower flux from lower glycolysis towards the TCA cycle,\citep{de2006,peng2004} resulting in lower succinate production, and an increased pool of \textit{pep}, pyruvate and acetyl-CoA.
+Additionally, PPC deletion to increase the \textit{nadph} pool for production of flavonoids was predicted by model simulation and experimentally validated. \citep{chemler2010}
+In summary, design of highly compatible modular cells requires not only major byproduct removal, but also manipulation of key branch points in central metabolism.
+
+
+\paragraph{Module reaction usage reveals pathway interfaces and unbiased module definition}
+The modular cell optimization formulation (Section~\ref{sec:formulation}) not only identifies genetic manipulations in the modular (chassis) cell, but also in the production modules.
+Module reactions correspond to reactions deleted in the chassis but inserted back in specific production modules to enable compatibility.
+We examined the module reactions used by all designs (Figure~\ref{fig7:module-usage}).
+As expected, ethanol often uses ALCD2x, acetate uses ACKr, and lactate LDH\_D, all these are the primary producers of those metabolites.
+More notably, we observe that products which are not highly reduced such as acetate, use ACALD, and similarly 3-methyl-2-oxobutanotae and 2,3-dihydroxy-3-methylbutanoate (which are naturally precursors of valine and artificially of isobutanol\citep{atsumi2008,atsumi2010}) use FUM and MDH.
+These module reactions likely play a role in both enabling the synthesis of relevant TCA precursors and the secretion of succinate as an electron sink.
+Interestingly, fatty acids tend to use TPI, which as mentioned earlier, its deletion activates the methylglyoxal bypass lowering the overall ATP yield.
+The first step in fatty acid biosynthesis, acetyl-CoA carboxylase, requires one ATP per mol of malonyl-CoA, explaining the usage of TPI as a module reaction for this family of products.
+Overall, module reactions provide with a systematic method to enhance the compatibility of a modular cell, leading to more efficient strategies and revealing potential metabolic flux bottlenecks that are not always directly upstream of the target product.
+
+\paragraph{Three modular cells is the smallest set needed to cover all compatible products}
+To minimize redundant strain engineering efforts, we identified the smallest set of modular cells that includes all compatible products in the library (Section~\ref{sec:minimal_covers}).
+For the Pareto set of designs $\alpha=5,\,\beta=1$ we  enumerated a total of 12 minimal covers of size 3.
+These covers are spanned by combinations of 8 unique designs (Figure~\ref{fig7:cover-graph}).
+We selected cover k that contains designs 82, 121, and 124, which use few deletions and have similar genetic manipulations among them.
+All designs in this cover have in common the deletion of ALCD2x and LDH\_D, disabling production of ethanol and lactate, the major reduced products of anaerobic growth in \textit{E.~coli}.
+Designs 121 and 124 are have 57 compatible products in common, while design 121 is uniquely compatible with ethanol, formate, and 2,3-dihydroxymethylbutanoate, and design 124 is uniquely compatible succinate (Figure~\ref{fig7:design-comparison}~a).
+These two designs only differ in that design 121 uses FUM deletion while design 124 uses MDH deletion (Figure~\ref{fig7:design-comparison} b).
+Design 82 is the only design that features the deletion of FLDR2 and PPC, and it is uniquely compatible with 24 modules, all fatty acids, making this design quite different from from 121 and 124.
+FLDR2 is coupled with POR5 to form a pathway for the reduction of pyruvate into acetyl-CoA consuming \textit{nadph} (Figure~\ref{fig7:design-comparison}~c), a key redox cofactor in fatty acid biosynthesis.
+PPC deletion is another strategy to increase \textit{nadph} available that has been experimentally validated. \citep{chemler2010}
+Overall, these designs can be efficiently built due to their similarity,  and are mainly composed of strategies that have been demonstrated in isolation but also seem applicable to cover large product classes.
+
+
+\subsection{Design of \textit{E.~coli} modular cells for conversion of hexoses and pentoses}
+\paragraph{Non-glucose carbon sources can require more genetic manipulations for high compatibility designs}
+We designed modular cells to consume other relevant carbon sources besides glucose also present in biomass feedstocks, including two pentoses, xylose and arabinose, and two more hexoses, galactose and mannose (Figure~\ref{fig7:sugars} a).
+For this case study, everything remained the same except for the substrate uptake reaction in the model which was changed to reflect the sole carbon source in each case.
+We first scanned the distribution of design compatibilities resulting from various combinations of $\alpha$ and $\beta$ for each carbon source (Figure~\ref{fig7:parameter-scan} b-e).
+All cases plateau at maximum compatibilities around 50\%, however, galactose, arabinose and xylose require at least $\alpha=10, \, \beta=2$ to reach this level, while glucose and mannose reach it with only $\alpha=5, \, \beta=1$.
+Hence, we selected $\alpha=10, \, \beta=2$ for further analysis.
+Overall, this simulation reveals the possibility of highly compatible modular cells for various hexose and pentose carbon sources, at the expense of an increased number of genetic manipulations for some of the carbon sources.
+
+
+\paragraph{The effect of pentose uptake in redox metabolism leads to lower compatibility than hexoses}
+For the set of designs in each carbon source, we examined the total compatible products (i.e., number of unique products compatible in at least one design from the Pareto front).
+This revealed a group of 26 products (27\% of the total 96 compatible products and 16\% of the original library size) that are only compatible in designs with hexose carbon sources  (Figure~\ref{fig7:sugars} b).
+The incompatibility of these 26 products is likely due to the
+ lower reduction potential and different uptake pathways of pentoses with respect to hexoses (Figure~\ref{fig7:sugars} a).
+More specifically, we examined the most deleted reactions in each carbon source which revealed several differences in deletions between pentoses and hexoses (Figure~\ref{fig7:sugars} c).
+Notably, pentoses do not use TKT2 and MDH reaction deletions, while hexoses make highly frequent use of them.
+TKT2 is a key component of incorporating pentoses into glycolysis, and hence cannot be deleted by pentose consuming designs.
+MDH  has been observed to be up-regulated under anaerobic conditions when the sole carbon source is pyruvate, galactose, or xylose with respect to glucose.\citep{park1995}
+Hence, MDH could be an important source of \textit{nadh} for substrates with less reduction potential. % NOTE: THD2pp is present and can convert nadh to nadph more directly at no cost
+Alternatively, MDH could also be important for \textit{nadph} generation as part of a pathway involving NADP-dependent Malic enzyme (ME2) that converts malate to pyruvate generating one mol of \textit{nadph}.
+Overall, pentose uptake does not use the oxidative phase of the pentose phosphate pathway, the most important source of \textit{nadph} in \textit{E.~coli},\citep{christodoulou2018}
+hence limiting the products that can be growth-coupled to these carbon sources.
+Further study of the reactions that limit pentose compatibility could enable strategies to overcome it in certain cases (e.g., create alternative sources of \textit{nadph} \citep{lee2013, ng2015c}).
+
+
+\subsection{Compatibility towards modules unknown at the time of chassis design}
+%. Degree of coupling (dc) between a modular cell andexchangeable production modules.After a modular cell is designedfor a given set of networks containing targeted exchangeableproduction modules, we can evaluate whether a new modulebelonging to a new network,z, can be coupled with the designedmodular cell by calculating its degree of couplin
+
+\paragraph{Highly compatible designs are better suited to be re-purposed towards unknown products.}
+To rapidly explore the large space of potential production modules, existing strains could be re-purposed for production of molecules not considered as part of the original design.
+To examine this scenario,  we randomly partitioned the product library into two evenly sized groups, and independently used each partition as input for ModCell-HPC.
+This was done in triplicates, each corresponding correspond to a different random product partition.
+Hence, in each replicate there is a group of known products at the time of design and a group of unknown products. For the designs produced by ModCell-HPC, we computed their objective value and then compatibility towards unknown products, which we refer to as \emph{unknown compatibility} of a design, a useful metric to understand the potential to re-purpose a given design.
+In contrast, \emph{known compatibility} is the compatibility towards known products at the time of design, simply referred to as compatibility in previous cases study.
+The total number of designs for each product group and the unknown compatibility distributions noticeably change across replicates (Figure~\ref{fig7:partitions} a).
+This result reveals the important effect of known products in the resulting designs, which could be further explored to identify ``representative products'' that can capture the necessary metabolic phenotypes required for certain product families.
+Remarkably, there is a high correlation between known and unknown compatibility
+of a given design (Figure~\ref{fig7:partitions} b-d).
+Hence, highly compatible designs are better suited to be re-purposed towards unknown products.
+
+\paragraph{Deletion reactions that remove major fermentation byproducts and alter redox metabolism have the highest contribution towards unknown compatibility}
+
+To identify the specific genetic intervention strategies that contribute to
+the unknown compatibility of a design,  we defined the unknown compatibility contribution of deletion reaction $j$ ($ucc_j$) as follows:
+\begin{equation}
+    ucc_j=\frac{\sum\limits_{h\in\mathcal{H}_j} u_h}{|\mathcal{H}|}
+\end{equation}
+where $\mathcal{H}_j$ is the subset of designs from a ModCell-HPC solution (Pareto set $\mathcal{H}$) containing deletion reaction $j$, and $u_h$ is the unknown compatibility of design $h$.
+We computed $ucc$ for all 3 replicates and examined the top 10 sorted by mean value (Table~\ref{tab7:top10contrib}).
+The main contributors towards unknown compatibility are removal of major fermentative byproducts (lactate, ethanol, and acetate), indeed these are the strategies that repeat the most across the metabolic engineering literature,\citep{winkler2015} followed by manipulation of redox pathways (THD2pp, FLDR2, MDH) and metabolic branch points (TKT2, PPC).
+Strain re-purposing could be further explored with algorithms specialized for this task, e.g., by identifying module reactions in the unknown modules or using the existing strain as a starting point to identify genetic manipulations instead of a wild type strain.
+In our analysis we have identified that high modular cell compatibility and certain reaction deletions are positive indicators of compatibility towards unknown products.
+
+\section{Conclusions}
+
+In this study we developed ModCell-HPC, a computational method to design modular cells compatible with hundredths of product synthesis modules.
+We applied ModCell-HPC to design \textit{E.~coli} modular cells with a product library of 161 endogenous metabolites.
+This resulted in many Pareto optimal designs for the production of these molecules, from which we identified three modular cells that include all compatible products.
+The designs feature strategies consistent with previous experimental studies aimed at optimizing production of a single product, reinforcing our confidence in the value of our simulations.
+%Remarkably, the strategies feature not only removal of major byproducts (e.g., lactate, ethanol), but also modification of key metabolic branch-points (e.g., deletion of TKT2 that alters flux between pentose phosphate and glycolysis pathways; or PPC, that alters flux from glycolysis towards the Krebs cycle).
+Remarkably, the strategies not only include removal of major byproducts, but also modification of key metabolic branch-points.
+The modular cells were designed for growth-coupled production,
+which not only is expected to lead to high product yields but also enables high-throughput pathway engineering approaches, e.g., the modular cell can be simultaneously transformed with a module library to rapidly identify good candidates through adaptive laboratory evolution.\citep{dragosits2013}
+We also used ModCell-HPC to design modular cells that utilize different hexoses and pentoses carbon sources.
+This revealed the limitations of pentoses towards coupling with certain products which might be addressed by redox cofactor engineering.
+Finally, we identified that high compatibility and certain reaction deletion are important features to re-purpose an existing modular cell towards new modules.
+Overall, ModCell-HPC is an effective tool towards more efficient and generalizable design of modular cells and platform strains that have recently captured the interest of metabolic engineers. \citep{nielsen2016}
+
+
+%\singlespace
+
+\section*{Tables}
+
+\begin{table}[H]
+    \caption{Island-MOEA parameters evaluated in ModCell-HPC.}
+    \centering
+    \rowcolors{2}{gray!25}{white}
+    \begin{tabular}{lp{13cm}}
+        \toprule
+        Name                & Description   \\
+        \midrule
+        Population size     & Number of individuals per island.  \\
+        Migration type      & Two are possible: 1) ``ReplaceBottom'', after non-dominated sorting of the Pareto front\citep{deb2002} (survivor selection), top individuals are sent and bottom individuals replaced; and 2) ``Random'', random individuals are sent and replaced.  \\
+        Migration interval  & Number of generations between migration events.    \\
+        Run time            & Wall-clock time for which the MOEA runs. It will determine the total number of generations.   \\
+        Cores               & Corresponds to the number of islands. Each island is a computing core at the hardware level. \\
+        \hline
+    \end{tabular}
+    \label{tab7:parameters}
+\end{table}
+
+\begin{table}[H]
+    \caption{Top 20 reaction deletions for design parameters $\alpha=5$, $\beta=1$ with 162 designs. Counts indicate the percentage of designs where the deletion is used. All reaction and metabolite abbreviations used in this study correspond to BiGG identifiers (\protect\url{http://bigg.ucsd.edu}).}
+    \centering
+    \input{./figures/anaerobic-top20deletions.tex}
+    \label{tab7:top20deletions}
+\end{table}
+
+\begin{table}[H]
+    \caption{Top 10 reactions sorted by mean unknown compatibility contribution ($ucc$) among replicates. }
+    \centering
+    \input{./figures/top10contrib.tex}
+    \label{tab7:top10contrib}
+\end{table}
+
+
+\section*{Figures}
+
+\begin{figure}[H]
+    \caption{Parallelization schemes for multi-objective evolutionary algorithms. (a) Master-slave approach used in the original ModCell2 implementation. (b) Island parallelization following ring topology implemented in ModCell-HPC. (c) Key steps in evolutionary algorithm.}
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{algorithm.png}
+    \label{fig7:algorithm}
+\end{figure}
+
+\begin{figure}[H]
+    \caption{ModCell-HPC benchmark with 161 products and design parameters $\alpha=10, \beta=2$: a),e) Coverage is the fraction of Pareto optimal designs captured by a Pareto front approximation (Section~\ref{sec:coverage_metric});
+    b),f) Compatible modules indicates the products that appear in at least one design with a design objective above the compatibility threshold, while minimal cover size is the smallest number of designs needed to capture all compatible products (Section~\ref{sec:design_characterization};
+    c),g) Total and unique number of solutions in the Pareto front approximations;
+    d),h) Total generations.}
+    \centering
+    \includegraphics[height=.87\textheight,keepaspectratio]{figures/benchmark-native.png}
+    \label{fig7:benchmark-161prod}
+\end{figure}
+
+\begin{figure}[H]
+    \caption{Module reaction usage for design parameters $\alpha=5, \,\beta=1$. Only designs compatible with the product are considered in the module usage frequency.}%For each product, designs in which the product is compatible are selected and the frequency of used module reactions is extracted.}
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{a5_b1_comp_0p5_module_usage.png}
+    \label{fig7:module-usage}
+\end{figure}
+
+\begin{figure}[H]
+    \caption{Comparison of the designs in the selected minimal cover. (a) Venn diagram of products compatible with each design. The products uniquely compatible with specific designs are (see \protect\url{http://bigg.ucsd.edu} for abbreviation descriptions):
+       Design 121: \textit{etoh, for, 23dhmb};
+       Design 124: \textit{succ};
+       Design 82: \textit{pg140, 2hdecg3p, 2odec11eg3p, 1agpg180, pe140, pg161, pg141, 2hdec9eg3p, pgp161, 2agpg180, 1ddecg3p, pg120, pgp141, pgp140, pe141, ps140, apg120, ps120, pgp120, pe120, lipidX, 2tdecg3p, 2odecg3p, ps141}.
+    (b) Venn diagram of reaction deletions that constitute each design.
+    (c) Metabolic map with reaction deletions colored in red.
+       }
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{cover-venns.png}
+    \label{fig7:design-comparison}
+\end{figure}
+
+\begin{figure}[H]
+    \caption{Design of modular cells for different carbon sources with design parameters $\alpha=10, \, \beta=2$. (a) Sugar uptake, pentose phosphate, Entner-Doudoroff, and upper glycolysis pathways. (b) Venn diagram of total products compatible with designs under pentoses and hexoses.
+    The 26 products uniquely compatible with hexoses are:
+    \textit{1agpg180, 2tdecg3p, 2agpg181, 3c3hmp, 3mob, 2hdecg3p, pe141, ps120, 1agpg160, 2agpg160, 23dhmb, ps141, 1agpe180, 2agpg180, apg120, 2agpe180, pe120, 2odec11eg3p, 4mop, lipidX, 3c2hmp, 2ippm, 2hdec9eg3p, 1agpg181, dha, 2odecg3p}.
+    (c) Top 20 reaction deletions according to deletion frequencies average across carbon sources. The counts for each carbon source correspond to the percentage of designs containing that reaction deletion.}
+    \centering
+    \includegraphics[width=1\textwidth,keepaspectratio]{sugars.png}
+    \label{fig7:sugars}
+\end{figure}
+
+\begin{figure}[H]
+    \caption{Compatibility towards unknown products in 3 random even partitions of the product library. (a) Distribution of unknown compatibility, n corresponds to the number of designs in each case. (b-d) Comparison between unknown and known compatibility of each design for each replicate, $r^2$ is the Pearson correlation coefficient.}
+    \centering
+    \includegraphics[width=.6\textwidth,keepaspectratio]{partitions.png}
+    \label{fig7:partitions}
+\end{figure}
+
+% Bibliography
+%\singlespace
+\printbibliography
+
+
+\section*{Supplementary Materials}
+\begin{enumerate}%[label=Supplementary Material \arabic*, leftmargin=*]
+    \item Supplementary figures. \label{sm:figures}
+    \item Designs for selected parameters $\alpha=5,\,\beta=1$. \label{sm:designs}
+    \item Computer programs used to generate the results of this study. \label{sm:code}
+    %\item NOTE: what to do with reaction/metabolite abbreviations?
+\end{enumerate}
+
+
+\section*{Supplementary Material 1}
+%\usepackage{xr}
+%\externaldocument{chapterI}
+
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+
+%\singlespace
+
+
+%\subsection*{Supplementary Figures}
+
+\begin{figure}[H]
+    \caption{Solution improvement process.}
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{figures/processing.png}
+    \label{fig7:processing}
+\end{figure}
+
+\begin{figure}[H]
+    \caption{Chemical properties of the product library. DoR is the degree of reduction (mol e\textsuperscript{-}/ mol C), which is computed assuming a constant valency of 4,1,-2, and 5 for C,H,O, and P, respectively.  For reference, ethanol has 2 carbon atoms, a molecular weight of 46 g/mol, and a DoR of 6 (mol e\textsuperscript{-}/mol C). The molecular weight and the number of carbon atoms have a Pearson correlation coefficient (pcc) of 0.98, while DoR and the molecular weight only have a pcc of 0.42.}
+    \centering
+    \includegraphics[width=.8\textwidth,keepaspectratio]{figures/biochemical-native.png}
+    \label{fig7:biochemical-properties}
+\end{figure}
+
+\begin{figure}[H]
+    \caption{ModCell-HPC benchmarking with 20 products and design parameters $\alpha=6, \,\beta=1$. For a given run time, this analysis scans through all the combinations of migration interval, migration policy, and population size. Note that coverage values are not directly comparable between run times since the use a different reference Pareto front.}
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{figures/benchmark-gem-model.png}
+    \label{fig7:benchmark-20prod}
+\end{figure}
+
+
+\begin{figure}[H]
+    \caption{Compatibility of all designs in a Pareto front as a result of the design parameters. Each panel corresponds to a unique carbon source as the only difference in model configuration.}
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{sugars-compatibility.png}
+    \label{fig7:parameter-scan}
+\end{figure}
+
+\begin{figure}[H]
+        \caption{Bipartite graph representing minimal covers for design parameters $\alpha=5$ and $\beta=1$. Covers are colored in red and labeled with letters, while designs are colored in blue.
+        %Some designs appear in more covers (e.g., 121).
+        All minimal covers are:
+            a: [101, 109, 121],
+            b: [109, 121, 124],
+            c: [101, 110, 121],
+            d: [25, 101, 121],
+            e: [82, 101, 121],
+            f: [110, 121, 124],
+            g: [97, 109, 121],
+            h: [97, 110, 121],
+            i: [25, 97, 121],
+            j: [25, 121, 124],
+            k: [82, 121, 124],
+            l: [82, 97, 121].
+            }
+    \centering
+    \includegraphics[width=\textwidth,keepaspectratio]{figures/cover-graph.png}
+    \label{fig7:cover-graph}
+\end{figure}
+
+\end{document}

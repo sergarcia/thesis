@@ -1,0 +1,230 @@
+\documentclass[border=2mm,tikz]{standalone}
+
+% Yet another description of ModCell Design principles
+% TODO:
+% - Eliminate white-space  between subpanels. Overall improve panel alignment and minimize whitespace.
+% - See "Matrices and alignment" In the manual to accomplish much better alignment between subfigures and withing subfigures.
+
+\usepackage{tikzfigure}
+
+
+\tikzset{
+    % Venn
+    paretop/.style={
+        circle, thick, inner sep=1.5pt, minimum size=.2cm,
+        draw=#1, fill=#1, text=#1
+    },
+    % pathways
+    met/.style={circle,draw=sorange,fill=sorange!40,thick,inner sep=0pt,minimum size=6pt},
+    rxn/.style={draw=sblue,ultra thick},
+    mrxn/.style={draw=sblue,ultra thick, dashed,->},
+    node distance=1cm,
+    % Modcell
+    %borders/.style={draw=gray,thick},
+    module/.style={draw=#1, fill=#1!20, thick},
+    %Interface o
+    % overall
+    labeltext/.style={text width=5cm, anchor=east, font=\large},
+}
+
+\newcommand{\chassisBcolor}{scyan}
+\newcommand{\productonecolor}{scyan}
+\newcommand{\producttwocolor}{spink}
+
+\begin{document}
+\begin{tikzpicture}
+
+    %\draw[help lines] (-10,-10) grid (10,10);
+
+    % ------------ Core phenotype ------------------
+    \node[labeltext] at (-3,7.5) {a. Phenotype view};
+    \begin{scope}[xshift=-5cm, yshift=4.5cm, scale=.8]
+        % Draw circles
+        \begin{scope}[blend group=soft light]
+            % \fill[red!30!white]   (-1,1) circle (2);
+            % \fill[green!30!white] (-1,-1) circle (2);
+            % \fill[blue!30!white]  (1,1) circle (2);
+            % \fill[purple!30!white]  (1,-1) circle (2);
+            \fill[slblue]   (-1.5,.5) circle (2);
+            \fill[slred] (-1.5,-.5) circle (2);
+            \fill[slcyan]  (1.5,.5) circle (2);
+            \fill[slpink]  (1.5,-.5) circle (2);
+        \end{scope}
+        % Labels  (could also draw circles in for loop
+        \foreach \x\ang in {1/45,2/45-90,3/45-180,4/45-270} {%
+            \node at (\ang:2.5) {\x};
+            }
+            % Regions labels
+            \node[spurple!80!black] at (-1.75,0)    {Group A};
+            \node[scyan!80!black] at (1.75,0)    {Group B};
+            %\node[orange!80!black] at (-1.5,0)    {Group A};
+            %\node[purple!80!black] at (1.5,0)    {Group B};
+            \node[gray] at (0,0)    {Core};
+    \end{scope}
+
+    % ----------- Pareto optimality ------
+    \node[labeltext] at (4,7.5) {b. Pareto optimality view};
+    \begin{scope}[xshift=0cm,yshift=3cm, scale=.9]
+        % Axis
+        \draw[<->, very thick] (0,4) |- (4,0);
+        \path (0,0) -- (4,0) node[pos=.5,below, label={[below]Phenotype group A}] {};
+        \path (0,0) -- (0,4) node[pos=.5,left, label={[rotate=90]Phenotype group B}] {} ;
+        % Points
+        \node[paretop={spurple}] at (3,1) {};
+        \node[paretop={scyan}] at (1,3) {};
+        \node[paretop={sgray}] at (3,3) {};
+    \end{scope}
+
+    % ----------- Pathways ------
+    \node[labeltext] at (-3,1) {c. Pathway view};
+
+    \def\drawcore{%
+            \node[met] (m0) {};
+            \node[met, right of = m0] (m1) {};
+            \path[rxn,->] (m0) -- (m1);
+    }
+        \def\drawabove[#1]{%
+            \node[met, above right of = m1] (m2) {};
+            \path[rxn,->,#1] (m1) -- (m2);
+            \node[met, above of = m2,label=4] (p0) {};
+            \node[met, right of = m2,label=right:3] (p1) {};
+            \path[mrxn] (m2) -- (p0);
+            \path[mrxn] (m2) -- (p1);
+    }
+        \def\drawbelow[#1]{%
+            \drawbelowone[#1];
+            \node[met, below of = m3, label=below:2] (p1) {};
+            \path[mrxn] (m3) -- (p1);
+    }
+    \def\drawbelowone[#1]{%
+            \node[met, below right of = m1] (m3) {};
+            \path[rxn,->,#1] (m1) -- (m3);
+            \node[met, right of = m3, label=right:1] (p2) {};
+            \path[mrxn] (m3) -- (p2);
+    }
+
+    \begin{scope}[xshift=-6.5cm,yshift=-2cm] % TODO: Scale?
+        \begin{scope}[xshift=-1cm]
+            \drawcore
+            \node[text=sgray] at (0,.5) {Core};
+        \end{scope}
+
+        \begin{scope}[xshift=2cm, yshift=.5cm]
+            \drawcore
+            \drawabove[solid]
+            \node[text=spurple] at (0,.5) {Chassis A};
+            \node[text=scyan] at (0,-.5) {Chassis B};
+        \end{scope}
+        \begin{scope}[xshift=2cm, yshift=-.5cm]
+            \drawcore
+            \drawbelow[solid]
+        \end{scope}
+
+        \begin{scope}[xshift=7cm, yshift=0cm]
+            \drawcore
+            \drawabove[dashed]
+            \drawbelow[dashed]
+            \node[text width=2cm] at (.3,.6) {Universal chassis};
+        \end{scope}
+
+        % Labels
+    \end{scope}
+
+    % ----------- Interface ------
+    \node[labeltext] at (-3,-6) {d. Interface components};
+
+    \begin{scope}[yshift=-10cm, xshift=-5.5cm, scale=.8]
+
+        % Genes
+        \begin{scope}[gray, scale=.3, domain=0:15, samples=101,
+            yshift=12cm, xshift=-2.5cm]
+            \node at (7,2) {Genetic module};
+            \foreach \x in {0,1, ...,14}{
+              \draw[thick] (\x,{-sin(\x*36)}) -- (\x,{sin(\x*36)}); % 180/5=36, which gives us 5 lines per loop
+            }
+            \draw[very thick] plot (\x,{sin(\x*36)});
+            \draw[very thick] plot (\x,{-sin(\x*36)});
+        \end{scope}
+
+        % Arrow:
+        \def\ylen{4}
+        \def\deltaf{.5}
+        \def\yhead{1}
+        \begin{scope}[yshift=3cm, xshift=1.5cm,
+                rotate=-180, scale=.5]
+            \draw[color=sgray, fill=slgray] (0,0) -- (1,0) -- (1,\ylen) -- (1+\deltaf, \ylen) -- (.5, \ylen+\yhead) -- (-\deltaf,\ylen) -- (0,\ylen) -- cycle;
+        \end{scope}
+
+
+        % Enzymes
+        \def\drawenzyme{%
+                \draw[color=sblue, fill=slblue] (0,0) -- +(30:1cm) arc (30:330:1cm) -- cycle;
+            }
+        \begin{scope}[yshift=1cm, xshift=1.2cm, sblue]
+            \node[align=left] at (1.3,-1) {Pathway \\enzymes};
+            \begin{scope}[yshift=-1cm, xshift=0cm, scale=.3, rotate=-40]
+                \drawenzyme
+            \end{scope}
+%            \begin{scope}[yshift=-1cm, xshift=1cm, scale=.3, rotate=-30]
+%                \drawenzyme
+%            \end{scope}
+        \end{scope}
+
+        % Pathway
+        \begin{scope}[yshift=0cm, xshift=-1.5cm]
+            \drawcore
+            \drawbelowone[solid]
+        \end{scope}
+
+        % Annotation
+        \node[align=left] at (-1.5, -1) (l1) {2. Metabolic \\precursors};
+        %\draw[->,thick] (l1) -- (m1);
+
+        \node[align=left] at (-1,2) (l2) {1. Transcriptional \\ and translational \\machinery};
+    \end{scope}
+
+
+    % ----------- Modular cell --------------------
+    \node[labeltext] at (4,-6) {e. Modular cell};
+    \begin{scope}[yshift=-9cm, xshift=1cm, scale=.7]
+
+    % Bacterium body
+    \draw[draw=\chassisBcolor, fill=\chassisBcolor!20, thick] (0,1) arc [start angle=90, end angle=270, radius=1] --
+    (2.5,-1) -- (2.5,-0.2)  -- (3, -0.2) -- (3,-1) -- % Bottom product interface
+    (3,-1) arc [start angle=-90, end angle=90, radius=1] --
+    (3,1) -- (3,0.2) -- (2.75, 0.5) -- (2.5, 0.2) -- (2.5,1) -- % Top product interface
+    (0.5,1) -- (0.5,0.2) -- (0.25,0) -- (0,0.2) -- % substrate module interface
+    cycle;
+    \draw[draw=\chassisBcolor, thick] (-1,0) .. controls (-2, 2) and  (-2, -2) .. (-3 ,0);
+
+    % Modules
+    \node[sblue] at (0.25, 2.8) {Substrate};
+    \filldraw[module=sblue]  (0, 1.5) -- (0.25, 1.2) -- (0.5,1.5) -- (0.5, 2.5) -- (0, 2.5) -- cycle;
+
+    \begin{scope}[yshift=1cm] % Scope allows to reuse coordinates more easily
+        \node[\productonecolor] at (3.5, 1.8) {Product 1};
+        \filldraw[module=\productonecolor] (3,1) -- (3,0.2) -- (2.75, 0.5) -- (2.5, 0.2) -- (2.5,1) --
+        (2.5, 1.5) -- (4, 1.5) -- (4.25, 1.25) -- (4, 1) -- cycle;
+    \end{scope}
+
+    \begin{scope}[yscale=-1,xscale=1, yshift=1cm] % Mirrosred above part
+        \filldraw[module=\producttwocolor] (3,1) -- (3,0.2) -- (2.5, 0.2) -- (2.5,1) --
+        (2.5, 1.5) -- (4, 1.5) -- (4.25, 1.25) -- (4, 1) -- cycle;
+        \node[\producttwocolor] at (3.5, 1.8) {Product 2};
+    \end{scope}
+
+    % Annotation
+    %% Chassis
+    \node[above] (chas) at (-2, -2.1) {Chassis};
+    \draw[->,thick] (chas.north east) -- (-0.6,-0.8);
+    %% Interfaces
+    \node (inter) at (-2, 1.2) {Interface};
+    \draw[->,thick] (inter.base east) -- (0,0.5);
+
+    \node (mod) at (-2, 2.2) {Module};
+    \draw[->,thick] (mod.east) -- (0,2);
+
+    \end{scope}
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,163 @@
+Solution index	Reaction deletions	Module reactions	Compatible products (wGCP objective value >= 0.5)
+1	ACALD, G3PD2, CBMKr, TPI, I4FE4SR	dca (TPI), hdca (TPI), ocdcap (TPI), ocdcea (TPI), ppa (TPI)	dca, ocdcea, ppa
+2	ALCD2x, G3PD2, CBMKr, TPI	hdcea (TPI), octa (TPI)	hdcea, octa
+3	ACALD, AMPN, ASPO6, TPI	12dgr180 (TPI), hdca (TPI), ocdca (TPI), ttdcea (TPI)	ttdcea
+4	ACALD, TPI, ALR4x, 6D6SPA	dca (TPI), hdca (TPI), ocdcap (TPI), ocdcea (TPI), ppa (TPI)	dca, ocdcea, ppa
+5	ACALD, LYSAM, TPI	ddca (TPI), hdcap (TPI), ocdcap (TPI), ppa (TPI)	ddca, ppa
+6	ACALD, G3PD2, LCADi, TPI	ttdcea (TPI)	ttdcea
+7	ACALD, TGBPA, HYD2pp, ZNabcpp, TPI	ac (ACALD), ttdcea (TPI)	ac, ttdcea
+8	ACALD, ASPT, GLUDy, NTP5, TPI	ttdcea (TPI)	ttdcea
+9	ACALD, TGBPA, GLUDC, ZNabcpp, TPI	ac (ACALD), ttdcea (TPI)	ac, ttdcea
+10	ACALD, ASPT, GLUDy, TPI	ttdcea (TPI)	ttdcea
+11	ACALD, OHPBAT, TGBPA, GLUDy, TPI		
+12	ACALD, TPI, ALR4x	dca (TPI), hdca (TPI), ocdcap (TPI), ocdcea (TPI), ppa (TPI)	dca, ocdcea, ppa
+13	ACALD, GLUDy, TPI	ttdcea (TPI)	ttdcea
+14	ACALD, G3PD2, TPI, ALR4x, 6D6SPA	dca (TPI), hdca (TPI), ocdcap (TPI), ocdcea (TPI), ppa (TPI)	dca, ocdcea, ppa
+15	ACALD, TGBPA, GLUDC, BUTSO3abcpp, TPI	ac (ACALD), ttdcea (TPI)	ac, ttdcea
+16	ACALD, ASPT, ZNabcpp, TPI	ac (ACALD), ttdcea (TPI)	ac, ttdcea
+17	ACALD, HKNDDH, CBMKr, GLUDy, TPI	ttdcea (TPI)	ttdcea
+18	ACALD, ASPT, G3PD2, LCADi, TPI	ac (ACALD), dca (TPI), hdca (TPI), ocdcap (TPI), ocdcea (TPI)	ac, dca, ocdcea
+19	ACALD, ASPT, HPYRRx, ZNabcpp, TPI	ac (ACALD), ttdcea (TPI)	ac, ttdcea
+20	ACALD, ASPT, URDGLYCD, TPI, I2FE2SR	ac (ACALD), ttdcea (TPI)	ac, ttdcea
+21	ACALD, G3PD2, 3HPPPNH, TPI	ttdcea (TPI)	ttdcea
+22	ACALD, ASPT, GLUDC, TPI	ac (ACALD), ttdcea (TPI)	ac, ttdcea
+23	ACALD, GLUDC, BUTSO3abcpp, TPI	ac (ACALD), ttdcea (TPI)	ac, ttdcea
+24	ACALD, ASPT, DDPGALA, GLUDy, TPI	ttdcea (TPI)	ttdcea
+25	TKT1, ALCD2x, PPC, LDH_D, POR5	1agpg120 (LDH_D), 1agpg160 (LDH_D), 1agpg181 (LDH_D), 2agpe160 (LDH_D), 2agpg160 (LDH_D), 2agpg161 (LDH_D), 2agpg181 (LDH_D), ddca (PPC), for (ALCD2x), hdcap (PPC), octa (PPC), ppa (PPC), ttdca (PPC)	12dgr120, 12dgr140, 12dgr141, 12dgr161, 12dgr181, 1agpg180, 1ddecg3p, 1hdec9eg3p, 1hdecg3p, 1odec11eg3p, 1tdec7eg3p, 1tdecg3p, 2agpg180, 2hdec9eg3p, 2hdecg3p, 2odec11eg3p, 2odecg3p, 2tdecg3p, acald, apg120, dca, ddca, ddcap, hdcap, hdceap, hxa, lipidX, octa, octapb, pa120, pa140, pa141, pa161, pa181, pe120, pe140, pe141, pe160, pe161, pe180, pe181, pg120, pg140, pg141, pg160, pg161, pg181, pgp120, pgp140, pgp141, pgp160, pgp161, pgp181, ppa, ps120, ps140, ps141, ps160, ps161, ps180, ps181, ttdca, ttdcea, ttdceap
+26	ALCD2x, PPC, TKT2, DMSOR1pp, POR5	ac (ALCD2x), for (ALCD2x), ppa (PPC)	12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+27	ALCD2x, ASPT, LCARS, TPI	12dgr180 (TPI), ocdcea (TPI), ocdceap (TPI), octa (TPI), ppa (TPI)	ocdcea, ocdceap, octa, ppa
+28	ALCD2x, NTPP2, CBMKr, ZN2abcpp, POR5		dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+29	ALCD2x, CBPS, CYSabc2pp, DAAD, TPI	dca (TPI), ocdca (TPI), ttdcea (TPI)	dca, ttdcea
+30	ALCD2x, NTPP2, LCARS, TPI	12dgr180 (TPI), ocdcea (TPI), ocdceap (TPI), octa (TPI), ppa (TPI)	ocdcea, ocdceap, octa, ppa
+31	ALCD2x, CBPS, NO3R2pp, DAAD, TPI	dca (TPI), ocdca (TPI), ttdcea (TPI)	dca, ttdcea
+32	ALCD2x, PYAM5PO, TPI, LSERDHr, SELabcpp	octa (TPI), ppa (TPI), ttdcea (TPI)	octa, ppa, ttdcea
+33	ALCD2x, UGLYCH, PFK, POR5, I4FE4SR		dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+34	ALCD2x, NTPP2, LCARS, SBTPD, TPI	12dgr180 (TPI), ocdcea (TPI), ocdceap (TPI), octa (TPI), ppa (TPI)	ocdcea, ocdceap, octa, ppa
+35	ALCD2x, NTPP2, LCARS, ACONMT, TPI	12dgr180 (TPI), ocdcea (TPI), ocdceap (TPI), octa (TPI), ppa (TPI)	ocdcea, ocdceap, octa, ppa
+36	ALCD2x, ASPO3, DAAD, TPI	dca (TPI), ocdca (TPI), ttdcea (TPI)	dca, ttdcea
+37	ALCD2x, CYSabc2pp, NODOy, PDH, TPI	hdca (TPI), hdcea (TPI), ocdcap (TPI), ocdcea (TPI), octa (TPI), ttdca (TPI)	hdcea, ocdcea, octa
+38	ALCD2x, AMPTASECG, PROabcpp, NO3R1pp	ac (ALCD2x), etoh (ALCD2x)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+39	ALCD2x, CYANST, 23PDE4pp, 3KGK, TPI	dca (TPI), ocdcea (TPI), octa (TPI)	dca, ocdcea, octa
+40	ALCD2x, SERD_L, DOGULNR, POR5, FDH4pp	for (ALCD2x)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+41	ALCD2x, SERD_L, FCLK, POR5, FDH4pp	for (ALCD2x)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+42	ALCD2x, SERD_L, PGMT, CSND, TPI	ddca (TPI), etoh (ALCD2x), for (ALCD2x), hdcea (TPI), ocdcap (TPI)	ddca, hdcea
+43	ALCD2x, SERD_L, PGMT, CSND, GLUDy	etoh (ALCD2x), for (ALCD2x)	12dgr180, dca, ddca, hdcap, hdcea, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+44	ALCD2x, CYNTAH, NDPK1, TPI, FLDR2		12dgr160, 12dgr180, 12dgr181, 1odecg3p, dca, ddca, hdca, hdcap, hdcea, lac__D, ocdca, ocdcap, ocdcea, ocdceap, octa, pa160, pa180, ttdca, ttdcea
+45	ACALD, CYNTAH, CBMKr, ASPO4, TPI	ddca (TPI), hdcap (TPI), octa (TPI)	ddca, octa
+46	ALCD2x, IDOND, G3PD2, FLDR2		dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+47	ACALD, ALCD2x, CYNTAH, GND, TPI	dca (TPI), ddca (TPI), hdcap (TPI), ocdceap (TPI), octa (TPI)	dca, ddca, ocdceap, octa
+48	ALCD2x, PTAr, PPC, TKT2, POR5	12dgr180 (PTAr), ddca (PTAr), etoh (ALCD2x), for (ALCD2x), hdca (PTAr), hdcea (PTAr), lac__D (POR5), ocdca (PTAr), ocdcea (PTAr), ocdceap (PTAr), octa (PTAr), ppa (PPC), succ (PPC), ttdca (PTAr), ttdcea (PTAr)	12dgr180, ddca, hdca, hdcea, lac__D, ocdca, ocdcea, ocdceap, octa, ttdca, ttdcea
+49	ALCD2x, PPC, PSERT, TKT2, POR5	2agpe181 (PSERT), etoh (ALCD2x)	12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ttdca, ttdcea
+50	ALCD2x, VALTA, GUAD, LDH_D, OCTNLL	for (ALCD2x)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+51	ACALD, ACKr, DDPGALA, GART, I4FE4SR		lac__D
+52	ACALD, ACKr, GART	etoh (ACALD), for (ACALD), hdcap (ACKr)	lac__D
+53	ACALD, PTAr, BUTSO3abcpp, ARABDI, 23PDE2pp	hdcea (PTAr), octa (PTAr), ttdca (PTAr)	hdcea, lac__D, octa
+54	ACALD, ACKr, ALLTN, M1PD	hdca (ACKr), hdcea (ACKr), ocdcap (ACKr)	hdcea, lac__D
+55	ACALD, FBP, GHMT2r, HOPNTAL, GART	dca (GHMT2r), hdca (GHMT2r)	dca, octa, ppa, ttdcea
+56	ACALD, ACKr, ADPT, CBMKr, CTBTabcpp	for (ACALD)	lac__D
+57	ACALD, PGI, DDPGALA	for (ACALD)	12dgr180, dca, ddca, hdcap, hdcea, ocdcap, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+58	ALCD2x, CTBTabcpp, PPA2, 2DOXG6PP, FLDR2	for (ALCD2x)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+59	ACALD, PGI, CBMKr, GART	for (ACALD)	12dgr180, dca, ddca, hdcap, hdcea, ocdcap, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+60	ACALD, FBP, OHPBAT, ASPO6, TPI	hdca (TPI), ocdca (TPI), octa (TPI)	octa
+61	ALCD2x, PPA2, 2DOXG6PP, FLDR2	for (ALCD2x)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+62	ALCD2x, NTD4, PPC, THD2pp, LDH_D	etoh (ALCD2x), lac__D (LDH_D)	12dgr120, 12dgr140, 12dgr141, 12dgr160, 12dgr161, 12dgr180, 12dgr181, 1ddecg3p, 1hdec9eg3p, 1hdecg3p, 1odec11eg3p, 1odecg3p, 1tdec7eg3p, 1tdecg3p, 2hdecg3p, 2odec11eg3p, 2odecg3p, ac, acald, apg120, dca, ddca, ddcap, for, hdca, hdcap, hdcea, hdceap, hxa, lac__D, ocdca, ocdcap, ocdcea, ocdceap, octa, octapb, pa120, pa140, pa141, pa160, pa161, pa180, pa181, pe120, pe140, pe141, pe160, pe161, pe180, pe181, pg120, pg140, pg141, pg160, pg161, pg180, pg181, pgp120, pgp140, pgp141, pgp160, pgp161, pgp180, pgp181, ps120, ps140, ps141, ps160, ps161, ps180, ps181, ttdca, ttdcap, ttdcea, ttdceap
+63	PFK_3, ACALD, FUM, TPI	12dgr180 (TPI), hdcea (TPI), ocdcea (TPI), octa (TPI)	hdcea, ocdcea, octa
+64	ALCD2x, G3PD2, MDH2, TPI, MEPNabcpp	hdcea (TPI), octa (TPI)	hdcea, octa
+65	ACALD, ACKr, SARCOX	hdca (ACKr), ttdca (ACKr)	lac__D
+66	ALCD2x, THD2pp, PYK4	for (ALCD2x)	dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+67	RPE, ALCD2x, 2DGULRy, HPYRRy, PTA2	etoh (ALCD2x)	12dgr180, dca, ddca, hdcap, hdcea, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+68	ALCD2x, ASNS2	for (ALCD2x)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+69	RPE, ALCD2x, THD2pp, MALDDH, NHFRBO	ocdca (RPE)	dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+70	ACALD, ALCD19, G3PD6, DCTPD, TPI	ac (ACALD), ttdcea (TPI)	ac, ttdcea
+71	RPE, ALCD2x, ASNS2, NADH16pp	etoh (ALCD2x)	12dgr180, dca, ddca, hdcap, hdcea, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+72	ACALD, HKNDDH, CYSabcpp, TPI, DSBAO1	dca (TPI), hdcea (TPI), octa (TPI)	dca, hdcea, octa
+73	ACALD, ARGDC, HPYRRx, SPODM, TPI	12dgr180 (TPI), hdca (TPI), ocdca (TPI), octa (TPI)	octa
+74	CYSabcpp, TPI, CYSDDS, ORNDC		ac
+75	ALCD2x, RNDR4, NTD3pp, DHPTPE, RNTR3c2	etoh (ALCD2x), for (ALCD2x)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+76	ALCD2x, TMAOR1, ARAI, HPPPNDO, TPI	etoh (ALCD2x), hdcap (TPI)	
+77	ALCD2x, RNDR4, ATHRDHr	etoh (ALCD2x), for (ALCD2x)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+78	ALCD2x, PPC, TKT2, LDH_D, FLDR2	1agpg141 (LDH_D), 2agpe161 (LDH_D), 2tdecg3p (TKT2), acald (TKT2), etoh (ALCD2x), for (FLDR2), ppa (PPC)	12dgr120, 12dgr140, 12dgr141, 12dgr160, 12dgr161, 12dgr180, 12dgr181, 1agpg180, 1ddecg3p, 1hdec9eg3p, 1hdecg3p, 1odec11eg3p, 1odecg3p, 1tdec7eg3p, 1tdecg3p, 2agpg180, 2hdec9eg3p, 2hdecg3p, 2odec11eg3p, 2odecg3p, 2tdecg3p, acald, apg120, dca, ddca, ddcap, for, hdca, hdcap, hdcea, hdceap, hxa, ocdca, ocdcap, ocdcea, ocdceap, octa, octapb, pa120, pa140, pa141, pa160, pa161, pa180, pa181, pe120, pe140, pe141, pe160, pe161, pe180, pe181, pg120, pg140, pg141, pg160, pg161, pg180, pg181, pgp120, pgp140, pgp141, pgp160, pgp161, pgp180, pgp181, ppa, ps120, ps140, ps141, ps160, ps161, ps180, ps181, ttdca, ttdcap, ttdcea, ttdceap
+79	ALCD2x, PPC, PSERT, TKT2, FLDR2	for (ALCD2x)	12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ttdca, ttdcea
+80	ALCD2x, PPC, CYTK1, TKT2, FLDR2		12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ttdca, ttdcea
+81	ALCD2x, PPC, FLDR2, AI2K	etoh (ALCD2x)	dca, lac__D, octa, ttdcea
+82	ALCD2x, PPC, LDH_D, FLDR2	for (ALCD2x)	12dgr120, 12dgr141, 12dgr161, 12dgr181, 1agpg180, 1ddecg3p, 1hdec9eg3p, 1odec11eg3p, 1tdec7eg3p, 1tdecg3p, 2agpg180, 2hdec9eg3p, 2hdecg3p, 2odec11eg3p, 2odecg3p, 2tdecg3p, acald, apg120, dca, ddcap, hdceap, hxa, lipidX, octa, octapb, pa120, pa140, pa141, pa161, pa181, pe120, pe140, pe141, pe160, pe161, pe180, pe181, pg120, pg140, pg141, pg160, pg161, pg181, pgp120, pgp140, pgp141, pgp160, pgp161, pgp181, ps120, ps140, ps141, ps160, ps161, ps180, ps181, ttdcea, ttdceap
+83	ALCD2x, PPC, TKT2, FLDR2	for (ALCD2x)	12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ttdca, ttdcea
+84	ALCD2x, PPC, CDGR, FLDR2	for (ALCD2x)	dca, lac__D, octa, ttdcea
+85	ALCD2x, PPC, TKT2, ATPS4rpp, FLDR2	lac__D (FLDR2), ps181 (ATPS4rpp)	lac__D
+86	ALCD2x, PPC, FLDR2	ac (ALCD2x), for (ALCD2x)	dca, lac__D, octa, ttdcea
+87	ALCD2x, PPC, CYTK1, FLDR2	for (ALCD2x)	dca, lac__D, octa, ttdcea
+88	ALCD2x, PPC, THD2pp, TKT2, FLDR2	lac__D (FLDR2)	dca, ddca, hdca, hdcap, hdcea, lac__D, ocdca, ocdcap, ocdcea, ocdceap, octa, ttdca, ttdcea
+89	ALCD2x, PPC, CYTK1, LDH_D, FLDR2	for (ALCD2x)	12dgr120, 12dgr141, 12dgr161, 12dgr181, 1ddecg3p, 1hdec9eg3p, 1odec11eg3p, 1tdec7eg3p, 1tdecg3p, 2hdec9eg3p, 2hdecg3p, 2odec11eg3p, 2odecg3p, 2tdecg3p, acald, dca, ddcap, hdceap, hxa, lipidX, octa, octapb, pa120, pa140, pa141, pa161, pa181, pe120, pe140, pe141, pe160, pe161, pe180, pe181, pg120, pg140, pg141, pg160, pg161, pg180, pg181, pgp120, pgp140, pgp141, pgp160, pgp161, pgp180, pgp181, ps120, ps140, ps141, ps160, ps161, ps180, ps181, ttdcea, ttdceap
+90	ALCD2x, MDH, PPC, TKT2, FLDR2	succ (FLDR2)	12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, pa180, ttdca, ttdcea
+91	PPC, TKT2, LDH_D, FLDR2, 2DGULRGy		
+92	PPC, TKT2, LDH_D, FLDR2		
+93	PPC, TKT2, LDH_D, FLDR2, METNA		
+94	PPC, TKT2, ATPS4rpp, LDH_D, FLDR2		etoh
+95	PPC, UGLYCH, TKT2, LDH_D, FLDR2		
+96	METSOXR2, PTHRpp, LDH_D, FLDR2		
+97	ALCD2x, TKT2, LDH_D, FLDR2	for (FLDR2)	12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdcap, ocdcea, ocdceap, octa, ppa, succ, ttdca, ttdcea
+98	ALCD2x, PPC, CYSabcpp, FLDR2	ocdceap (PPC)	dca, lac__D, ocdceap, octa, ttdcea
+99	G6PDA, PPC, TKT2, FLDR2		
+100	ACALD, METSOXR2, PTHRpp, LDH_D, FLDR2		dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+101	ALCD2x, MDH, TKT2, LDH_D, FLDR2		12dgr120, 12dgr140, 12dgr141, 12dgr160, 12dgr161, 12dgr180, 12dgr181, 1ddecg3p, 1hdec9eg3p, 1hdecg3p, 1odec11eg3p, 1odecg3p, 1tdec7eg3p, 1tdecg3p, dca, ddca, ddcap, hdcap, hdcea, hdceap, hxa, ocdcea, ocdceap, octa, octapb, pa120, pa140, pa141, pa160, pa161, pa180, pa181, pe140, pe160, pe161, pe180, pe181, pg140, pg160, pg161, pg180, pg181, pgp140, pgp160, pgp161, pgp180, pgp181, ppa, ps140, ps160, ps161, ps180, ps181, succ, ttdca, ttdcap, ttdcea, ttdceap
+102	ALCD2x, PPC, THD2pp, TKT2, DAAD		dca, ddca, hdca, hdcap, hdcea, lac__D, ocdca, ocdcap, ocdcea, ocdceap, octa, ttdca, ttdcea
+103	ALCD2x, PPC, TKT2, FLDR2, 4HTHRK	etoh (ALCD2x)	12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ttdca, ttdcea
+104	ALCD2x, PPC, ALAabcpp, FLDR2, 4HTHRK	ppa (PPC)	dca, lac__D, octa, ppa, ttdcea
+105	ALCD2x, ACKr, PPC, FLDR2		lac__D
+106	ALCD2x, PPC, ASNS2, TKT2, FLDR2		12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ttdca, ttdcea
+107	ALCD2x, PPC, PSERT, FLDR2, 4HTHRK	etoh (ALCD2x), ocdceap (PPC)	lac__D, octa
+108	ALCD2x, PPC, NDPK7, TKT2, FLDR2	etoh (ALCD2x)	12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ttdca, ttdcea
+109	ALCD2x, PPC, TMAOR1pp, LDH_D, FLDR2	etoh (ALCD2x)	12dgr120, 12dgr141, 12dgr161, 12dgr181, 1agpg180, 1ddecg3p, 1hdec9eg3p, 1odec11eg3p, 1tdec7eg3p, 1tdecg3p, 2agpg180, 2hdec9eg3p, 2hdecg3p, 2odec11eg3p, 2odecg3p, 2tdecg3p, acald, apg120, dca, ddcap, hdceap, hxa, lipidX, octa, octapb, pa120, pa140, pa141, pa161, pa181, pe120, pe140, pe141, pe160, pe161, pe180, pe181, pg120, pg140, pg141, pg160, pg161, pg181, pgp120, pgp140, pgp141, pgp160, pgp161, pgp181, ps120, ps140, ps141, ps160, ps161, ps180, ps181, ttdcea, ttdceap
+110	ALCD2x, PPC, LDH_D, FLDR2, 4HTHRK		12dgr120, 12dgr141, 12dgr161, 12dgr181, 1agpg180, 1ddecg3p, 1hdec9eg3p, 1odec11eg3p, 1tdec7eg3p, 1tdecg3p, 2agpg180, 2hdec9eg3p, 2hdecg3p, 2odec11eg3p, 2odecg3p, 2tdecg3p, acald, apg120, dca, ddcap, hdceap, hxa, lipidX, octa, octapb, pa120, pa140, pa141, pa161, pa181, pe120, pe140, pe141, pe160, pe161, pe180, pe181, pg120, pg140, pg141, pg160, pg161, pg181, pgp120, pgp140, pgp141, pgp160, pgp161, pgp181, ps120, ps140, ps141, ps160, ps161, ps180, ps181, ttdcea, ttdceap
+111	GLYCK2, FLDR2		
+112	DHORD2, KG6PDC, FLDR2		
+113	ALCD2x, TKT2, POR5, DHMPTR, MEPNabcpp		12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdcap, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+114	CYTDK1, ALCD2x, NDPK3, GLYCK2, TPI		
+115	PGI, ALCD2x, PPC, TKT2, FLDR2	12dgr140 (PGI), 12dgr160 (PGI), 1hdec9eg3p (PGI), pe160 (PGI), pg120 (PGI), pg140 (PGI), ttdceap (PGI)	12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ttdca, ttdcea
+116	ALCD2x, NDPK3, HEX1, POR5, MEPNabcpp		dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+117	ACALD, G3PD2, NO3R2pp, PEAMNOpp	for (ACALD)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+118	ACALD, SPODMpp, TPI, ALR2	ocdca (TPI), ocdcea (TPI)	ocdcea
+119	ACALD, RPE, TPI, POR5, I2FE2SS	12dgr180 (TPI)	12dgr180
+120	ACALD, SPODMpp, GLUDy, TPI, ALR2	ocdca (TPI), ocdcea (TPI)	ocdcea
+121	ACALD, ALCD2x, ACKr, FUM, LDH_D	12dgr141 (ACALD), 1ddecg3p (ACALD), 1odec11eg3p (ACALD), 23dhmb (FUM), 3mob (FUM), ac (ACKr), acald (ACALD), etoh (ALCD2x), for (ACKr), lac__D (LDH_D), pe140 (ACALD), pg120 (ACALD), pg140 (ACALD), pg141 (ACALD), pg161 (ACALD), pgp120 (ACALD), pgp141 (ACALD), pgp161 (ACALD), ppa (ACALD)	12dgr120, 12dgr140, 12dgr141, 12dgr160, 12dgr161, 12dgr180, 12dgr181, 1hdec9eg3p, 1hdecg3p, 1odec11eg3p, 1odecg3p, 1tdec7eg3p, 1tdecg3p, 23dhmb, 3mob, ac, acald, dca, ddca, ddcap, etoh, for, hdca, hdcap, hdcea, hdceap, hxa, lac__D, ocdca, ocdcap, ocdcea, ocdceap, octa, octapb, pa120, pa140, pa141, pa160, pa161, pa180, pa181, pe160, pe161, pe180, pe181, pg160, pg180, pg181, pgp160, pgp180, pgp181, ppa, ps160, ps161, ps180, ps181, ttdca, ttdcap, ttdcea, ttdceap
+122	ACALD, ALCD2x, ACKr, FUM		lac__D
+123	ACALD, ALCD2x, ACKr, FUM, SSALy		lac__D
+124	ACALD, ALCD2x, ACKr, MDH, LDH_D	1ddecg3p (ACALD), 1odec11eg3p (ACALD), 3mob (MDH), ac (ACKr), acald (ACALD), lac__D (LDH_D), pe140 (ACALD), pe141 (ACALD), pg120 (ACALD), pgp120 (ACALD), ppa (ACALD), succ (MDH)	12dgr120, 12dgr140, 12dgr141, 12dgr160, 12dgr161, 12dgr180, 12dgr181, 1hdec9eg3p, 1hdecg3p, 1odec11eg3p, 1odecg3p, 1tdec7eg3p, 1tdecg3p, 3mob, ac, acald, dca, ddca, ddcap, hdca, hdcap, hdcea, hdceap, hxa, lac__D, ocdca, ocdcap, ocdcea, ocdceap, octa, octapb, pa120, pa140, pa141, pa160, pa161, pa180, pa181, pe160, pe161, pe180, pe181, pg160, pg180, pg181, pgp160, pgp180, pgp181, ppa, ps160, ps161, ps180, ps181, succ, ttdca, ttdcap, ttdcea, ttdceap
+125	ACALD, ASNS2, ME2, 2MAHMP, SELabcpp	etoh (ACALD)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+126	GLYCTO3, ACALD, AKGDH, TPI	12dgr180 (TPI), etoh (ACALD)	
+127	GLYCTO3, ACALD, NADH5, TPI, I2FE2SS	dca (TPI)	dca
+128	GLYCTO3, ACALD, AMPTASECG, TPI	dca (TPI), etoh (ACALD), hdca (TPI)	dca
+129	ALCD2x, GUAD, LDH_D, OCTNLL	for (ALCD2x)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+130	ALCD2x, ACKr, LYSAM, MDH, LDH_D	val__L (MDH)	12dgr140, 12dgr141, 12dgr160, 12dgr161, 12dgr180, 12dgr181, 1odec11eg3p, 1odecg3p, acald, dca, ddca, ddcap, hdca, hdcap, hdcea, hdceap, hxa, ocdca, ocdcap, ocdcea, ocdceap, octa, pa140, pa160, pa161, pa180, pa181, ppa, ttdca, ttdcap, ttdcea, ttdceap
+131	ALCD2x, AGDC, PHYTSpp, TPI	for (ALCD2x), hdca (TPI)	
+132	ALCD2x, LYSAM, ASNS2, LYSabcpp, TPI	dca (TPI), ttdcea (TPI)	dca, ttdcea
+133	ACALD, ALLTN, SPMDabcpp, PGCD, PSURIK	ocdceap (PGCD), octa (PGCD), ttdca (PGCD)	ocdceap, octa
+134	ALCD2x, ASNS2, PHYTSpp, DAPAL, FHL	for (ALCD2x)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+135	ALCD2x, AGDC, TAURabcpp, TPI	for (ALCD2x), hdca (TPI)	
+136	ALCD2x, LYSAM, ASNS2, THD2pp, S2FE2SR		dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+137	RPE, ALCD2x, ASNS2, TPI, S2FE2ST	12dgr180 (TPI), hdcap (TPI), hdcea (TPI)	12dgr180, hdcap, hdcea
+138	ALCD2x, HPYRRy, TPI, GALCTLO, S4FE4ST	hdcap (TPI), hdcea (TPI), ocdceap (TPI), octa (TPI), ttdcea (TPI)	hdcea, ocdceap, octa, ttdcea
+139	ALCD2x, TPI, 13PPDH2, METGLCUR	12dgr180 (TPI), hdcap (TPI), hdcea (TPI)	hdcea
+140	ALCD2x, MALS, THD2pp	for (ALCD2x)	dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+141	ALCD2x, MALS, THD2pp, PSP_Lpp	for (ALCD2x)	dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+142	ALCD2x, MALS, THD2pp, TPI, RNTR3c2	for (ALCD2x), ocdcap (TPI), ocdcea (TPI), octa (TPI)	lac__D, ocdcap, ocdcea, octa
+143	ALCD2x, GLUDy, TPI	hdca (TPI), ocdcap (TPI), octa (TPI), ttdca (TPI)	octa, ttdca
+144	ALCD2x, ADK1, MALS, THD2pp	etoh (ALCD2x)	dca, ddca, hdca, hdcap, hdcea, ocdca, ocdcap, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+145	ACALD, TALA, G3PD2, GLYCDx, I2FE2SR	etoh (ACALD)	dca, ddca, hdcap, hdcea, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+146	ACALD, ALCD2x, OP4ENH, GLYOX3, TPI	12dgr180 (TPI), hdca (TPI), ocdca (TPI), ttdcea (TPI)	ttdcea
+147	ALCD2x, NADTRHD, SSALy, SULabcpp, TPI	12dgr180 (TPI), hdca (TPI), ocdca (TPI), ttdcea (TPI)	ttdcea
+148	ACALD, SERD_L, PGCD, TPI	dca (TPI), hdca (TPI), hdcea (TPI), ocdcea (TPI), ppa (TPI)	
+149	ALCD2x, HCYSMT, NADTRHD, PTHRpp, TPI	12dgr180 (TPI), hdca (TPI), ocdca (TPI), ttdcea (TPI)	ttdcea
+150	ME1, ALCD2x, NTPP8, TPI	12dgr180 (TPI), hdca (TPI), ocdca (TPI), ttdcea (TPI)	ttdcea
+151	ALCD2x, HCYSMT, TPI	12dgr180 (TPI), hdca (TPI), ocdca (TPI), ttdcea (TPI)	ttdcea
+152	ACALD, TMAOR1, CBPS, CYTD, TPI	12dgr180 (TPI), hdca (TPI), ocdca (TPI), ttdcea (TPI)	ttdcea
+153	ACALD, LYSDC, TPI	ddca (TPI), ttdca (TPI), ttdcea (TPI)	ddca, ttdcea
+154	ACALD, ALCD2x, TPI	12dgr180 (TPI), hdca (TPI), ocdca (TPI), ttdcea (TPI)	ttdcea
+155	ALCD2x, NADH10, TKT2, ALDD3y, POR5		12dgr180, dca, ddca, hdca, hdcap, hdcea, ocdcap, ocdcea, ocdceap, octa, ppa, ttdca, ttdcea
+156	ACALD, RNDR4, G3PD2, R5PP	ac (ACALD), etoh (ACALD)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+157	ACALD, RNDR4, PPTHpp, TPI, AI2abcpp	ac (ACALD), hdca (TPI)	ac
+158	ACALD, RNDR4, CTBTabcpp	ac (ACALD), etoh (ACALD)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+159	ACALD, RNDR4, G3PD2, I2FE2ST	ac (ACALD), etoh (ACALD)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea
+160	ACALD, NDPK2, DHPTPE, TPI, DXYLTD	ddca (TPI), octa (TPI)	ddca, octa
+161	ACALD, NDPK2, DHPTPE, TPI, 6D6SFK	ddca (TPI), octa (TPI)	ddca, octa
+162	ACALD, CTBTabcpp	ac (ACALD), etoh (ACALD)	dca, ddca, hdcea, ocdcea, ocdceap, octa, ppa, ttdcea

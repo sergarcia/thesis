@@ -1,0 +1,122 @@
+\documentclass[border=2mm]{standalone}
+%Notes:
+%   - Above master could label: gentic algorithms, and above arrows objective evaluation. Objective evaluation has to reflect in panel C (would be after offspring)
+%   - Use units consistently
+
+\usepackage{tikzfigure}
+
+\tikzset{
+    abline/.style={
+        very thick,sgray
+    },
+    master/.style={
+        rectangle, draw, rounded corners,
+        text width=.5cm, text centered, minimum height=.5cm,
+        draw=sblue,fill=slblue
+    },
+    slave/.style={
+        circle, thick,inner sep=1.5pt,minimum size=6pt,
+        draw=sblue,fill=slblue
+    },
+    islandd/.style={
+        %circle,thick,inner sep=1.5pt,minimum size=6pt,
+        rectangle, draw, rounded corners, text width=.5cm, text centered,
+        draw=sblue,fill=slblue
+    },
+    zoomline/.style={
+        draw=sgray, dashed,
+    },
+    frame/.style={
+        rectangle, draw, rounded corners,
+        text width=2cm, text centered, minimum height=1cm,
+        fill=slgreen, draw=sgreen,
+    },
+    island/.style={
+        rectangle, draw, rounded corners,
+        text width=1.5cm, text centered, minimum height=1cm,
+        fill=slblue, draw=sblue,
+    },
+    line/.style={
+        draw=sgray, -{Latex[length=3mm,width=3mm]}, rounded corners=1mm, very thick
+    },
+}
+
+\begin{document}
+\begin{tikzpicture}
+
+    %Master-slave
+    \begin{scope}[yshift=-.1cm]
+        \node (center) at (0,0) {};
+        \node[master] (master) at (5,0) {1};
+
+        \def \n {8}
+        \foreach \s in {2,...,\n} {
+            \node[slave] (c\s) at ($(center) + (\s, -2)$) {\s};
+            \draw[<->, abline] (master) -- (c\s);
+        }
+        % labels
+        \node [below of=master, node distance = 2.5cm] {Evaulate objectives};
+        \node [above of=master, node distance = .5cm] {Genetic algorithm};
+    \end{scope}
+
+    %Island
+    \begin{scope}[yshift=-6cm, xshift=5cm]
+        \node (center) at (0,0) {};
+        \def \n {8}
+        \def \radius {2}
+        \def \margin {9}
+        \foreach \s in {1,...,\n} {
+            \node[master] (c\s) at ($(center) + ({360/\n * (\s + 1)}:\radius)$) {\s};
+            \draw[->, abline] ($(center) +({360/\n * (\s - 1)+\margin}:\radius)$)
+            arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);
+        }
+    \end{scope}
+
+    % Genetic algorithm
+    \begin{scope}[xshift=13cm, yshift=-3.8cm]
+        \node [frame] (pop) {Population};
+        \node [above=2cm, left of=pop, node distance = 2.5cm] (init) {Initialization};
+        \node [below=2cm, left of=pop, node distance = 2.5cm] (term) {Termination};
+        \node [frame, above=3cm, right of=pop, node distance = 6cm] (parents)  {Parents};
+        \node [frame, below=3cm, right of=pop, node distance = 6cm] (off)  {Offspring};
+
+
+        \path [line] (parents)
+        -- node[right,align=left,pos=.5] {Recombination\\and mutation}
+        (off);
+        \path [line] (init) |- (pop.170);
+        \path [line] (pop.190) -| (term);
+        \path [line] (off) -| node[below,pos=.25, align=center] {Survivor selection}(pop);
+        \path [line] (pop) |- node[above,pos=.75, align=center] {Parent selection}(parents);
+
+
+        % Migration
+        \node [island, above=1.5cm, right of=pop, node distance = 4cm] (island1) {Island 8};
+        \node [island, below=1.5cm, right of=pop, node distance = 4cm] (island2) {Island 6};
+        \path [line, dashed] ([xshift=2em]pop.north) |- node[above, xshift=2.8em, align=center] {Send\\ individuals}(island1.west);
+        \path [line, dashed] (island2.west) -| node[above, xshift=2.8em, align=center] {Receive\\ individuals}([xshift=2em]pop.south);
+
+        % Refence coordinates:
+        \coordinate (c-top-left) at (-4,4);
+        \coordinate (c-bottom-left) at (-4,-4);
+        \coordinate (c-bottom-right) at (9,-4);
+
+        % labels
+        %\node [left of=c7, node distance =1cm, text width=5em, text centered]
+        %(ga7) {Genetic algorithm};
+        %\node [above of=ga7, node distance =.5cm] {Send individuals};
+        %\node [above of=master, node distance = .5cm] {Genetic algorithm};
+    \end{scope}
+%
+    % Zoom in
+    \draw [zoomline, rounded corners] (c-top-left) rectangle (c-bottom-right);
+    \draw [zoomline] (c7.north east) to[out=60, in=-100] (c-top-left)
+                     (c7.south east) to[out=-40, in=100] (c-bottom-left);
+
+    % Figure labels (should probably go in their scopes)
+    \node[right] at (1,1) {\large a. Master-slave parallelization};
+    \node[right] at (1,-3.3) {\large b. Island parallelization};
+    \node[right] at (9,1) {\large c. Genetic algorithm with island parallelization};
+
+\end{tikzpicture}
+\end{document}

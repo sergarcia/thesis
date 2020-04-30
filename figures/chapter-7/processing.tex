@@ -1,0 +1,76 @@
+\documentclass[border=2mm]{standalone}
+
+\usepackage{tikzfigure}
+
+\begin{document}
+\begin{tikzpicture}[>=latex',
+    node distance = 0.8cm,
+    block/.style= {draw, rectangle, align=center,minimum width=2cm,minimum height=1cm, fill=sorange!20 },
+    rblock/.style={draw, shape=rectangle,rounded corners=1.2em,align=center,minimum width=2cm,minimum height=1cm, fill=sblue!20},
+    explain/.style= {draw, rectangle, align=center,minimum width=2cm,minimum height=1cm, fill=sgreen!20 },
+    %explain/.style={cloud, draw, align=left, cloud puffs=20,cloud puff arc=110, aspect=2, inner sep=-2mm},
+    auto]
+
+    % Main nodes
+    \node [rblock]  (start) {Population produced by MOEA};
+    \node [block, below= of start] (minimize) {1: Remove futile module reactions};
+    \node [block, below= of minimize] (coal) {2: Coalesce module reactions};
+    \node [block, below= of coal] (keep) {3: Only keep unique and non-dominated solutions};
+    \node [rblock, below= of keep]  (end) {Designs ready for analysis};
+
+    % Explanation
+    \node [explain, right=2cm of minimize] (minimize-e) { Futile modules reactions do not have an effect on the objective:\\
+    \begin{tabular}{|l|l|l|l|l|l|}
+        \hline
+        Design & Deletions & M1 & M2 & O1 & O2 \\
+        \hline
+        Before removal & a,b,c & a,{\color{sred}b} & {\color{sred}c} & 0.8 & 0.5 \\
+        After removal & a,b,c  & a   &  & 0.8 & 0.5 \\
+        \hline
+    \end{tabular}\\ \\
+
+    \parbox{0.8\textwidth}{
+        These are identified by systematically removing each module reaction for each objective, and if the objective value is diminished then the module reaction is kept and otherwise it is removed.}
+    };
+
+
+    % Explanation
+    \node [explain, below=0.5cm of minimize-e] (coal-e) {
+        \parbox{0.8\textwidth}{
+            Consider the following designs with the same reaction deletions but different module reactions:\vspace{1ex}}\\
+        \begin{tabular}{|l|l|l|l|l|l|}
+            \hline
+            Design & Deletions & M1 & M2 & O1 & O2 \\
+            \hline
+            0 & a,b,c & a &  & 0.5 & 0 \\
+            1 & a,b,c  &   &  b & 0 & 0.5 \\
+            \hline
+        \end{tabular}\\ \\
+        \parbox{0.8\textwidth}{
+            Both designs have the same deletions but independently found good module reactions, so the following design dominates both 0 and 1: \vspace{1ex}
+        }\\
+        \begin{tabular}{|l|l|l|l|l|l|}
+            \hline
+            Design & Deletions & M1 & M2 & O1 & O2 \\
+            \hline
+            2 & a,b,c & a & b  & 0.5 & 0.5\\
+            \hline
+        \end{tabular}\\ \\
+
+        \parbox{0.8\textwidth}{
+            These are identified by condensing groups of designs with the same reaction deletions but different module reactions into the best possible design.}
+    };
+
+
+    \path[draw,->, ultra thick] (start) edge (minimize)
+    (minimize) edge (coal)
+    (coal) edge (keep)
+    (keep) edge (end);
+
+    \path[draw,dotted, thick] (minimize) -- (minimize-e)
+    (coal) -- (coal-e);
+
+
+\end{tikzpicture}
+
+\end{document}
