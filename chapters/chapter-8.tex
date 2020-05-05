@@ -22,14 +22,14 @@
 %TODO: Could move the contribution to later in the pargraph?
 %In this thesis we have developed quantitative and systematic tools for modular design of cellular systems, primarly through multi-objective optimization theory.
 %The driving application behind these developments is
-Whole-cell biocatalysis technology can lead to renewable and efficient manufacturing of chemicals, fuels, and materials.
-Over the last two decades, researchers at companies and universities have built platform strains that recycle the knowledge and labor applied for a certain product towards other molecules that use similar metabolic pathways \citep{nielsen2016}.
+Whole-cell biocatalysis technology can lead to renewable and sustainable manufacturing of chemicals, fuels, and materials.
+Over the past two decades, researchers at companies and universities have been developing platform strains that can produce various metabolically similar molecules \citep{nielsen2016}.
 However, these efforts have been limited by the use of qualitative and reductionistic approaches.
-Motivated by the goals of modular platform strain design, we used multi-objective optimization theory and  genome-scale metabolic models to develop several iterations of the ModCell design method (Figure~\ref{fig8:arrow}).
-We applied ModCell tools to design modular biocatalytic strains of \textit{E. coli} and \textit{C. thermocellum} that enable various product synthesis phenotypes in a plug-and-play fashion.
-These proposed modular designs require few genetic manipulations thanks to the natural modular features of metabolic networks.
-Overall, this effort contributes to the current wave in molecular biology of tackling problems through more quantitative and holistic approaches.
-We envision the new design tools will lower the cost and time required to develop efficient an robust biocatalytic strains that harness the large space of molecules resulting from natural and synthetic metabolic pathways.
+Motivated by the potential of modular platform strains, we used multi-objective optimization theory and  genome-scale metabolic models to develop several iterations of the ModCell design method (Figure~\ref{fig8:arrow}).
+We applied ModCell tools to design \textit{E.~coli} and \textit{C.~thermocellum} modular cells that enable various product synthesis phenotypes in a plug-and-play fashion.
+These proposed modular cell designs require few genetic manipulations thanks to the natural modular features of metabolic networks.
+Overall, this effort contributes to the current wave in synthetic biology of tackling problems through more quantitative and holistic approaches.
+We envision the new design tools will help reduce the cost and time required to develop efficient and robust biocatalytic strains that harness the large space of molecules resulting from natural and synthetic metabolic pathways.
 
 \begin{figure}[h]
   \centering
@@ -47,14 +47,11 @@ We envision the new design tools will lower the cost and time required to develo
 % - Next wave -> build and characterize
 
 % TODO: The main point does not stand out, and the beginning of the paragraph feels confusing
-Algorithmic and modeling challenges are major aspects of computational biology.
-However, as an applied field, simulation efforts should often go along experimental validation.
-There are two approaches to bridge the gap between simulations and experiments:
-i) Simulations are used a priori to generate a hypothesis, then experiments are conducted to test the hypothesis and also perhaps to validate the accuracy of the simulation;
-ii) Experimental observations are available, and simulations are used to explain them, i.e., to assist in developing a scientific theory.
-Chapter~\ref{ch:ctherm} falls under the second category, where the developed metabolic model is used to explain proteomics data at the system level to contribute towards a redox imbalance theory of biocatalytic \textit{C. thermocellum} strains. % NOTE: Don't be too specific here
-However, the majority of this work, formulated as a biocatalysis strain design problem, falls under the first category.
-Hence, the next wave of development of modular cell design principles should be focused on the implementation and characterization of the strains proposed here, closing the design-build-test cycle.
+The interdisciplinary nature of computational biology demands that one addresses algorithmic and modeling challenges, while also combining simulation efforts with experimental validation.
+To bridge the gap between simulations and experiments, a simulation can be used to generate a testable hypothesis, or a simulation can be used to explained existing data.
+Chapter~\ref{ch:ctherm} is an example of the second case, where proteomics data studied through model simulations increases our understanding of redox metabolism in \textit{C.~thermocellum} biofuel-producing strains.
+However, the majority of this work, formulated as a biocatalysis strain design problem, falls under the first case.
+Hence, the next wave of development of modular cell design principles should be focused on the implementation and characterization of the strains proposed here, closing the design-build-test-learn cycle.
 
 %post hoc addition of experimental data %Watch out since post hoc, can have quite negative connotations %Watch out since post hoc, can have quite negative connotations
 
@@ -69,20 +66,17 @@ As with most contemporary research works, this thesis contributes a drop to the 
 %Scientific and social challenges,
 The implementation of modular design principles developed here can be impactful in addressing the challenge of whole-cell biocatalysis, however, there are other important facets of this problem.
 %There are multiple relevant facets to the problem of whole-cell biocatalysis.
-Most notably, the predictive and explanatory capacities of cellular models remain highly limited by the lack of tools to integrate disparate data types and to efficiently measure enzymatic kinetic parameters.
+Most notably, the predictive and explanatory capacities of cellular models remain highly limited by a lack of tools to integrate disparate data types and to efficiently measure enzymatic kinetics.
 %integration ability to integrate disparate data types and the technical challenges of measuring certain parameters such as the catalytic efficiency of each enzyme.
-Furthermore, even if the necessary metabolic fluxes and required enzyme concentrations were known, it remains highly challenging to accomplish appropriate enzyme expression and function in targeted pathways. %of interest.
-%Similarly
-Overall, our ability to build and manipulate living organisms for any conceivably feasible biological function does not seem to be around the corner.
-Since precise comprehensive description of already known phenomena (e.g., metabolic reactions) is unavailable, additionally unknown or poorly explored biophysical phenomena (e.g., macromolecular crowding) are likely to highly influence cellular function.
-%As much information regarding already known principles of metabolism and regulation, resist precise description, and the importance of biophysical phenomena such as crowding remains largely unexplored.
-% TODO: due to what? due to the lack of both essential information and models that integrate the information.
+Furthermore, even if the necessary metabolic fluxes and required enzyme concentrations were known, it remains highly challenging to accomplish appropriate enzyme expression and pathway function \textit{in vivo}.
+More generally, we lack precise comprehensive description of already known phenomena (e.g., metabolic reactions), and unknown or poorly explored biophysical phenomena (e.g., macromolecular crowding) are likely to highly influence cellular function.
+Hence, it is unlikely that we will develop the capacity to manipulate living organisms for any conceivable biological function in a near future.
 The good news is that we are rapidly overcoming the key challenges needed for applied technologies, as evidenced by the many biotechnology companies emerging over the last decade.
 
 As we develop novel technologies, we must also become aware of the ethical and existential risks associated with them.
 For example, genetic engineering for enhanced cognitive abilities could likely become an expensive medical treatment that increases the wealth gap in society.
 These concerns are specially relevant for the field of synthetic biology, as tools continue to become more widely available hence enabling DIY biohacking \citep{bennett2009}.
-These developments could pose an existential risk for our current civilization given that a highly destructive technology becomes sufficiently easy to use,  and such technology cannot be ``uninvented" or effectively policed.
+These developments could pose an existential risk for our current civilization, given that a highly destructive technology becomes sufficiently easy to use,  and such technology cannot be ``uninvented" or effectively policed.
 This challenge can be illustrated through The Urn of Inventions metaphor (Figure~\ref{fig8:vwh}) \citep{bostrom2019}. % NOTE: Follow up this sentence to expl
 % NOTE: Make sure this feels "complete" but that further reading is available to expand, do not lean on citations. It has to make sense entirely in this context.
 % NOTE: Last sentence needs to be conclusive
