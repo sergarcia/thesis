@@ -275,6 +275,7 @@
 \setlength{\textfloatsep}{.5in}
 \setlength{\intextsep}{.5in}
 
+\allowdisplaybreaks[1] % Allow equation breaks (options is 1 through 4, increasing permissiveness
 %(some style fixes are also in the my-dissertation.tex file)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
