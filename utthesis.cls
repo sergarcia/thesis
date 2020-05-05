@@ -126,14 +126,13 @@
     %pdfstartview={FitV},   % fits the width of the page to the window
     pdfcreator={\@author},  % creator of the document
     pdfnewwindow=true,      % links in new window
-    hidelinks=true
-    %colorlinks = false, % SG: no colors
-    %linkbordercolor = {white}
-%    colorlinks=true,        % false: boxed links; true: colored links
+    %hidelinks=true         % SG: no colors
+    colorlinks=true,        % false: boxed links; true: colored links
+    linkcolor=.,         % color of internal links
 %    linkcolor=blue,         % color of internal links
-%    citecolor=magenta,      % color of links to bibliography
+    citecolor=gray,      % color of links to bibliography
 %    filecolor=magenta,      % color of file links
-%    urlcolor=cyan           % color of external links
+    urlcolor=.           % color of external links
 }
 %-------------------------------------------------------------------------%
 \geometry{

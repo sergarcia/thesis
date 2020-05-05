@@ -46,8 +46,8 @@ In an attempt to redirect carbon and electron flows for enhanced ethanol product
 Sulfur metabolism also plays a key role in redox metabolism of \textit{C.~thermocellum} and has been investigated for its role in ethanol production. Sulfate, a component of \textit{C.~thermocellum} media, serves as an electron acceptor, which is capable of oxidizing sulfate to sulfite and then sulfide. Thompson \textit{et al.}\citep{thompson2015}\ demonstrated that the strain \ko{hydG,ech,pfl}, which cannot grow in conventional medium due to its inability to secrete hydrogen or formate, recovered growth by sulfate supplementation to the culture medium. More recently, Biswas \textit{et al.}\citep{biswas2017}\ reported an increase in final sulfide concentration and over-expression of the associated sulfate uptake and reduction pathway in the \ko{hydG} strain, but did not observe a significant difference in final sulfide concentration in \ko{hydG,ech}. Remarkably, neither of the strains consumed cysteine from the medium, unlike the wild-type. Sulfide can be converted to cysteine by CYSS (Cysteine synthase) or homocysteine and then methionine by SHSL2 and METS (succinyl-homoserine succinate-lyase and methionine synthase), but the connection between the cessation of cysteine uptake and sulfate metabolism remains unclear.
 
 Overall, the complex interactions of \textit{C.~thermocellum} metabolic pathways remain challenging to understand and engineer with conventional methods, and hence require a quantitative systems biology approach to decipher.
-To this end, several genome-scale metabolic models (GSMs) of \textit{C.~thermocellum} have been developed. The first GSM, named iSR432, was constructed for the strain ATCC27405 and applied to identify gene deletion strategies for high ethanol yield. \citep{roberts2010}
-This model was then further curated into iCth446. \citep{dash2017}
+To this end, several genome-scale metabolic models (GSMs) of \textit{C.~thermocellum} have been developed. The first GSM, named iSR432, was constructed for the strain ATCC27405 and applied to identify gene deletion strategies for high ethanol yield.\citep{roberts2010}
+This model was then further curated into iCth446.\citep{dash2017}
 More recently, Thompson \textit{et al.}\ developed the iAT601 genome-scale model \citep{thompson2016} for the strain DSM1313, which is genetically tractable.\citep{argyros2011}
 The iAT601 model was used to identify genetic manipulations for high ethanol, isobutanol, and hydrogen production,\citep{thompson2016} and to understand growth cessation prior to substrate depletion observed under high-substrate loading fermentations that simulate industrial conditions.\citep{thompson2017}
 In addition to these core and genome-scale steady-state metabolic models, a kinetic model of central metabolism, k-ctherm118, was recently developed and used to elucidate the mechanisms of nitrogen limitation and ethanol stress.\citep{dash2017} Due to the biotechnological relevance of the \textit{Clostridium} genus, GSMs have also been developed for other species,\citep{dash2016} including
@@ -67,7 +67,7 @@ A detailed account of these changes can be found in the Supplementary Material~\
 
 \subsubsection{Modeling updates}
 To facilitate model usage and reduce human error, the identifiers of reactions and metabolites were converted from KEGG into BiGG human-readable form.\citep{king2015}
-Additionally, reaction and metabolite identifiers were linked to the modelSEED database \citep{henry2010} that enables analysis through the KBase web interface. \citep{arkin2018}
+Additionally, reaction and metabolite identifiers were linked to the modelSEED database \citep{henry2010} that enables analysis through the KBase web interface.\citep{arkin2018}
 The gene identifiers and functional descriptions were updated to the most current annotation (NCBI Reference Sequence: NC\_017304.1). %(identifiers changed from Clo1313\_xxx to CLO1313\_RSxxx).
 Metabolite formulas and charges from the modelSEED database\citep{henry2010} were included in the model and reactions were systematically corrected for charge and mass balance by the addition of protons and water.
 
@@ -92,7 +92,7 @@ Gene-protein-reaction associations were updated to represent experimental knowle
 
 %Hypothetical
 Two hypothetical reaction modifications were introduced to ensure consistency with reported phenotypes. First, to enable growth without the need for succinate secretion, as observed in experimental data (Supplementary Material \ref{sm:datasets}), the reaction homoserine-O-trans-acetylase (HSERTA) was added to enable methionine biosynthesis (essential for growth) without succinate formation.
-Although this reaction is not currently known to be associated with any gene in \textit{C.~thermocellum}, it is known to be present in other \textit{Clostridium} GSMs. \citep{nagarajan2013}
+Although this reaction is not currently known to be associated with any gene in \textit{C.~thermocellum}, it is known to be present in other \textit{Clostridium} GSMs.\citep{nagarajan2013}
 Next, the reaction deoxyribose-phosphate aldolase (DRPA) was removed to ensure correct lethality prediction of the \ko{hydG,ech,pfl} mutant strain as well as the correct prediction of growth recovery in this mutant by addition of external electron sinks such as sulfate or ketoisovalerate (Table~\ref{tab6:mutants}).
 The correct prediction of \ko{hydG,ech,pfl}-associated phenotypes is critical to successfully use the model for computational strain design.\citep{long2015, ng2015, maranas2016, wang2018, garcia2019, garcia2019b, garcia2019c}
 
@@ -125,7 +125,7 @@ Remarkably, iCBI655 has a smaller percentage of blocked reactions than iAT601, i
 Growth and non-growth associated maintenance (GAM and NGAM) are parameters that capture the consumption of ATP towards cell division and homeostasis, respectively. These are known to be condition-specific; however, genome-scale models do not include a mechanistic description that allows to determine these ATP consumption rates as part of the simulation. Instead, GAM is incorporated into the biomass pseudo-reaction and NGAM has its own pseudo-reaction that hydrolyzes ATP at a rate tuned by constraint parameters.
 
 To increase model prediction accuracy for various conditions, we trained GAM and NGAM parameters of iCBI655 using an extensive dataset of 28 extracellular fluxes (Supplementary Material~\ref{sm:datasets}) measured during the
-growth phase under different reactor configurations, carbon sources, and gene deletion mutants. This approach is based on the method used to train the iML1655 \textit{E.~coli} model. \citep{monk2017}
+growth phase under different reactor configurations, carbon sources, and gene deletion mutants. This approach is based on the method used to train the iML1655 \textit{E.~coli} model.\citep{monk2017}
 Remarkably, we observed highly linear trends under three different conditions, including chemostat reactor with cellobiose as a carbon source, chemostat reactor with cellulose as a carbon source, and batch reactor with either cellobiose or cellulose as carbon sources (Figure~\ref{fig6:training} a). This model training has led to improved growth rate prediction of iCBI655 as compared to iAT601 that has previously been trained with only a smaller dataset (Figure~\ref{fig6:training} b). Specifically, the iAT601 training dataset was limited to batch conditions; hence, the inaccurate predictions of iAT601 were observed for chemostat conditions (Figure~\ref{fig6:training} c).
 
 \begin{figure}[hp]
@@ -146,7 +146,7 @@ Remarkably, we observed highly linear trends under three different conditions, i
 
 \subsection{Assessment of model quality and standard compliance with Memote}
 The field of metabolic network modeling suffers from a lack of standard enforcement and quality control metrics that limit model reproducibility and applicability.
-To address this issue, Lieven \textit{et al.}\ recently developed the Memote framework that systematically tests for standards and best practices in GSMs. \citep{lieven2018}
+To address this issue, Lieven \textit{et al.}\ recently developed the Memote framework that systematically tests for standards and best practices in GSMs.\citep{lieven2018}
 We applied Memote to both the iCBI655 and \textit{E.~coli} iML1515 models for comparison (Figure~\ref{fig6:training} d). This analysis produces five independent scores that assess model quality.
 The \emph{consistency score}  measures basic biochemical requirements, such as mass and charge balance of metabolic reactions, and it was near 100\% for both models.
 Additionally, the different annotation scores quantify how many elements in the model contain relevant metadata. More specifically, the \emph{systems biology ontology (SBO) annotation} indicates if an object in the model refers to a metabolite, reaction, or gene, while the respective \emph{annotation scores} of these elements correspond to properties (e.g., name, chemical formula, etc.) and identifiers linking them to relevant databases (e.g., KEGG\citep{kanehisa2000} or modelSEED\citep{henry2010}). The \emph{overall score} is computed as a weighted average of all the individual scores with additional emphasis on the \emph{consistency score}.
@@ -224,7 +224,7 @@ Generally, the developed FC-based omics integration protocol can be applied to d
 \subsection{Model-guided design of modular production strains for biofuel synthesis}
 
 % Context and explanation
-Another common application of genome-scale models is strain design. \citep{long2015, ng2015, maranas2016, wang2018, garcia2019, garcia2019b, garcia2019c}
+Another common application of genome-scale models is strain design.\citep{long2015, ng2015, maranas2016, wang2018, garcia2019, garcia2019b, garcia2019c}
 We used the iCBI655 model combined with the ModCell tool\citep{garcia2020b} to design \textit{C.~thermocellum} modular production strains for efficient biosynthesis of alcohols and esters.
 Briefly, with ModCell we aim to design a modular (chassis) cell that can be rapidly combined with different pathway modules in a plug-and-play fashion to obtain modular production strains exhibiting target phenotypes with minimal strain optimization cycles.
 In this study, the target phenotype for modular production strains is growth-coupled to product synthesis (\textit{wGCP}), that corresponds to the minimum product synthesis rate at the maximum growth rate.
@@ -275,7 +275,7 @@ In summary, this analysis demonstrates the potential of the model to identify no
 In this study, we developed a genome-scale metabolic model of the biotechnologically relevant organism \textit{C.~thermocellum}.
 Model development followed standards and best practices to ensure reproducibility and accessibility.
 We demonstrated the enhanced predictions of the model for diverse fermentation conditions and gene lethality. %for the lethality of important mutants.
-Genome-scale models have a broad range of applications in systems biology, including metabolic engineering, physiological discovery, phenotype interpretation, and studies of evolutionary processes. \citep{feist2008, palsson2015} To illustrate the model applications, we chose to tackle the challenge of disparate data integration and interpretation at the systems level. We developed a fold-change-based omics integration method for this purpose, and used it to identify routes in central metabolism that were selected to increase NADPH generation in the \ko{hydG,ech} strain. This analysis revealed the importance of NADPH cofactor over its alternatives and provided new engineering targets for enhanced biosynthesis of reduced products in \textit{C.~thermocellum}.
+Genome-scale models have a broad range of applications in systems biology, including metabolic engineering, physiological discovery, phenotype interpretation, and studies of evolutionary processes.\citep{feist2008, palsson2015} To illustrate the model applications, we chose to tackle the challenge of disparate data integration and interpretation at the systems level. We developed a fold-change-based omics integration method for this purpose, and used it to identify routes in central metabolism that were selected to increase NADPH generation in the \ko{hydG,ech} strain. This analysis revealed the importance of NADPH cofactor over its alternatives and provided new engineering targets for enhanced biosynthesis of reduced products in \textit{C.~thermocellum}.
 We also illustrated the use of the model to design \textit{C.~thermocellum} modular cells, using the ModCell tool.\citep{garcia2019b} The proposed designs cover C2 through C4 alcohols and their derived esters, which are key target molecules for renewable production with \textit{C.~thermocellum}.\citep{peters2018}
 The proposed designs feature a combination of previously-explored and novel strategies to couple target metabolite production with cellular growth.
 Like the well-developed genome-scale models\citep{monk2017, lu2019} of the important organisms \textit{Escherichia~coli} and \textit{Saccharomyces~cerevisiae} broadly used for strain engineering both in academia\citep{blazeck2010} and industry\citep{yim2011a}, we anticipate the iCBI655 genome-scale model will also provide a versatile tool for systems metabolic engineering of \textit{C.~thermocellum}.
@@ -317,7 +317,7 @@ The model is configured to generally represent different medium and reactor cond
 The first feature involves model boundaries specifying which metabolites may enter the intracellular environment (i.e., present in the growth medium) or may exit the extracellular environment (i.e., secreted by \textit{C.~thermocellum}). This feature can be adjusted through $u_j$ and $l_j$ for exchange reactions.
 In our simulations, only essential metabolites required for \textit{in silico} growth may be consumed and only commonly observed metabolites may be produced, unless otherwise noted.
 The second feature involves biomass objective function. iCBI655 contains 3 possible biomass reactions: i) BIOMASS\_CELLOBIOSE used for growth in cellobiose with cellulosome constituting 2\% of cell dry weight (CDW) \citep{zhang2005}, ii) BIOMASS\_CELLULOSE used for growth on cellulose with cellulosome constituting 20\% of CDW  \citep{zhang2005}, and iii)
-BIOMASS\_NO\_CELLULOSOME, a biomass function that does not consider cellulosome production and only used as a control. The combination of cellulosome and protein fractions accounts for 52.85\% of the CDW in all cases. \citep{roberts2010, thompson2015}
+BIOMASS\_NO\_CELLULOSOME, a biomass function that does not consider cellulosome production and only used as a control. The combination of cellulosome and protein fractions accounts for 52.85\% of the CDW in all cases.\citep{roberts2010, thompson2015}
 Cellobiose conditions were used in all simulations unless otherwise noted.
 The third feature involves GAM/NGAM. Three sets of these parameters are considered including batch, chemostat-cellulose, and chemostat-cellobiose, based on fitting the model to experimental data.
 Batch conditions were used in all simulations unless otherwise noted.
@@ -326,7 +326,7 @@ For growth on cellulose, the experimentally measured glucose equivalent uptake w
 \textit{3 glceq\_e $\rightarrow$ cell3\_e}; \textit{4 glceq\_e $\rightarrow$ cell4\_e};
 \textit{5 glceq\_e $\rightarrow$ cell5\_e}; \textit{6 glceq\_e $\rightarrow$ cell6\_e}.
 Here \textit{cell3\_e}, \textit{cell4\_e}, \textit{cell5\_e}, and \textit{cell6\_e} are cellodextrin polymers with 3, 4, 5, and 6 glucose monomers, respectively. These polymers can be imported inside the cell through the oligo-cellulose transport ABC system.
-The model is free to use any cellodextrin length, although higher lengths have higher ATP yield. \citep{zhang2005, thompson2016}
+The model is free to use any cellodextrin length, although higher lengths have higher ATP yield.\citep{zhang2005, thompson2016}
 
 \subsection{Single-reaction deletion analysis to match experimentally observed phenotype}\label{sec:deletion_analysis}
 A core model of \textit{C.~thermocellum}\citep{thompson2015} correctly predicted the experimentally observed lethality of \ko{hydG,ech,pfl}; however, the iAT601 genome-scale model built by extension of this core model failed, suggesting that the genome-scale model has alternative active pathways leading to the false growth prediction \textit{in silico}.
@@ -408,11 +408,11 @@ The sequence of upgrades and improvements can be seen in the Git version
 control records. The repository is available online through Github (\url{https://github.com/trinhlab/ctherm-gem}) and in Supplementary Material \ref{sm:code}.
 
 \subsection{Proteomics data collection}
-\textit{C.~thermocellum} wild-type and \ko{hydG,ech} strains were cultured in batch reactors and metabolic fluxes were calculated as previously described. \citep{thompson2015}
+\textit{C.~thermocellum} wild-type and \ko{hydG,ech} strains were cultured in batch reactors and metabolic fluxes were calculated as previously described.\citep{thompson2015}
 For proteomics measurements, the wild-type and mutant strains were cultured in MNM and MTC media,\citep{kridelbaugh2013} respectively. While both wild-type and mutant were originally cultured in MTC,\citep{thompson2015} the wild-type had to be cultured separately in MNM medium due to insufficient volume for proteomics sampling in the MTC culture.
-MTC has higher nitrogen and trace mineral concentrations, but previous studies have shown no effect on growth rates. \citep{kridelbaugh2013}
+MTC has higher nitrogen and trace mineral concentrations, but previous studies have shown no effect on growth rates.\citep{kridelbaugh2013}
 During the mid-exponential growth phase \SI{10}{\milli\liter} samples were collected, centrifuged, and the resulting pellet was stored at \SI{-20}{\celsius}. Cell pellets were then prepared for LC–MS/MS-based proteomic analysis.
-Briefly, proteins extracted via SDS, boiling, and sonic disruption were precipitated with trichloroacetic acid. \citep{giannone2015}
+Briefly, proteins extracted via SDS, boiling, and sonic disruption were precipitated with trichloroacetic acid.\citep{giannone2015}
 The precipitated protein was then resolubilized in urea and treated with dithiothreitol and iodoacetamide to reduce and block disulfide bonds prior to digestion with sequencing-grade trypsin (Sigma-Aldrich).
 Following two-rounds of proteolysis, tryptic peptides were salted, acidified, and filtered through a \SI{10}{\kilo\dalton} MWCO spin column (Vivaspin 2; GE Healthcare) and quantified by BCA assay (Pierce).
 
@@ -431,7 +431,7 @@ All raw and database-searched LC-MS/MS data pertaining to this study have been d
 \subsection{Modular cell design}
 The iCBI655 model in its batch reaction and cellobiose carbon source configuration (Supplementary Material \ref{sm:model}) was used as basis for the strain design.
 The alcohol pathways were curated from recent literature, \citep{holwerda2014, lin2015, loder2015} where adapted Adh can use either NADH or NADPH to form the target alcohol.\citep{biswas2015}
-%, as demonstrated by a single-nucleotide polymorphism in the case of ethanol production. \citep{biswas2015}
+%, as demonstrated by a single-nucleotide polymorphism in the case of ethanol production.\citep{biswas2015}
 The esters pathway require the inclusion of a condensation reaction between alcohol and acyl-CoA that are already present in the alcohol pathways. This reaction can be performed by cloramphenicol acetyl transferase (CAT)  as recently demonstrated.\citep{seo2019}
 All the software involved in the generation of these designs is available online at \url{https://github.com/trinhlab/modcell-hpc} and \url{https://github.com/trinhlab/modcell-hpc-study}.
 

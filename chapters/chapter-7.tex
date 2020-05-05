@@ -19,7 +19,7 @@ In this study, we developed a new computational method, named ModCell-HPC, capab
 
 
 \section{Introduction}
-Modular design has gained recent interest as an effective approach to understand and redesign cellular systems. \citep{garcia2019b}
+Modular design has gained recent interest as an effective approach to understand and redesign cellular systems.\citep{garcia2019b}
 In the fields of metabolic engineering and synthetic biology, various modularization strategies\citep{biggs2014,trinh2015,garcia2019,garcia2019c,garcia2019d} have been proposed to address the slow and expensive design-build-test cycles of developing microbial catalysts for renewable chemical synthesis.\citep{nielsen2016}
 A promising system-level modularization\citep{purnick2009} approach is ModCell,\citep{garcia2019} that aims to design a modular (chassis) cell compatible with exchangeable production modules that enable metabolite overproduction.
 ModCell could be an effective tool to efficiently produce the vast number of molecules offered by nature,\citep{trinh2016, lee2019}
@@ -46,7 +46,7 @@ A new parallelization approach that uses high-performance computing (HPC) more e
 %limited to small problems.
 
 %Parallelization schemes that harness the power of high-performance computing (HPC) to solve challenging many-objective problems remain poorly explored.
-In recent years, multiple approaches to harness HPC have been developed to solve single-objective evolutionary algorithms (EA). \citep{alba2013}
+In recent years, multiple approaches to harness HPC have been developed to solve single-objective evolutionary algorithms (EA).\citep{alba2013}
 In particular, the island-parallelization approach has been proposed, where multiple instances of the EA are run independently but communicate with each other to enhance overall convergence towards optimal solutions (Figure~\ref{fig7:algorithm}~b).
 This addresses the serial bottlenecks of the master-slave approach by separating the algorithm into highly independent processes that directly map to the computing hardware.
 While this approach has not been throughly examined in MOEA, there are a few successful applications to specific design problems.\citep{martens2013, jozefowiez2005, garcia2016}
@@ -261,12 +261,12 @@ The top 7 reactions are used $\ge$10\% of the designs and belong to central meta
 Overall, the role of these deletions can be classified into two functions: i) to eliminate major byproducts and ii) to alter key branch-points in metabolism that influence the pools of precursor metabolites, including carbon, redox, and energy precursors.
 The first type of manipulations is generally intuitive and often used in metabolic engineering efforts.\citep{winkler2015}
 The second type of manipulations are not commonly identified unless metabolic model simulations are used, \citep{tokuyama2014, venayak2018, chemler2010}
-even though the importance of targeting metabolic branch-points was noted early. \citep{stephanopoulos1991}
+even though the importance of targeting metabolic branch-points was noted early.\citep{stephanopoulos1991}
 An example of this second type observed in our designs is TPI deletion, that activates the methylglyoxal bypass,\citep{fong2006} reducing the overall ATP yield resulting from glucose conversion into pyruvate.
 Lower ATP yield limits biomass formation hence redirecting carbon flow towards products of interest.
 While such strategies are not common, TPI deletion predicted by model simulations was successfully used for enhanced 3-hydroxypropionic acid production,\citep{tokuyama2014} and ATP waisting has recently been proposed to enhance production of certain molecules.\citep{boecker2019}
 Another example of branch-point manipulation is PPC deletion, that has been shown to lower flux from lower glycolysis towards the TCA cycle,\citep{de2006,peng2004} resulting in lower succinate production, and an increased pool of \textit{pep}, pyruvate and acetyl-CoA.
-Additionally, PPC deletion to increase the \textit{nadph} pool for production of flavonoids was predicted by model simulation and experimentally validated. \citep{chemler2010}
+Additionally, PPC deletion to increase the \textit{nadph} pool for production of flavonoids was predicted by model simulation and experimentally validated.\citep{chemler2010}
 In summary, design of highly compatible modular cells requires not only major byproduct removal, but also manipulation of key branch points in central metabolism.
 
 \begin{table}[h]
@@ -413,7 +413,7 @@ which not only is expected to result in high product yields but also enables hig
 We also used ModCell-HPC to design modular cells that utilize different hexoses and pentoses carbon sources.
 This revealed the limitations of pentoses towards coupling with certain products which might be addressed by redox cofactor engineering.
 Finally, we identified that high compatibility and certain reaction deletion are important features to re-purpose an existing modular cell towards new modules.
-Overall, ModCell-HPC is an effective tool towards more efficient and generalizable design of modular cells and platform strains that have recently captured the interest of metabolic engineers. \citep{nielsen2016}
+Overall, ModCell-HPC is an effective tool towards more efficient and generalizable design of modular cells and platform strains that have recently captured the interest of metabolic engineers.\citep{nielsen2016}
 
 
 %\singlespace
